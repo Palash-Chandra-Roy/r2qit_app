@@ -11,7 +11,11 @@ class EditProfile extends StatefulWidget {
 class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool _obscureText = true;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -49,14 +53,7 @@ class _EditProfileState extends State<EditProfile> {
                           height: 100,
                           fit: BoxFit.cover, // Ensure proper fitting
                         ),
-                      )
-                      //  ClipRRect(
-                      //   borderRadius: BorderRadius.circular(100),
-                      //   child: Image(
-                      //     image: AssetImage("assets/images/palash.jpg"),
-                      //   ),
-                      // ),
-                      ),
+                      )),
                   Positioned(
                     bottom: 0,
                     right: 0,
@@ -88,23 +85,127 @@ class _EditProfileState extends State<EditProfile> {
                 height: 30,
               ),
 
-              ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    elevation: 5,
-                    backgroundColor: Colors.amber,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 30),
-                  ),
-                  child: Text("Edit Profile ")),
-              // SizedBox(
-              //   height: 20,
-              // ),
               SizedBox(
                 height: 20,
               ),
+
+              Form(
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Full name",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Email ",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Phone number ",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      obscureText: _obscureText, // Hide the text for passwords
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        prefixIcon: Icon(Icons.lock), // Change to lock icon
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscureText =
+                                  !_obscureText; // Toggle password visibility
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: screenHeight * 0.04,
+                    ),
+                    SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            elevation: 5,
+                            backgroundColor: Colors.amber,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 14, horizontal: 30),
+                          ),
+                          child: Text("Edit Profile ")),
+                    ),
+                    SizedBox(
+                      height: screenHeight * 0.1,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'Joined 12 March 2025 ',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                            onTap: () {},
+                            child: Text(
+                              "Delete ",
+                              style: TextStyle(fontSize: 16, color: Colors.red),
+                            )),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: screenHeight * 0.15,
+              ),
+              Container(
+                height: screenHeight * 0.005,
+                width: screenWidth * 0.5,
+                color: Colors.grey,
+              )
             ]),
           ),
         ),

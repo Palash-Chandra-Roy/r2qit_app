@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Screen/BottomNavBar/bottom_navbar_controller.dart';
-import 'package:r2ait_app/Screen/Card%20Screen/card_screen.dart';
-import 'package:r2ait_app/Screen/Fevarit%20Screen/fevarid_screen.dart';
+import 'package:r2ait_app/Screen/Service%20Screen/service_screen.dart';
+import 'package:r2ait_app/Screen/Job%20Screen/job_screen.dart';
+
 import 'package:r2ait_app/Screen/Home_Screen/home_screen.dart';
 import 'package:r2ait_app/Screen/Profile%20Screen/profile_screen.dart';
 
@@ -20,8 +21,8 @@ class _BottomnavbarScreen extends State<BottomNavbarScreen> {
 
   List<Widget> pages = [
     HomeScreen(),
-    FevaridScreen(),
-    CardScreen(),
+    ServiceScreen(),
+    JobScreen(),
     ProfileScreen(),
   ];
 
@@ -68,7 +69,7 @@ class _BottomnavbarScreen extends State<BottomNavbarScreen> {
             child: BottomNavigationBar(
               currentIndex: controller.selectedIndex.value,
               backgroundColor: Colors.white,
-              selectedItemColor: Colors.blue,
+              selectedItemColor: Colors.black,
               unselectedItemColor: Colors.grey,
               type: BottomNavigationBarType.fixed,
               onTap: controller.changeIndex,
@@ -81,15 +82,15 @@ class _BottomnavbarScreen extends State<BottomNavbarScreen> {
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.favorite,
+                    Icons.engineering,
                   ),
-                  label: "Favorite",
+                  label: "Services ",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(
-                    Icons.shopping_cart,
+                    Icons.work,
                   ),
-                  label: "Card ",
+                  label: "Job",
                 ),
                 BottomNavigationBarItem(
                   icon: Icon(

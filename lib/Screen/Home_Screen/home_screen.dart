@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:r2ait_app/Screen/Home_Screen/home%20Controller/home_controller.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,6 +13,111 @@ class HomeScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: Colors.white,
+      drawer: Drawer(
+        backgroundColor: Colors.white,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.white),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: ExactAssetImage("assets/images/palash.jpg"),
+              ),
+              accountName: Text(
+                "Palash Roy",
+                style: TextStyle(color: Colors.black),
+              ),
+              accountEmail: Text("palashtpi21@gmail.com",
+                  style: TextStyle(color: Colors.black)),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("Settings"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.book,
+              ),
+              title: Text("Billing Details"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.personal_injury),
+              title: Text(
+                "User Managment",
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text("Information"),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout),
+              title: Text(
+                "Logout",
+                style: TextStyle(color: Colors.red),
+              ),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Container(
+          height: screenHeight * 0.04,
+          width: screenWidth * 0.7,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: Colors.grey, width: 1)),
+          child: TextField(
+            onTap: () {},
+            obscureText: true,
+            decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
+                prefixIcon: Icon(Icons.search),
+                hintText: "Search",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                )),
+          ),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                print("Chatting Option ");
+              },
+              icon: Icon(
+                Icons.offline_bolt,
+                size: 20,
+                color: Colors.black,
+              )),
+          IconButton(
+              onPressed: () {
+                print("Notifications update");
+              },
+              icon: Icon(
+                Icons.notifications,
+                size: 20,
+                color: Colors.black,
+              )),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 15, right: 15, top: 20),
@@ -21,52 +125,6 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    "Welcome to R2A IT",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      // Get to Notification Screen
-                    },
-                    child: Icon(
-                      Icons.menu,
-                      color: Colors.black,
-                      size: 30,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              Center(
-                child: Container(
-                  height: screenHeight * 0.05,
-                  width: screenWidth * 0.8,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      border: Border.all(color: Colors.grey, width: 2)),
-                  child: TextField(
-                    onTap: () {},
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.search),
-                        hintText: "Searching here.....",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        )),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
               Container(
                 width: double.infinity,
                 height: screenHeight * .15,
@@ -90,7 +148,7 @@ class HomeScreen extends StatelessWidget {
                       "Service Categary ",
                       style: TextStyle(
                           fontSize: 20,
-                          color: Colors.green,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -100,14 +158,14 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Text(
                         "All Service",
-                        style: TextStyle(fontSize: 14, color: Colors.blue),
+                        style: TextStyle(fontSize: 14, color: Colors.black),
                       ),
                       InkWell(
                           onTap: () {},
                           child: Icon(
                             Icons.add,
                             size: 16,
-                            color: Colors.blue,
+                            color: Colors.black,
                           )),
                     ],
                   )
@@ -151,11 +209,13 @@ class HomeScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 10, color: Colors.black),
                               ),
-                              Text(
-                                _homeController
-                                    .serviceCategories[index].discription,
-                                style:
-                                    TextStyle(fontSize: 7, color: Colors.black),
+                              Center(
+                                child: Text(
+                                  _homeController
+                                      .serviceCategories[index].discription,
+                                  style: TextStyle(
+                                      fontSize: 7, color: Colors.black),
+                                ),
                               ),
                             ],
                           ),
@@ -171,7 +231,7 @@ class HomeScreen extends StatelessWidget {
                   " Your Team Member",
                   style: TextStyle(
                       fontSize: 16,
-                      color: Colors.green,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -234,7 +294,7 @@ class HomeScreen extends StatelessWidget {
                   "About Us",
                   style: TextStyle(
                       fontSize: 20,
-                      color: Colors.green,
+                      color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
               ),

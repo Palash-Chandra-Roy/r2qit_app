@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:r2ait_app/Screen/Home_Screen/home_screen.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Screen/Splash%20Screen/splash_screen.dart';
@@ -14,15 +15,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: SplashScreen()
-      //HomeScreen(),
-      
-    );
+        title: 'R2AIT',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: SplashScreen()
+        //HomeScreen(),
+
+        );
   }
 }

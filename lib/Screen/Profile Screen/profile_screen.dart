@@ -14,7 +14,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -23,12 +25,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: Icon(
             Icons.arrow_back_ios,
             size: 16,
+            color: Colors.black,
           ),
         ),
         title: Center(
           child: Text(
             "Profile",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
           ),
         ),
         actions: [
@@ -110,7 +114,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
 
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(EditProfile());
+                  },
                   style: ElevatedButton.styleFrom(
                     elevation: 5,
                     backgroundColor: Colors.amber,

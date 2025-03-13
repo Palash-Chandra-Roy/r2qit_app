@@ -26,8 +26,7 @@ class HomeController extends GetxController {
     ServiceCategory(
         image: "assets/images/grapic_design.png",
         name: "GRAPHIC DESIGN",
-        discription:
-            "Graphic design is the art and practice of creating visual content to ..."),
+        discription: "Graphic design ."),
     ServiceCategory(
         image: "assets/images/webflow.jpeg",
         name: "WEBFLOW",
