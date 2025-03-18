@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/Coustom_Widget/CustomBottom/custom_bottom.dart';
 
 import 'package:r2ait_app/Screen/Home_Screen/home%20Controller/home_controller.dart';
 
@@ -87,7 +88,7 @@ class HomeScreen extends StatelessWidget {
               border: Border.all(color: Colors.grey, width: 1)),
           child: TextField(
             onTap: () {},
-            obscureText: true,
+            obscureText: false,
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.symmetric(vertical: 10),
                 prefixIcon: Icon(Icons.search),
@@ -209,14 +210,14 @@ class HomeScreen extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 10, color: Colors.black),
                               ),
-                              Center(
-                                child: Text(
-                                  _homeController
-                                      .serviceCategories[index].discription,
-                                  style: TextStyle(
-                                      fontSize: 7, color: Colors.black),
-                                ),
-                              ),
+                              // Center(
+                              //   child: Text(
+                              //     _homeController
+                              //         .serviceCategories[index].discription,
+                              //     style: TextStyle(
+                              //         fontSize: 7, color: Colors.black),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),

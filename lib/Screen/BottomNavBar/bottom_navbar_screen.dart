@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Screen/BottomNavBar/bottom_navbar_controller.dart';
+import 'package:r2ait_app/Screen/QR%20Scanner%20Screen/qr_code_generator.dart';
 import 'package:r2ait_app/Screen/Service%20Screen/service_screen.dart';
 import 'package:r2ait_app/Screen/Job%20Screen/job_screen.dart';
 
@@ -42,7 +43,9 @@ class _BottomnavbarScreen extends State<BottomNavbarScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        onPressed: () {},
+        onPressed: () {
+          // Get.to(QrCodeGenerator());
+        },
         child: Icon(
           Icons.center_focus_strong,
           color: Colors.amber,

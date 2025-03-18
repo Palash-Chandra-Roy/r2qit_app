@@ -9,7 +9,8 @@ class ServiceController extends GetxController {
     Services(
         image: "assets/images/webflow.jpeg",
         name: "WEBFLOW",
-        discription: "Webflow is a powerful no-code website design "),
+        discription:
+            "Webflow is a powerful no-code website design ..,Webflow is a powerful no-code website design"),
     Services(
         image: "assets/images/gohighlevel.png",
         name: "GOHIGHLEVEL",
