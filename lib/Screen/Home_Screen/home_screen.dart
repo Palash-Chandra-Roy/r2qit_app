@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/Coustom_Widget/CustomBottom/custom_bottom.dart';
 
 import 'package:r2ait_app/Screen/Home_Screen/home%20Controller/home_controller.dart';
 
