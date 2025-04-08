@@ -1,4 +1,4 @@
-package com.example.r2ait_app
+package com.example.r2aitapp
 
 import io.flutter.embedding.android.FlutterActivity
 

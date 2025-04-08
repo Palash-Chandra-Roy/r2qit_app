@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "570999462191",
+    "project_id": "r2ait-f7ec3",
+    "storage_bucket": "r2ait-f7ec3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:570999462191:android:7c065217fb13a141a669da",
+        "android_client_info": {
+          "package_name": "com.example.r2ait_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXlpH1qMo5Ln8tBgY1P8xoyhgm0NJzTsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
