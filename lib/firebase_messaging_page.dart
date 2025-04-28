@@ -8,6 +8,7 @@ class FirebaseMsg {
     await firebaseMessaging.requestPermission();
     var token = await firebaseMessaging.getToken();
     Logger().e(token);
+    Logger().e(token);
     FirebaseMessaging.onBackgroundMessage(hendleNotification);
     FirebaseMessaging.onMessage.listen(hendleNotification);
   }
