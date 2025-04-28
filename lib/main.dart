@@ -12,7 +12,6 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseMsg().initsFCM();
-
   runApp(const MyApp());
 }
 
