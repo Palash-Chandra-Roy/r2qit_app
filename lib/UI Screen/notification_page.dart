@@ -20,7 +20,7 @@ class _NotificationPageState extends State<NotificationPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            CustomNotificationFild(text: "New"),
+            CustomNotificationFild(text: "New."),
             CustomNotificationFild(
               text: "Earlier",
               isCheck: true,
