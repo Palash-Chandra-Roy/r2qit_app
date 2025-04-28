@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
 import 'package:r2ait_app/UI%20Screen/signup.dart';
 
@@ -11,6 +12,38 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // final GoogleSignIn _googleSignIn = GoogleSignIn();
+  // final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Future<void> signInWithGoogle() async {
+  //   try {
+  //     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+  //     if (googleUser == null) {
+  //       // User cancelled the sign-in
+  //       return;
+  //     }
+
+  //     final GoogleSignInAuthentication googleAuth =
+  //         await googleUser.authentication;
+
+  //     final OAuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth.accessToken,
+  //       idToken: googleAuth.idToken,
+  //     );
+
+  //     // Sign in to Firebase
+  //     await _auth.signInWithCredential(credential);
+
+  //     // After successful sign-in, you can navigate to your home screen or another screen
+  //     print("User Signed In: ${_auth.currentUser?.displayName}");
+  //     // Example: Navigate to HomeScreen
+  //     // Get.to(HomeScreen());
+  //   } catch (e) {
+  //     print("Error during Google Sign-In: $e");
+  //     Get.snackbar("Error", "Google Sign-In failed");
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
@@ -18,23 +51,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 14,
-              color: Colors.black,
-            )),
-      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+          padding: EdgeInsets.only(top: 100, left: 20, right: 20),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Image.asset(
-              height: 120,
+              height: 200,
               "assets/images/logo.png",
             ), // Replace with actual logo
 
@@ -47,47 +70,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
             SizedBox(
-              height: screenheight * 0.1,
+              height: screenheight * 0.05,
             ),
             Text(
               "Let's You In ",
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
+              style: AppWidget.hederTextFeildStyle(),
             ),
             SizedBox(
-              height: screenheight * 0.05,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(width: 2, color: Colors.grey)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/facebook.png",
-                      height: 30,
-                      width: 30,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      "Continue with Facebook",
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
+              height: screenheight * 0.06,
             ),
             InkWell(
               onTap: () {},
@@ -110,37 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(width: 5),
                     Text(
                       "Continue with Google",
-                      style: TextStyle(fontSize: 16, color: Colors.black),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(width: 2, color: Colors.grey)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/images/apple.png",
-                      height: 30,
-                      width: 30,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(width: 5),
-                    Text(
-                      "Continue with Apple",
-                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      style: AppWidget.appBarTextFeildStyle(),
                     )
                   ],
                 ),
@@ -181,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textColor: Colors.black),
 
             SizedBox(
-              height: 10,
+              height: 30,
             ),
 
             Row(
@@ -189,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 Text(
                   "Already have an Account?",
-                  style: TextStyle(fontSize: 14, color: Color(0xFF0F172A)),
+                  style: AppWidget.appBarTextFeildStyle(),
                 ),
                 SizedBox(
                   width: 8,
@@ -200,10 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text(
                     'Sing Up!',
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF7E22CD),
-                        fontWeight: FontWeight.bold),
+                    style: AppWidget.parpleTextFeildStyle(),
                   ),
                 ),
               ],
