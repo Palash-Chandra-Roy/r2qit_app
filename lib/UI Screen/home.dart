@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Controller/home_controller.dart';
+import 'package:r2ait_app/UI%20Screen/notification_page.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Super, Key});
@@ -45,9 +46,7 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.black,
               )),
           IconButton(
-              onPressed: () {
-                print("Notifications update");
-              },
+              onPressed: () => goToNotificationPage(context),
               icon: Icon(
                 Icons.notifications,
                 size: 20,
@@ -245,5 +244,12 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void goToNotificationPage(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (builder) => NotificationPage()),
+        (predicate) => false);
   }
 }
