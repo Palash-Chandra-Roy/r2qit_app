@@ -1,10 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/UI%20Screen/splash.dart';
 
+
+
+import 'firebase_messaging_page.dart';
+
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseMsg().initsFCM();
+
   runApp(const MyApp());
 }
 
