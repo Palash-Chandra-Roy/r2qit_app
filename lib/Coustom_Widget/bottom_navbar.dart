@@ -6,23 +6,23 @@ import 'package:r2ait_app/UI%20Screen/job.dart';
 import 'package:r2ait_app/UI%20Screen/profile.dart';
 import 'package:r2ait_app/UI%20Screen/service.dart';
 
-class BottomNavbarScreen extends StatefulWidget {
-  const BottomNavbarScreen({super.key});
+class BottomNavbar extends StatefulWidget {
+  const BottomNavbar({super.key});
 
   @override
-  State<BottomNavbarScreen> createState() => _BottomnavbarScreen();
+  State<BottomNavbar> createState() => _Bottomnavbar();
 }
 
-class _BottomnavbarScreen extends State<BottomNavbarScreen> {
+class _Bottomnavbar extends State<BottomNavbar> {
   final BottomNavController controller = Get.put(BottomNavController());
 
   final selectedIndex = 0;
 
   List<Widget> pages = [
-    HomeScreen(),
-    ServiceScreen(),
-    JobScreen(),
-    ProfileScreen(),
+    Home(),
+    Service(),
+    Job(),
+    Profile(),
   ];
   @override
   Widget build(BuildContext context) {

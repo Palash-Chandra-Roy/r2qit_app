@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Controller/service_controller.dart';
 
-class ServiceScreen extends StatefulWidget {
-  const ServiceScreen({super.key});
+class Service extends StatefulWidget {
+  const Service({super.key});
 
   @override
-  State<ServiceScreen> createState() => _ServiceScreenState();
+  State<Service> createState() => _ServiceState();
 }
 
-class _ServiceScreenState extends State<ServiceScreen> {
+class _ServiceState extends State<Service> {
   final ServiceController _serviceController = Get.put(ServiceController());
 
   @override
