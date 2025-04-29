@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
+import 'package:r2ait_app/Controller/signup_controller.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
 import 'package:r2ait_app/Coustom_Widget/customtextfromfield.dart';
 import 'package:r2ait_app/UI%20Screen/signin.dart';
@@ -14,8 +14,18 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  SignUpController signUpController = Get.put(SignUpController());
   bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
+
+  void gotoSignin() {
+    if (_formKey.currentState?.validate() ?? false) {
+      print("✅ Form Validated - Navigating to Signin Page");
+      Get.to(Signin());
+    } else {
+      print("❌ Form Not Valid");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +52,7 @@ class _SignupState extends State<Signup> {
                 CustomTextFormField(
                   hintText: "Full Name",
                   autocorrect: false,
+                  controller: signUpController.nameController,
                   prefixIcon: Icon(Icons.person),
                   filled: true,
                   keyboardType: TextInputType.name,
@@ -58,11 +69,12 @@ class _SignupState extends State<Signup> {
                 CustomTextFormField(
                   hintText: "Email",
                   autocorrect: false,
+                  controller: signUpController.emailController,
                   prefixIcon: Icon(Icons.email),
                   filled: true,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value == null || value!.isNotEmpty) {
+                    if (value == null || value.isEmpty) {
                       return "Email is required";
                     }
                     if (!RegExp(
@@ -74,11 +86,10 @@ class _SignupState extends State<Signup> {
                   },
                 ),
                 SizedBox(height: screenheight * 0.01),
-
-                /// Password
                 CustomTextFormField(
                   hintText: "Password",
                   prefixIcon: Icon(Icons.lock),
+                  controller: signUpController.passwordController,
                   filled: true,
                   obscureText: obscureText,
                   suffixIcon: IconButton(
@@ -91,7 +102,7 @@ class _SignupState extends State<Signup> {
                     },
                   ),
                   validator: (value) {
-                    if (value == null || value!.isNotEmpty) {
+                    if (value == null || value.isEmpty) {
                       return "Password is required";
                     }
                     if (value.length < 6) {
@@ -106,7 +117,10 @@ class _SignupState extends State<Signup> {
                 CustomButton(
                   buttonText: "Sign Up",
                   color: Color(0xFFA020F0),
-                  onPressed: () => gotoSignin,
+                  onPressed: gotoSignin,
+                  // () {
+                  //   Get.to(Signin());
+                  // },
                   textColor: Colors.black,
                 ),
                 SizedBox(height: screenheight * 0.04),
@@ -171,12 +185,5 @@ class _SignupState extends State<Signup> {
         ),
       ),
     );
-  }
-
-  void gotoSignin() {
-    // if (_formKey.currentState!.validate()) {
-    Logger().e("gotoSignIn Page");
-    Get.to(Signin());
-    // }
   }
 }

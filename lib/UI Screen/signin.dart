@@ -21,7 +21,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
 import 'package:r2ait_app/Coustom_Widget/customtextfromfield.dart';
@@ -81,7 +80,7 @@ class _SigninState extends State<Signin> {
                   filled: true,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value != null || value!.split(value).isNotEmpty) {
+                    if (value == null || value.isEmpty) {
                       return "Email is required";
                     }
                     if (!RegExp(
@@ -110,7 +109,7 @@ class _SigninState extends State<Signin> {
                     },
                   ),
                   validator: (value) {
-                    if (value != null || value!.split(value).isNotEmpty) {
+                    if (value == null || value.isEmpty) {
                       return "Password is required";
                     }
                     if (value.length < 6) {
@@ -180,9 +179,7 @@ class _SigninState extends State<Signin> {
                 CustomButton(
                   buttonText: "Sign In",
                   color: Color(0xFFA020F0),
-                  onPressed: () {
-                    gotoHome();
-                  },
+                  onPressed: gotoHome,
                   textColor: Colors.black,
                 ),
 
@@ -213,9 +210,11 @@ class _SigninState extends State<Signin> {
   }
 
   void gotoHome() {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState?.validate() ?? false) {
+      print("✅ Form Validated - Navigating to Home Page");
       Get.to(Home());
-      Logger().e("Navigetion is seccussfully");
+    } else {
+      print("❌ Form Not Valid");
     }
   }
 }
