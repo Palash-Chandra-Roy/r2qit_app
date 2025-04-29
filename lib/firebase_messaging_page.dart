@@ -22,13 +22,10 @@ class FirebaseMessageControler {
       provisional: true,
       sound: true,
     );
-    // if(settings.authorizationStatus == AuthorizationStatus.authorized){
-    //
-    // }else if (settings.authorizationStatus==AuthorizationStatus.provisional){
-    //
-    // }else{
-    //
-    // }
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+    } else {}
   }
 
   initsFCM() async {
