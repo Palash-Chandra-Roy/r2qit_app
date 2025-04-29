@@ -1,173 +1,221 @@
+//     final GoogleSignInAuthentication googleAuth =
+//         await googleUser.authentication;
+
+//     final OAuthCredential credential = GoogleAuthProvider.credential(
+//       accessToken: googleAuth.accessToken,
+//       idToken: googleAuth.idToken,
+//     );
+
+//     // Sign in to Firebase
+//     await _auth.signInWithCredential(credential);
+
+//     // After successful sign-in, you can navigate to your home screen or another screen
+//     print("User Signed In: ${_auth.currentUser?.displayName}");
+//     // Example: Navigate to HomeScreen
+//     // Get.to(HomeScreen());
+//   } catch (e) {
+//     print("Error during Google Sign-In: $e");
+//     Get.snackbar("Error", "Google Sign-In failed");
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/UI%20Screen/signup.dart';
+import 'package:r2ait_app/Coustom_Widget/customtextfromfield.dart';
+import 'package:r2ait_app/UI%20Screen/home.dart';
+import 'package:r2ait_app/UI%20Screen/otp.dart';
+import 'package:r2ait_app/UI%20Screen/signup.dart'; // Add this import if missing
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class Signin extends StatefulWidget {
+  const Signin({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<Signin> createState() => _SigninState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  // final GoogleSignIn _googleSignIn = GoogleSignIn();
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  // Future<void> signInWithGoogle() async {
-  //   try {
-  //     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-  //     if (googleUser == null) {
-  //       // User cancelled the sign-in
-  //       return;
-  //     }
-
-  //     final GoogleSignInAuthentication googleAuth =
-  //         await googleUser.authentication;
-
-  //     final OAuthCredential credential = GoogleAuthProvider.credential(
-  //       accessToken: googleAuth.accessToken,
-  //       idToken: googleAuth.idToken,
-  //     );
-
-  //     // Sign in to Firebase
-  //     await _auth.signInWithCredential(credential);
-
-  //     // After successful sign-in, you can navigate to your home screen or another screen
-  //     print("User Signed In: ${_auth.currentUser?.displayName}");
-  //     // Example: Navigate to HomeScreen
-  //     // Get.to(HomeScreen());
-  //   } catch (e) {
-  //     print("Error during Google Sign-In: $e");
-  //     Get.snackbar("Error", "Google Sign-In failed");
-  //   }
-  // }
+class _SigninState extends State<Signin> {
+  bool isCheck = false;
+  bool obscureText = true;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 100, left: 20, right: 20),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Image.asset(
-              height: 200,
-              "assets/images/logo.png",
-            ), // Replace with actual logo
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(width: 100, height: 4, color: Colors.purple),
-                SizedBox(width: 5),
-                Container(width: 100, height: 4, color: Colors.blue.shade300),
-              ],
-            ),
-            SizedBox(
-              height: screenheight * 0.05,
-            ),
-            Text(
-              "Let's You In ",
-              style: AppWidget.hederTextFeildStyle(),
-            ),
-            SizedBox(
-              height: screenheight * 0.06,
-            ),
-            InkWell(
-              onTap: () {},
-              child: Container(
-                height: 60,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(width: 2, color: Colors.grey)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                Image.asset(
+                  height: 200,
+                  "assets/images/logo.png",
+                ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      "assets/images/google.png",
-                      height: 30,
-                      width: 30,
-                      fit: BoxFit.cover,
-                    ),
+                    Container(width: 100, height: 4, color: Colors.purple),
                     SizedBox(width: 5),
-                    Text(
-                      "Continue with Google",
-                      style: AppWidget.appBarTextFeildStyle(),
-                    )
+                    Container(
+                        width: 100, height: 4, color: Colors.blue.shade300),
                   ],
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 3,
-                  width: screenWidth * 0.38,
-                  color: Colors.grey,
-                ),
-                Text(
-                  "Or",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  height: 3,
-                  width: screenWidth * 0.38,
-                  color: Colors.grey,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: screenheight * 0.02,
-            ),
-            CustomButton(
-                buttonText: "SignIn With Password",
-                color: Color(0xFFA020F0),
-                onPressed: () {},
-                textColor: Colors.black),
+                SizedBox(height: screenheight * 0.03),
+                Text("Let's You In", style: AppWidget.hederTextFeildStyle()),
+                SizedBox(height: screenheight * 0.03),
 
-            SizedBox(
-              height: 30,
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Already have an Account?",
-                  style: AppWidget.appBarTextFeildStyle(),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.to(signupScreen());
+                // Email
+                CustomTextFormField(
+                  hintText: "Email",
+                  autocorrect: false,
+                  prefixIcon: Icon(Icons.email),
+                  filled: true,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value != null || value!.split(value).isNotEmpty) {
+                      return "Email is required";
+                    }
+                    if (!RegExp(
+                            r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                        .hasMatch(value)) {
+                      return "Please enter a valid email";
+                    }
+                    return "";
                   },
-                  child: Text(
-                    'Sing Up!',
-                    style: AppWidget.parpleTextFeildStyle(),
+                ),
+                SizedBox(height: screenheight * 0.01),
+
+                // Password
+                CustomTextFormField(
+                  hintText: "Password",
+                  prefixIcon: Icon(Icons.lock),
+                  filled: true,
+                  obscureText: obscureText,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                  ),
+                  validator: (value) {
+                    if (value != null || value!.split(value).isNotEmpty) {
+                      return "Password is required";
+                    }
+                    if (value.length < 6) {
+                      return "Password must be at least 6 characters long";
+                    }
+                    return "";
+                  },
+                ),
+                SizedBox(height: screenheight * 0.01),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(OTP());
+                    },
+                    child: Text("Forgot the Password?",
+                        style: AppWidget.simpleTextFeildStyle()),
                   ),
                 ),
+                SizedBox(height: screenheight * 0.01),
+                // Google Sign In (optional)
+                InkWell(
+                  onTap: () {
+                    // signInWithGoogle(); // Uncomment and implement if needed
+                  },
+                  child: Container(
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(width: 2, color: Colors.grey),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset("assets/images/google.png",
+                            height: 30, width: 30),
+                        SizedBox(width: 5),
+                        Text("Continue with Google",
+                            style: AppWidget.appBarTextFeildStyle()),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: screenheight * 0.01), // Divider
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                      value: isCheck,
+                      onChanged: (bool? newVal) {
+                        setState(() {
+                          isCheck = newVal!;
+                        });
+                      },
+                    ),
+                    Flexible(
+                      child: Text(
+                        "Remember me",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: screenheight * 0.02),
+
+                // Sign In Button
+                CustomButton(
+                  buttonText: "Sign In",
+                  color: Color(0xFFA020F0),
+                  onPressed: () {
+                    gotoHome();
+                  },
+                  textColor: Colors.black,
+                ),
+
+                SizedBox(height: 30),
+
+                // Go to Sign Up
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an Account?",
+                        style: AppWidget.appBarTextFeildStyle()),
+                    SizedBox(width: 8),
+                    InkWell(
+                      onTap: () {
+                        Get.to(Signup()); // Navigate to signup screen
+                      },
+                      child: Text('Sign Up!',
+                          style: AppWidget.parpleTextFeildStyle()),
+                    ),
+                  ],
+                ),
               ],
             ),
-          ]),
+          ),
         ),
       ),
     );
+  }
+
+  void gotoHome() {
+    if (_formKey.currentState!.validate()) {
+      Get.to(Home());
+      Logger().e("Navigetion is seccussfully");
+    }
   }
 }

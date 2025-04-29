@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Controller/job_controller.dart';
 
-class JobScreen extends StatelessWidget {
-  JobScreen({super.key});
+class Job extends StatelessWidget {
+  Job({super.key});
 
   JobController _jobController = Get.put(JobController());
 

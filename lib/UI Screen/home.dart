@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:r2ait_app/Controller/home_controller.dart';
 import 'package:r2ait_app/UI%20Screen/notification_page.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({Super, Key});
+class Home extends StatelessWidget {
+  Home({Super, Key});
   final HomeController _homeController = Get.put(HomeController());
 
   @override

@@ -4,18 +4,17 @@ import 'package:r2ait_app/Coustom_Widget/bottom_navbar.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
 import 'package:r2ait_app/Coustom_Widget/customtextfromfield.dart';
 
-class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({super.key});
+class Forget extends StatefulWidget {
+  const Forget({super.key});
 
   @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
+  State<Forget> createState() => _ForgetState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
+class _ForgetState extends State<Forget> {
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
 
     bool isCheck = false;
     String checkStatus = "UnCheck";
@@ -189,7 +188,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Color(0xFFA020F0)),
                                 onPressed: () {
-                                  Get.to(BottomNavbarScreen());
+                                  Get.to(BottomNavbar());
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(

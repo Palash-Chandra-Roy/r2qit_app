@@ -201,7 +201,7 @@ class _VerifyState extends State<Verify> {
                 buttonText: "Send OTP ",
                 color: Color(0xFFA020F0),
                 onPressed: () {
-                  Get.to(ForgetPassword());
+                  Get.to(Forget());
                 },
                 textColor: Colors.black)
           ],
