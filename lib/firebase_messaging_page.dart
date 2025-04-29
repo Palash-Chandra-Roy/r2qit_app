@@ -12,8 +12,23 @@ class FirebaseMessageControler {
     });
   }
 
+  notificationPermiton() async {
+    NotificationSettings settings = await firebaseMessaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
+      sound: true,
+    );
+    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    } else if (settings.authorizationStatus ==
+        AuthorizationStatus.provisional) {
+    } else {}
+  }
+
   initsFCM() async {
-    await firebaseMessaging.requestPermission();
     var token = await firebaseMessaging.getToken();
     Logger().e("message token: $token");
     FirebaseMessaging.onBackgroundMessage(hendleNotification);
