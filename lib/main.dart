@@ -12,6 +12,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseMessageControler().initsFCM();
+  await FirebaseMessageControler().notificationPermiton();
 
   runApp(const MyApp());
 }
