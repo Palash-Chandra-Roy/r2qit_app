@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../Coustom_Widget/custom_notification_fild.dart';
+import '../firebase_messaging_page.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -25,9 +26,21 @@ class _NotificationPageState extends State<NotificationPage> {
               text: "Earlier",
               isCheck: true,
             ),
+            ElevatedButton(onPressed: shownotification, child: Text("data"))
           ],
         ),
       ),
     );
+  }
+
+  void shownotification() {}
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      FirebaseMessageControler.notificationSetup();
+    });
   }
 }

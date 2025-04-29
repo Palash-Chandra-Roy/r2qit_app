@@ -1,0 +1,2 @@
+D:/Shahed project/fluttter/r2qit_app/android/app/.cxx/RelWithDebInfo/6553203g/x86/CMakeFiles/edit_cache.dir
+D:/Shahed project/fluttter/r2qit_app/android/app/.cxx/RelWithDebInfo/6553203g/x86/CMakeFiles/rebuild_cache.dir
