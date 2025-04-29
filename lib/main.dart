@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/UI%20Screen/splash.dart';
+import 'package:r2ait_app/UI%20Screen/notification_page.dart';
 import 'package:r2ait_app/firebase_options.dart';
 
 import 'firebase_messaging_page.dart';
@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseMsg().initsFCM();
+  await FirebaseMessageControler().initsFCM();
 
   runApp(const MyApp());
 }
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: NotificationPage(),
       //HomeScreen(),
     );
   }
