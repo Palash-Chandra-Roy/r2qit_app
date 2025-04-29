@@ -23,9 +23,13 @@ class FirebaseMessageControler {
       sound: true,
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      Logger().e("permission granted");
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-    } else {}
+      Logger().e("permission granted");
+    } else {
+      Logger().e("permission NOt granted");
+    }
   }
 
   initsFCM() async {
