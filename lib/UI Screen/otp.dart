@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
+import 'package:r2ait_app/Controller/otp_controller.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
 import 'package:r2ait_app/UI%20Screen/verify.dart';
 
@@ -11,6 +13,8 @@ class OTP extends StatefulWidget {
 }
 
 class _OTPState extends State<OTP> {
+  OtpController otpController = Get.put(OtpController());
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -29,51 +33,75 @@ class _OTPState extends State<OTP> {
               size: 14,
               color: Colors.black,
             )),
-        title: Text(
-          "Forgot Password ",
-          style: TextStyle(
-              fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
+        title:
+            Text("Forgot Password ", style: AppWidget.appBarTextFeildStyle()),
       ),
       body: Padding(
         padding: const EdgeInsets.only(
           right: 20,
           left: 20,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Image.asset(
-                "assets/images/frame.png",
-                height: 300,
-                width: 300,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Image.asset(
+                  "assets/images/frame.png",
+                  height: 300,
+                  width: 300,
+                ),
               ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.01,
-            ),
-            Text(
-              "Please Enter your email to reset your password",
-              style: TextStyle(fontSize: 16, color: Color(0xFF5C5C5C)),
-            ),
-            SizedBox(
-              height: screenHeight * 0.02,
-            ),
-            SizedBox(
-              height: screenHeight * 0.2,
-            ),
-            CustomButton(
-                buttonText: "Send OTP ",
-                color: Color(0xFFA020F0),
-                onPressed: () {
-                  Get.to(Verify());
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              Text(
+                "Please Enter your email to reset your password",
+                style: AppWidget.greyTextFeildStyle(),
+              ),
+              SizedBox(
+                height: screenHeight * 0.02,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Email",
+                  prefixIcon: Icon(Icons.email),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                controller: otpController.emailController,
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Email is required";
+                  } else if (!RegExp(
+                          r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                      .hasMatch(value)) {
+                    return "Please enter a valid email";
+                  } else {
+                    return null;
+                  }
                 },
-                textColor: Colors.black)
-          ],
+              ),
+              SizedBox(
+                height: screenHeight * 0.2,
+              ),
+              CustomButton(
+                  buttonText: "Send OTP ",
+                  color: Color(0xFFA020F0),
+                  onPressed: gotoVerify,
+                  textColor: Colors.black)
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  void gotoVerify() {
+    if (_formKey.currentState?.validate() ?? false) {
+      print("✅ Form Validated");
+      Get.to(Verify());
+    }
   }
 }

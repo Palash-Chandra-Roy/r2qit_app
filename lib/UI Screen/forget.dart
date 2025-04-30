@@ -1,7 +1,208 @@
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
+// import 'package:r2ait_app/Controller/forget_controller.dart';
+// import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
+// import 'package:r2ait_app/UI%20Screen/signin.dart';
+
+// class Forget extends StatefulWidget {
+//   const Forget({super.key});
+
+//   @override
+//   State<Forget> createState() => _ForgetState();
+// }
+
+// class _ForgetState extends State<Forget> {
+//   ForgetController forgetController = Get.put(ForgetController());
+//   bool obscureText = true;
+//   bool obscuresText = true;
+//   bool isCheck = false;
+//   String checkStatus = "UnCheck";
+
+//   final _formKey = GlobalKey<FormState>();
+//   @override
+//   Widget build(BuildContext context) {
+//     double screenheight = MediaQuery.of(context).size.height;
+
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       appBar: AppBar(
+//         elevation: 0,
+//         centerTitle: true,
+//         backgroundColor: Colors.white,
+//         leading: IconButton(
+//             onPressed: () {
+//               Get.back();
+//             },
+//             icon: Icon(
+//               Icons.arrow_back_ios,
+//               size: 16,
+//               color: Colors.black,
+//             )),
+//         title: Text(
+//           "Create New Password",
+//           style: TextStyle(
+//               fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+//         ),
+//       ),
+//       body: SingleChildScrollView(
+//         child: Padding(
+//           padding: EdgeInsets.only(
+//             right: 20,
+//             left: 20,
+//           ),
+//           child: Form(
+//             key: _formKey,
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.start,
+//               children: [
+//                 SizedBox(
+//                   height: MediaQuery.of(context).size.height / 4,
+//                   child: ClipRRect(
+//                     borderRadius: BorderRadius.circular(30),
+//                     child: Image.asset(
+//                       "assets/images/forgot.png",
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(
+//                   height: screenheight * 0.02,
+//                 ),
+//                 Text("Create Your New Password",
+//                     style: AppWidget.appBarTextFeildStyle()),
+//                 SizedBox(
+//                   height: screenheight * 0.03,
+//                 ),
+//                 TextFormField(
+//                   decoration: InputDecoration(
+//                     hintText: " New Password",
+//                     prefixIcon: Icon(Icons.lock),
+//                     suffixIcon: IconButton(
+//                       icon: Icon(obscureText
+//                           ? Icons.visibility_off
+//                           : Icons.visibility),
+//                       onPressed: () {
+//                         setState(() {
+//                           obscureText = !obscureText;
+//                         });
+//                       },
+//                     ),
+//                   ),
+//                   keyboardType: TextInputType.visiblePassword,
+//                   controller: forgetController.newPasswordController,
+//                   validator: (value) {
+//                     if (value == null || value.isEmpty) {
+//                       return "Password is required";
+//                     }
+//                     if (value.length < 6) {
+//                       return "Password must be at least 6 characters long";
+//                     }
+//                     return null;
+//                   },
+//                 ),
+//                 SizedBox(
+//                   height: screenheight * 0.02,
+//                 ),
+//                 TextFormField(
+//                   decoration: InputDecoration(
+//                     hintText: " Confirm Password",
+//                     prefixIcon: Icon(Icons.lock),
+//                     suffixIcon: IconButton(
+//                       icon: Icon(obscureText
+//                           ? Icons.visibility_off
+//                           : Icons.visibility),
+//                       onPressed: () {
+//                         setState(() {
+//                           obscureText = !obscuresText;
+//                         });
+//                       },
+//                     ),
+//                   ),
+//                   keyboardType: TextInputType.visiblePassword,
+//                   controller: forgetController.confirmPasswordController,
+//                   validator: (value) {
+//                     if (value == null || value.isEmpty) {
+//                       return "Password is required";
+//                     }
+//                     if (value.length < 6) {
+//                       return "Password must be at least 6 characters long";
+//                     }
+//                     return null;
+//                   },
+//                 ),
+//                 SizedBox(
+//                   height: screenheight * 0.04,
+//                 ),
+//                 Row(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     Checkbox(
+//                       value: isCheck,
+//                       onChanged: (bool? newVal) {
+//                         setState(() {
+//                           isCheck = newVal ?? false;
+//                           //Text(isCheck ? "Check" : "UnCheck");
+//                         });
+//                       },
+//                     ),
+//                     Flexible(
+//                       child: Text(
+//                         "Remember me",
+//                         style: AppWidget.appBarTextFeildStyle(),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 SizedBox(
+//                   height: screenheight * 0.06,
+//                 ),
+//                 CustomButton(
+//                     buttonText: "Continue",
+//                     color: Color(0xFFA020F0),
+//                     onPressed: gotoSigninpage,
+//                     textColor: Colors.black),
+//                 SizedBox(
+//                   height: screenheight * 0.03,
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   void gotoSigninpage() {
+//     if (_formKey.currentState?.validate() ?? false) {
+//       if (forgetController.newPasswordController.text !=
+//           forgetController.confirmPasswordController.text) {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           const SnackBar(content: Text("Passwords do not match")),
+//         );
+//         return;
+//       }
+
+//       if (!isCheck) {
+//         ScaffoldMessenger.of(context).showSnackBar(
+//           const SnackBar(content: Text("চেকবক্সে টিক দিন")),
+//         );
+//         return;
+//       }
+
+//       ScaffoldMessenger.of(context).showSnackBar(
+//         const SnackBar(content: Text("Go to Signin Page ")),
+//       );
+//       Get.to(Signin());
+//     }
+//   }
+// }
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/Coustom_Widget/bottom_navbar.dart';
+import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
+import 'package:r2ait_app/Controller/forget_controller.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
+import 'package:r2ait_app/UI%20Screen/signin.dart';
 
 class Forget extends StatefulWidget {
   const Forget({super.key});
@@ -11,12 +212,17 @@ class Forget extends StatefulWidget {
 }
 
 class _ForgetState extends State<Forget> {
+  final ForgetController forgetController = Get.put(ForgetController());
+
+  bool obscureText = true;
+  bool obscuresText = true;
+  bool isCheck = false;
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-    bool obscureText = true;
-    bool isCheck = false;
-    String checkStatus = "UnCheck";
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -25,15 +231,10 @@ class _ForgetState extends State<Forget> {
         centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 16,
-              color: Colors.black,
-            )),
-        title: Text(
+          onPressed: () => Get.back(),
+          icon: const Icon(Icons.arrow_back_ios, size: 16, color: Colors.black),
+        ),
+        title: const Text(
           "Create New Password",
           style: TextStyle(
               fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
@@ -41,199 +242,144 @@ class _ForgetState extends State<Forget> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 10, left: 20, right: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Image.asset(
-                  "assets/images/forgot.png",
-                  height: 300,
-                  width: 300,
-                  fit: BoxFit.contain, // optional
-                ),
-              ),
-              SizedBox(
-                height: screenheight * 0.01,
-              ),
-              Text(
-                "Create Your New Password",
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        obscureText ? Icons.visibility_off : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: screenheight / 4,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: Image.asset("assets/images/forgot.png"),
                   ),
                 ),
-                keyboardType: TextInputType.visiblePassword,
-                // controller: signUpController.passwordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Password is required";
-                  }
-                  if (value.length < 6) {
-                    return "Password must be at least 6 characters long";
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: screenheight * 0.01,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        obscureText ? Icons.visibility_off : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
-                  ),
-                ),
-                keyboardType: TextInputType.visiblePassword,
-                // controller: signUpController.passwordController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Password is required";
-                  }
-                  if (value.length < 6) {
-                    return "Password must be at least 6 characters long";
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(
-                height: screenheight * 0.04,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: isCheck,
-                    onChanged: (bool? newVal) {
-                      setState(() {
-                        isCheck = newVal ?? false;
-                        Text(isCheck ? "Check" : "UnCheck"); // টেক্সট আপডেট
-                      });
-                    },
-                  ),
-                  Flexible(
-                    child: Text(
-                      "Remember me",
-                      style: TextStyle(fontSize: 18, color: Colors.black),
+                SizedBox(height: screenheight * 0.02),
+                Text("Create Your New Password",
+                    style: AppWidget.appBarTextFeildStyle()),
+                SizedBox(height: screenheight * 0.03),
+
+                /// New Password
+                TextFormField(
+                  obscureText: obscureText,
+                  decoration: InputDecoration(
+                    hintText: " New Password",
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      icon: Icon(obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
                     ),
                   ),
-
-                  // Checkbox(
-                  //     value: isCheck,
-                  //     onChanged: (bool? newVal) {
-                  //       setState(() {
-                  //         isCheck = newVal!;
-                  //       });
-                  //       Text(isCheck ? "Check" : "UnCheck");
-                  //     }),
-                  // Flexible(
-                  //   child: Text(
-                  //     "Remember me",
-                  //     style: TextStyle(fontSize: 18, color: Colors.black),
-                  //   ),
-                  // ),
-                ],
-              ),
-              SizedBox(
-                height: screenheight * 0.06,
-              ),
-              CustomButton(
-                  buttonText: "Continue",
-                  color: Color(0xFFA020F0),
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        title: Center(
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                "assets/images/con.png",
-                                height: 120,
-                                width: 120,
-                              ),
-                              SizedBox(
-                                height: screenheight * 0.01,
-                              ),
-                              Text("Congratulations!",
-                                  style: TextStyle(
-                                      color: Color(0xFFA020F0),
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold)),
-                              SizedBox(
-                                height: screenheight * 0.01,
-                              ),
-                              Text("Your Account is redy to use",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold)),
-                              SizedBox(
-                                height: screenheight * 0.01,
-                              ),
-                              ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFFA020F0)),
-                                onPressed: () {
-                                  Get.to(BottomNavbar());
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(
-                                      "Go to HomePages",
-                                      style: TextStyle(color: Colors.white),
-                                    )),
-                                  );
-                                },
-                                child: Text(
-                                  "Go to Homepages",
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-
-                    //
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: forgetController.newPasswordController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password is required";
+                    }
+                    if (value.length < 6) {
+                      return "Password must be at least 6 characters long";
+                    }
+                    return null;
                   },
-                  textColor: Colors.black),
-              SizedBox(
-                height: screenheight * 0.03,
-              ),
-            ],
+                ),
+                SizedBox(height: screenheight * 0.02),
+
+                /// Confirm Password
+                TextFormField(
+                  obscureText: obscuresText,
+                  decoration: InputDecoration(
+                    hintText: " Confirm Password",
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      icon: Icon(obscuresText
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          obscuresText = !obscuresText;
+                        });
+                      },
+                    ),
+                  ),
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: forgetController.confirmPasswordController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Confirm password is required";
+                    }
+                    if (value.length < 6) {
+                      return "Confirm password must be at least 6 characters long";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: screenheight * 0.04),
+
+                /// Checkbox
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Checkbox(
+                      value: isCheck,
+                      onChanged: (bool? newVal) {
+                        setState(() {
+                          isCheck = newVal ?? false;
+                        });
+                      },
+                    ),
+                    Flexible(
+                      child: Text(
+                        "Remember me",
+                        style: AppWidget.appBarTextFeildStyle(),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: screenheight * 0.06),
+
+                /// Continue Button
+                CustomButton(
+                  buttonText: "Continue",
+                  color: const Color(0xFFA020F0),
+                  textColor: Colors.black,
+                  onPressed: gotoSigninpage,
+                ),
+                SizedBox(height: screenheight * 0.03),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void gotoSigninpage() {
+    if (_formKey.currentState?.validate() ?? false) {
+      if (forgetController.newPasswordController.text !=
+          forgetController.confirmPasswordController.text) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Passwords do not match")),
+        );
+        return;
+      }
+
+      if (!isCheck) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Tick ​​the checkbox.")),
+        );
+        return;
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Go to Home Page")),
+      );
+      Get.to(() => const Signin());
+    }
   }
 }
