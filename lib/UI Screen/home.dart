@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Controller/home_controller.dart';
 import 'package:r2ait_app/UI%20Screen/notification_page.dart';
+import 'package:r2ait_app/UI%20Screen/support_chat.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -243,6 +244,27 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          goToSupportChatPage(context);
+        },
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+          margin: EdgeInsets.symmetric(vertical: 10),
+          decoration: BoxDecoration(
+            color: Colors.orange,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Icon(Icons.chat_bubble_rounded, size: 35, color: Colors.white),
+        ),
+      ),
     );
   }
 
@@ -250,6 +272,15 @@ class Home extends StatelessWidget {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (builder) => NotificationPage()),
+        (predicate) => true);
+  }
+
+  void goToSupportChatPage(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SupportChat(),
+        ),
         (predicate) => true);
   }
 }
