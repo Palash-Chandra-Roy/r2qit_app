@@ -23,18 +23,13 @@ class FirebaseMessageControler {
       sound: true,
     );
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      Logger().e("permission granted");
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-      Logger().e("permission granted");
-    } else {
-      Logger().e("permission NOt granted");
-    }
+    } else {}
   }
 
   initsFCM() async {
     var token = await firebaseMessaging.getToken();
-    Logger().e("message token: $token");
     FirebaseMessaging.onBackgroundMessage(hendleNotification);
     FirebaseMessaging.onMessage.listen(hendleNotification);
   }
