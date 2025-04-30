@@ -250,6 +250,6 @@ class Home extends StatelessWidget {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (builder) => NotificationPage()),
-        (predicate) => false);
+        (predicate) => true);
   }
 }

@@ -17,23 +17,10 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: AppBar(title: const Text('Notifications'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            CustomNotificationFild(text: "New"),
-            CustomNotificationFild(
-              text: "Earlier",
-              isCheck: true,
-            ),
-            ElevatedButton(onPressed: shownotification, child: Text("data"))
-          ],
-        ),
+        child: CustomNotificationFild(),
       ),
     );
   }
-
-  void shownotification() {}
 
   @override
   void initState() {
