@@ -28,10 +28,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Container(
-          height: 200,
-          width: 200,
+          height: 300,
+          width: 300,
           child: Image.asset(
-            "assets/images/company_logo.jpg",
+            "assets/images/logo.png",
             fit: BoxFit.cover,
           ),
         ),

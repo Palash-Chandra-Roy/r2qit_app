@@ -22,8 +22,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
+import 'package:r2ait_app/Controller/signin_controller.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/Coustom_Widget/customtextfromfield.dart';
 import 'package:r2ait_app/UI%20Screen/home.dart';
 import 'package:r2ait_app/UI%20Screen/otp.dart';
 import 'package:r2ait_app/UI%20Screen/signup.dart'; // Add this import if missing
@@ -36,6 +36,7 @@ class Signin extends StatefulWidget {
 }
 
 class _SigninState extends State<Signin> {
+  SigninController signinController = Get.put(SigninController());
   bool isCheck = false;
   bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
@@ -73,41 +74,45 @@ class _SigninState extends State<Signin> {
                 SizedBox(height: screenheight * 0.03),
 
                 // Email
-                CustomTextFormField(
-                  hintText: "Email",
-                  autocorrect: false,
-                  prefixIcon: Icon(Icons.email),
-                  filled: true,
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Email",
+                    prefixIcon: Icon(Icons.email),
+                  ),
                   keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
+                  controller: signinController.emailController,
+                  validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return "Email is required";
-                    }
-                    if (!RegExp(
+                    } else if (!RegExp(
                             r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
                         .hasMatch(value)) {
                       return "Please enter a valid email";
+                    } else {
+                      return null;
                     }
-                    return "";
                   },
                 ),
                 SizedBox(height: screenheight * 0.01),
 
-                // Password
-                CustomTextFormField(
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.lock),
-                  filled: true,
-                  obscureText: obscureText,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        obscureText ? Icons.visibility_off : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
+                //password
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    prefixIcon: Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      icon: Icon(obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
+                    ),
                   ),
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: signinController.passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password is required";
@@ -115,10 +120,9 @@ class _SigninState extends State<Signin> {
                     if (value.length < 6) {
                       return "Password must be at least 6 characters long";
                     }
-                    return "";
+                    return null;
                   },
                 ),
-                SizedBox(height: screenheight * 0.01),
                 Center(
                   child: InkWell(
                     onTap: () {
