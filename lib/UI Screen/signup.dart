@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
 import 'package:r2ait_app/Controller/signup_controller.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/Coustom_Widget/customtextfromfield.dart';
 import 'package:r2ait_app/UI%20Screen/signin.dart';
 
 class Signup extends StatefulWidget {
@@ -19,7 +18,7 @@ class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
 
   void gotoSignin() {
-    if (_formKey.currentState?.validate() ?? false) {
+    if (_formKey.currentState!.validate()) {
       print("✅ Form Validated - Navigating to Signin Page");
       Get.to(Signin());
     } else {
@@ -49,58 +48,61 @@ class _SignupState extends State<Signup> {
                 SizedBox(height: screenheight * 0.03),
 
                 /// Full Name
-                CustomTextFormField(
-                  hintText: "Full Name",
-                  autocorrect: false,
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Name",
+                    prefixIcon: Icon(Icons.person),
+                  ),
                   controller: signUpController.nameController,
-                  prefixIcon: Icon(Icons.person),
-                  filled: true,
                   keyboardType: TextInputType.name,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Enter your name";
                     }
-                    return "";
+                    return null;
+                  },
+                ),
+                SizedBox(height: screenheight * 0.01),
+                //Email
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Email",
+                    prefixIcon: Icon(Icons.email),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                  controller: signUpController.emailController,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Email is required";
+                    } else if (!RegExp(
+                            r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                        .hasMatch(value)) {
+                      return "Please enter a valid email";
+                    } else {
+                      return null;
+                    }
                   },
                 ),
                 SizedBox(height: screenheight * 0.01),
 
-                /// Email
-                CustomTextFormField(
-                  hintText: "Email",
-                  autocorrect: false,
-                  controller: signUpController.emailController,
-                  prefixIcon: Icon(Icons.email),
-                  filled: true,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Email is required";
-                    }
-                    if (!RegExp(
-                            r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-                        .hasMatch(value)) {
-                      return "Please enter a valid email";
-                    }
-                    return "";
-                  },
-                ),
-                SizedBox(height: screenheight * 0.01),
-                CustomTextFormField(
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.lock),
-                  controller: signUpController.passwordController,
-                  filled: true,
-                  obscureText: obscureText,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        obscureText ? Icons.visibility_off : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        obscureText = !obscureText;
-                      });
-                    },
+                //password
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                    prefixIcon: Icon(Icons.lock),
+                    suffixIcon: IconButton(
+                      icon: Icon(obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility),
+                      onPressed: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
+                    ),
                   ),
+                  keyboardType: TextInputType.visiblePassword,
+                  controller: signUpController.passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password is required";
@@ -108,9 +110,10 @@ class _SignupState extends State<Signup> {
                     if (value.length < 6) {
                       return "Password must be at least 6 characters long";
                     }
-                    return "";
+                    return null;
                   },
                 ),
+
                 SizedBox(height: screenheight * 0.04),
 
                 /// Sign Up Button

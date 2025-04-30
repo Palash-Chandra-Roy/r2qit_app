@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/Coustom_Widget/customtextfromfield.dart';
 import 'package:r2ait_app/UI%20Screen/verify.dart';
 
 class OTP extends StatefulWidget {
@@ -61,24 +60,6 @@ class _OTPState extends State<OTP> {
             ),
             SizedBox(
               height: screenHeight * 0.02,
-            ),
-            CustomTextFormField(
-              hintText: "Email",
-              autocorrect: true,
-              obscureText: true,
-
-              //fillColor: Colors.white70,
-              prefixIcon: Icon(Icons.email),
-              filled: true,
-              //obscureText: true,
-              keyboardType: TextInputType.emailAddress,
-              // validator: (value) {
-              //   if (value == null || value.isEmpty) {
-              //     return "Enter your Email";
-              //   } else {
-              //     return null!;
-              //   }
-              // },
             ),
             SizedBox(
               height: screenHeight * 0.2,

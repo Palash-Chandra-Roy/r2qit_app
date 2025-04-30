@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Coustom_Widget/bottom_navbar.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/Coustom_Widget/customtextfromfield.dart';
 
 class Forget extends StatefulWidget {
   const Forget({super.key});
@@ -15,7 +14,7 @@ class _ForgetState extends State<Forget> {
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-
+    bool obscureText = true;
     bool isCheck = false;
     String checkStatus = "UnCheck";
 
@@ -68,44 +67,60 @@ class _ForgetState extends State<Forget> {
               SizedBox(
                 height: 15,
               ),
-              CustomTextFormField(
-                hintText: "Password",
-                prefixIcon: Icon(Icons.lock),
-                filled: true,
-                keyboardType: TextInputType
-                    .visiblePassword, // More appropriate for password input
-                obscureText: true, // Usually true for password fields
-                suffixIcon: Icon(Icons.visibility_off),
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return "Password is required"; // Meaningful error message
-                //   }
-                //   if (value.length < 6) {
-                //     return "Password must be at least 6 characters long"; // Basic validation
-                //   }
-                //   return null!; // Valid input
-                // },
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  prefixIcon: Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                  ),
+                ),
+                keyboardType: TextInputType.visiblePassword,
+                // controller: signUpController.passwordController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Password is required";
+                  }
+                  if (value.length < 6) {
+                    return "Password must be at least 6 characters long";
+                  }
+                  return null;
+                },
               ),
               SizedBox(
                 height: screenheight * 0.01,
               ),
-              CustomTextFormField(
-                hintText: "Confirm Password",
-                prefixIcon: Icon(Icons.lock),
-                filled: true,
-                keyboardType: TextInputType
-                    .visiblePassword, // More appropriate for password input
-                obscureText: true, // Usually true for password fields
-                suffixIcon: Icon(Icons.visibility_off),
-                // validator: (value) {
-                //   if (value == null || value.isEmpty) {
-                //     return "Password is required"; // Meaningful error message
-                //   }
-                //   if (value.length < 6) {
-                //     return "Password must be at least 6 characters long"; // Basic validation
-                //   }
-                //   return null!; // Valid input
-                // },
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  prefixIcon: Icon(Icons.lock),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility),
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                  ),
+                ),
+                keyboardType: TextInputType.visiblePassword,
+                // controller: signUpController.passwordController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Password is required";
+                  }
+                  if (value.length < 6) {
+                    return "Password must be at least 6 characters long";
+                  }
+                  return null;
+                },
               ),
               SizedBox(
                 height: screenheight * 0.04,
