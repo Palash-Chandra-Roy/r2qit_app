@@ -93,7 +93,7 @@ class _SigninState extends State<Signin> {
                     }
                   },
                 ),
-                SizedBox(height: screenheight * 0.01),
+                SizedBox(height: screenheight * 0.02),
 
                 //password
                 TextFormField(
@@ -123,12 +123,14 @@ class _SigninState extends State<Signin> {
                     return null;
                   },
                 ),
-                Center(
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(OTP());
-                    },
-                    child: Text("Forgot the Password?",
+                SizedBox(height: screenheight * 0.01),
+                InkWell(
+                  onTap: () {
+                    Get.to(OTP());
+                  },
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text("Forgot Password?",
                         style: AppWidget.simpleTextFeildStyle()),
                   ),
                 ),
@@ -157,7 +159,9 @@ class _SigninState extends State<Signin> {
                     ),
                   ),
                 ),
-                SizedBox(height: screenheight * 0.01), // Divider
+                // Divider
+
+                SizedBox(height: screenheight * 0.02),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -172,14 +176,14 @@ class _SigninState extends State<Signin> {
                     Flexible(
                       child: Text(
                         "Remember me",
-                        style: TextStyle(fontSize: 18),
+                        style: AppWidget.appBarTextFeildStyle(),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: screenheight * 0.02),
-
                 // Sign In Button
+
+                SizedBox(height: screenheight * 0.02),
                 CustomButton(
                   buttonText: "Sign In",
                   color: Color(0xFFA020F0),

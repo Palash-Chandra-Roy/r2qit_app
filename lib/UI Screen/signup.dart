@@ -62,7 +62,7 @@ class _SignupState extends State<Signup> {
                     return null;
                   },
                 ),
-                SizedBox(height: screenheight * 0.01),
+                SizedBox(height: screenheight * 0.02),
                 //Email
                 TextFormField(
                   decoration: InputDecoration(
@@ -83,7 +83,7 @@ class _SignupState extends State<Signup> {
                     }
                   },
                 ),
-                SizedBox(height: screenheight * 0.01),
+                SizedBox(height: screenheight * 0.02),
 
                 //password
                 TextFormField(

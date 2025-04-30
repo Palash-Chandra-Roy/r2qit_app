@@ -4,7 +4,15 @@ class AppWidget {
   static TextStyle appBarTextFeildStyle() {
     return TextStyle(
       color: Colors.black,
-      fontSize: 14,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+    );
+  }
+
+  static TextStyle greyTextFeildStyle() {
+    return TextStyle(
+      color: Color(0xFF5C5C5C),
+      fontSize: 16,
       fontWeight: FontWeight.bold,
     );
   }
@@ -12,7 +20,7 @@ class AppWidget {
   static TextStyle parpleTextFeildStyle() {
     return TextStyle(
       color: Color(0xFF7E22CD),
-      fontSize: 14,
+      fontSize: 16,
       fontWeight: FontWeight.bold,
     );
   }
@@ -26,7 +34,7 @@ class AppWidget {
   }
 
   static TextStyle simpleTextFeildStyle() {
-    return TextStyle(color: Color(0xFFA020F0), fontSize: 18);
+    return TextStyle(color: Colors.blue, fontSize: 14);
   }
 
   static TextStyle whiteTextFeildStyle() {
