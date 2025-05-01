@@ -227,19 +227,17 @@ class Home extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {},
-                child: Text(
-                  "About Us",
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                child: Center(
+                  child: Text(
+                    "About Us",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
-              Container(
-                height: screenHeight * 0.2,
-                width: double.infinity,
-                color: Colors.amber,
-              ),
+              CustomAboutAs()
             ],
           ),
         ),
@@ -282,5 +280,50 @@ class Home extends StatelessWidget {
 
   void goToSupportPage() {
     Get.to(() => SupportChatPage());
+  }
+}
+
+class CustomAboutAs extends StatelessWidget {
+  const CustomAboutAs({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
+    return Container(
+      height: height * 0.2,
+      width: double.infinity,
+      color: Colors.green.shade100,
+      child: Row(
+        children: [
+          SizedBox(
+            height: height,
+            width: width * 0.4,
+            child: Image.network(
+              "https://img.freepik.com/free-photo/team-developers-doing-brainstorming-optimizing-code_482257-112972.jpg",
+              fit: BoxFit.cover,
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                "At our company, our Customer Service Department is wholly "
+                "committed to delivering unparalleled service to our valued customers."
+                " From the very first point of contact, customers are warmly welcomed with "
+                "a friendly smile and a supportive demeanor. Our team undergoes rigorous "
+                "training to adeptly handle customer requests and inquiries with efficiency "
+                "and efficacy, ensuring a remarkable experience that upholds the elevated"
+                " standards we hold dear.",
+                style: TextStyle(fontSize: 14),
+                overflow: TextOverflow.fade,
+                softWrap: true,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
