@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 class CustomFaqTupper extends StatelessWidget {
   String text;
   late VoidCallback? goToSupportChatPage;
+  late VoidCallback? backButton;
   IconData? icon;
   CustomFaqTupper(
-      {super.key, required this.text, this.goToSupportChatPage, this.icon});
+      {super.key,
+      required this.text,
+      this.goToSupportChatPage,
+      this.icon,
+      this.backButton});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,7 @@ class CustomFaqTupper extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
-            onTap: () => Navigator.pop(context),
+            onTap: backButton,
             child: Icon(
               Icons.arrow_back,
               size: 30,

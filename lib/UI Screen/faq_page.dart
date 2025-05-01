@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:get/get.dart';
 import 'package:r2ait_app/Coustom_Widget/custom_faq_tupper.dart';
 import 'package:r2ait_app/UI%20Screen/support_chat_page.dart';
 
 import '../Coustom_Widget/ask_box.dart';
 import '../Coustom_Widget/faq_card.dart';
 
-class FAQPage extends StatelessWidget {
+class FAQPage extends StatefulWidget {
   FAQPage({super.key});
 
+  @override
+  State<FAQPage> createState() => _FAQPageState();
+}
+
+class _FAQPageState extends State<FAQPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -23,10 +29,12 @@ class FAQPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomFaqTupper(
-                text: "FAQ",
-                goToSupportChatPage: goToSupportChatPage(context),
-                icon: Icons.chat_bubble_outlined,
-              ),
+                  text: "FAQ",
+                  goToSupportChatPage: goToSupportChatPage,
+                  icon: Icons.chat_bubble_outlined,
+                  backButton: () {
+                    Get.back();
+                  }),
 
               SizedBox(
                 height: height * 0.01,
@@ -113,10 +121,7 @@ class FAQPage extends StatelessWidget {
     );
   }
 
-  goToSupportChatPage(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) => SupportChatPage()),
-        (route) => true);
+  goToSupportChatPage() {
+    Get.to(() => SupportChatPage());
   }
 }

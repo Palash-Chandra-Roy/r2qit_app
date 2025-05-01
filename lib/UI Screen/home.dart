@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Controller/home_controller.dart';
 import 'package:r2ait_app/UI%20Screen/faq_page.dart';
 import 'package:r2ait_app/UI%20Screen/notification_page.dart';
+import 'package:r2ait_app/UI%20Screen/support_chat_page.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -38,11 +40,9 @@ class Home extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                print("Chatting Option ");
-              },
+              onPressed: goToSupportPage,
               icon: Icon(
-                Icons.offline_bolt,
+                Entypo.chat,
                 size: 20,
                 color: Colors.black,
               )),
@@ -246,23 +246,24 @@ class Home extends StatelessWidget {
       ),
       floatingActionButton: GestureDetector(
         onTap: () {
-          goToSupportChatPage(context);
+          goToFaqPage();
         },
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           margin: EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
-            color: Colors.orange,
-            borderRadius: BorderRadius.circular(20),
+            color: Colors.grey.shade500,
+            borderRadius: BorderRadius.circular(5),
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
-                blurRadius: 10,
+                blurRadius: 30,
                 offset: Offset(0, 4),
               ),
             ],
           ),
-          child: Icon(Icons.chat_bubble_rounded, size: 35, color: Colors.white),
+          child: Icon(MaterialCommunityIcons.frequently_asked_questions,
+              size: 35, color: Colors.white),
         ),
       ),
     );
@@ -275,12 +276,11 @@ class Home extends StatelessWidget {
         (predicate) => true);
   }
 
-  void goToSupportChatPage(BuildContext context) {
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => FAQPage(),
-        ),
-        (predicate) => true);
+  void goToFaqPage() {
+    Get.to(() => FAQPage());
+  }
+
+  void goToSupportPage() {
+    Get.to(() => SupportChatPage());
   }
 }
