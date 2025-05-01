@@ -23,8 +23,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
 import 'package:r2ait_app/Controller/signin_controller.dart';
+import 'package:r2ait_app/Coustom_Widget/bottom_navbar.dart';
 import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/UI%20Screen/home.dart';
 import 'package:r2ait_app/UI%20Screen/otp.dart';
 import 'package:r2ait_app/UI%20Screen/signup.dart'; // Add this import if missing
 
@@ -60,17 +60,20 @@ class _SigninState extends State<Signin> {
                   height: 200,
                   "assets/images/logo.png",
                 ),
+
+                Text("Sign In", style: AppWidget.hederTextFeildStyle()),
+                SizedBox(height: screenheight * 0.01),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(width: 100, height: 4, color: Colors.purple),
-                    SizedBox(width: 5),
                     Container(
-                        width: 100, height: 4, color: Colors.blue.shade300),
+                        width: 90,
+                        height: 4,
+                        color: const Color.fromARGB(255, 4, 56, 5)),
+                    SizedBox(width: 5),
+                    Container(width: 90, height: 4, color: Colors.red),
                   ],
                 ),
-                SizedBox(height: screenheight * 0.03),
-                Text("Let's You In", style: AppWidget.hederTextFeildStyle()),
                 SizedBox(height: screenheight * 0.03),
 
                 // Email
@@ -187,9 +190,9 @@ class _SigninState extends State<Signin> {
                 SizedBox(height: screenheight * 0.02),
                 CustomButton(
                   buttonText: "Sign In",
-                  color: Color(0xFFA020F0),
+                  color: const Color.fromARGB(255, 4, 56, 5),
                   onPressed: gotoHome,
-                  textColor: Colors.black,
+                  textColor: Colors.white,
                 ),
 
                 SizedBox(height: 30),
@@ -206,7 +209,7 @@ class _SigninState extends State<Signin> {
                         Get.to(Signup()); // Navigate to signup screen
                       },
                       child: Text('Sign Up!',
-                          style: AppWidget.parpleTextFeildStyle()),
+                          style: AppWidget.brand1TextFeildStyle()),
                     ),
                   ],
                 ),
@@ -227,7 +230,7 @@ class _SigninState extends State<Signin> {
         return;
       }
       print("✅ Form Validated - Navigating to Home Page");
-      Get.to(Home());
+      Get.to(BottomNavbar());
     }
   }
 }

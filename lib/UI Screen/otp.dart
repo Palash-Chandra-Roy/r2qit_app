@@ -88,9 +88,9 @@ class _OTPState extends State<OTP> {
               ),
               CustomButton(
                   buttonText: "Send OTP ",
-                  color: Color(0xFFA020F0),
+                  color: const Color.fromARGB(255, 4, 56, 5),
                   onPressed: gotoVerify,
-                  textColor: Colors.black)
+                  textColor: Colors.white)
             ],
           ),
         ),
