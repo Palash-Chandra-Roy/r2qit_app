@@ -41,12 +41,13 @@ class CustomServiceCard extends StatelessWidget {
             SizedBox(
               height: height * 0.040,
             ),
-            Text("$title"),
+            Text(
+              "$title",
+              style: TextStyle(fontSize: 10),
+            ),
             Text(
               "$subtitle",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             )
           ],
         ),
