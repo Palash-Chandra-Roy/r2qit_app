@@ -163,7 +163,7 @@ class _VerifyState extends State<Verify> {
                     },
                     child: Text(
                       'Resent',
-                      style: AppWidget.parpleTextFeildStyle(),
+                      style: AppWidget.brand1TextFeildStyle(),
                     ),
                   ),
                 ],
@@ -173,9 +173,9 @@ class _VerifyState extends State<Verify> {
               ),
               CustomButton(
                   buttonText: "Verify",
-                  color: Color(0xFFA020F0),
+                  color: const Color.fromARGB(255, 4, 56, 5),
                   onPressed: gotoforget,
-                  textColor: Colors.black)
+                  textColor: Colors.white)
             ],
           ),
         ),

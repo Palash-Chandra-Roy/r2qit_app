@@ -36,7 +36,7 @@ class _SupportChatPageState extends State<SupportChatPage> {
               child: ListView.builder(
                 itemCount: 50,
                 itemBuilder: (context, index) {
-                  bool isMe = true;
+                  bool isMe = false;
                   return Row(
                     crossAxisAlignment:
                         CrossAxisAlignment.start, // Optional: better alignment
@@ -100,9 +100,9 @@ class _SupportChatPageState extends State<SupportChatPage> {
             ),
             Row(
               children: [
-                SizedBox(width: width * 0.02),
+                SizedBox(width: width * 0.01),
                 Icon(Icons.image_rounded),
-                SizedBox(width: width * 0.02),
+                SizedBox(width: width * 0.01),
                 Icon(Icons.attach_file),
                 SizedBox(width: width * 0.02),
                 SizedBox(
@@ -112,7 +112,7 @@ class _SupportChatPageState extends State<SupportChatPage> {
                           suffixIcon: Icon(Icons.emoji_emotions),
                           hintText: "Type here..."),
                     )),
-                SizedBox(width: width * 0.02),
+                SizedBox(width: width * 0.03),
                 Icon(Icons.send)
               ],
             )

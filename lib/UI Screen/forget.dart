@@ -139,8 +139,8 @@ class _ForgetState extends State<Forget> {
                 SizedBox(height: screenheight * 0.06),
                 CustomButton(
                   buttonText: "Continue",
-                  color: const Color(0xFFA020F0),
-                  textColor: Colors.black,
+                  color: const Color.fromARGB(255, 4, 56, 5),
+                  textColor: Colors.white,
                   onPressed: gotoSigninpage,
                 ),
                 SizedBox(height: screenheight * 0.03),

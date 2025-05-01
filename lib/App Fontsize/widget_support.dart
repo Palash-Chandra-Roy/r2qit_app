@@ -17,9 +17,9 @@ class AppWidget {
     );
   }
 
-  static TextStyle parpleTextFeildStyle() {
+  static TextStyle brand1TextFeildStyle() {
     return TextStyle(
-      color: Color(0xFF7E22CD),
+      color: const Color.fromARGB(255, 4, 56, 5),
       fontSize: 16,
       fontWeight: FontWeight.bold,
     );

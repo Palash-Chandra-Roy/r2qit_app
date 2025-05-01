@@ -109,12 +109,12 @@ class _SignupState extends State<Signup> {
                 /// Sign Up Button
                 CustomButton(
                   buttonText: "Sign Up",
-                  color: Color(0xFFA020F0),
+                  color: const Color.fromARGB(255, 4, 56, 5),
                   onPressed: gotoSignin,
                   // () {
                   //   Get.to(Signin());
                   // },
-                  textColor: Colors.black,
+                  textColor: Colors.white,
                 ),
                 SizedBox(height: screenheight * 0.04),
 
@@ -122,10 +122,10 @@ class _SignupState extends State<Signup> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(width: 120, height: 4, color: Colors.grey),
+                    Container(width: 100, height: 4, color: Colors.grey),
                     Text("Or continue with",
                         style: AppWidget.appBarTextFeildStyle()),
-                    Container(width: 120, height: 4, color: Colors.grey),
+                    Container(width: 100, height: 4, color: Colors.grey),
                   ],
                 ),
                 SizedBox(height: screenheight * 0.04),
@@ -168,7 +168,7 @@ class _SignupState extends State<Signup> {
                         Get.to(Signin());
                       },
                       child: Text('Sign In!',
-                          style: AppWidget.parpleTextFeildStyle()),
+                          style: AppWidget.brand1TextFeildStyle()),
                     ),
                   ],
                 ),
