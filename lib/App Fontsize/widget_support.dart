@@ -50,7 +50,7 @@ class AppWidget {
     );
   }
 
-  static TextStyle boldTextFeildStyle() {
+  static TextStyle homeTextFeildStyle() {
     return TextStyle(
       color: Colors.black,
       fontSize: 20,
