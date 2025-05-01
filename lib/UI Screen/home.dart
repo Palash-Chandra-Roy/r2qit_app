@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
 import 'package:r2ait_app/Controller/home_controller.dart';
 import 'package:r2ait_app/UI%20Screen/faq_page.dart';
 import 'package:r2ait_app/UI%20Screen/notification_page.dart';
@@ -51,23 +52,36 @@ class Home extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+          padding: EdgeInsets.only(
+            left: 15,
+            right: 15,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                width: double.infinity,
-                height: screenHeight * .15,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/banner.png"),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(20)),
-              ),
-              SizedBox(
-                height: screenHeight * 0.02,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                height: 150,
+                child: PageView.builder(
+                  itemCount: _homeController.bannerImages.length,
+                  onPageChanged: (index) {
+                    _homeController.currentPage.value = index;
+                  },
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.all(4),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          _homeController.bannerImages[index],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,21 +89,14 @@ class Home extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {},
-                    child: Text(
-                      "Service Categary ",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold),
-                    ),
+                    child: Text("Service Categary ",
+                        style: AppWidget.homeTextFeildStyle()),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "All Service",
-                        style: TextStyle(fontSize: 14, color: Colors.black),
+                        style: AppWidget.appBarTextFeildStyle(),
                       ),
                       InkWell(
                           onTap: () {},
@@ -150,6 +157,145 @@ class Home extends StatelessWidget {
                               // ),
                             ],
                           ),
+                        ),
+                      );
+                    }),
+              ),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Resent Project", style: AppWidget.homeTextFeildStyle()),
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "All Project",
+                      style: AppWidget.appBarTextFeildStyle(),
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                height: screenHeight * 0.15,
+                width: double.infinity,
+                child: ListView.builder(
+                    itemCount: _homeController.serviceCategories.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        height: screenHeight * 0.12,
+                        width: screenWidth * 0.28,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: Colors.grey),
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(30),
+                              bottomLeft: Radius.circular(30)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                                padding:
+                                    EdgeInsets.only(top: 8, left: 5, right: 5)),
+                            SizedBox(
+                                height: 55,
+                                width: 55,
+                                child: ClipOval(
+                                  child: Image.asset(
+                                    _homeController
+                                        .serviceCategories[index].image,
+                                    fit: BoxFit.cover,
+                                    height: screenHeight * 0.5,
+                                    width: screenWidth * 0.5,
+                                  ),
+                                )),
+                            SizedBox(
+                              height: screenHeight * 0.01,
+                            ),
+                            Text(
+                              _homeController.serviceCategories[index].name,
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.black),
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Best Project", style: AppWidget.homeTextFeildStyle()),
+                  InkWell(
+                    onTap: () {},
+                    child: Text(
+                      "All Project",
+                      style: AppWidget.appBarTextFeildStyle(),
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                height: screenHeight * 0.15,
+                width: double.infinity,
+                child: ListView.builder(
+                    itemCount: _homeController.serviceCategories.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        height: screenHeight * 0.15,
+                        width: screenWidth * 0.28,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 238, 45, 55),
+                          border: Border.all(width: 1, color: Colors.grey),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(50),
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                padding:
+                                    EdgeInsets.only(top: 8, left: 5, right: 5),
+                                height: 60,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Image.asset(
+                                  _homeController
+                                      .serviceCategories[index].image,
+                                  fit: BoxFit.cover,
+                                )),
+                            SizedBox(
+                              height: screenHeight * 0.001,
+                            ),
+                            Text(
+                              _homeController.serviceCategories[index].name,
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.black),
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.001,
+                            ),
+                            Text(
+                              _homeController.serviceCategories[index].name,
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.black),
+                            ),
+                          ],
                         ),
                       );
                     }),
@@ -224,10 +370,7 @@ class Home extends StatelessWidget {
                 child: Center(
                   child: Text(
                     "About Us",
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                    style: AppWidget.homeTextFeildStyle(),
                   ),
                 ),
               ),

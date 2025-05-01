@@ -5,7 +5,6 @@ class HomeController extends GetxController {
 
   // List of Generate addItem & Remove Item ;
   var items = List.generate(10, (index) => "Item $index").obs;
-
   void addItem() {
     int nextIndex = items.length;
     items.add("Item $nextIndex");
@@ -106,6 +105,13 @@ class HomeController extends GetxController {
         image: "assets/images/web.jpeg",
         name: "Palash Chandra  Roy",
         department: "Flutter Developer"),
+  ].obs;
+  var currentPage = 0.obs;
+
+  List<String> bannerImages = [
+    'assets/images/banner.png',
+    'assets/images/banner1.png',
+    'assets/images/banner.png',
   ].obs;
 }
 
