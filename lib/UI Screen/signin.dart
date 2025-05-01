@@ -94,16 +94,18 @@ class _SigninState extends State<Signin> {
                   },
                 ),
                 SizedBox(height: screenheight * 0.02),
-
                 //password
                 TextFormField(
+                  controller: signinController.passwordController,
+                  obscureText: obscureText,
+                  keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
                     hintText: "Password",
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
-                      icon: Icon(obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility),
+                      icon: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility,
+                      ),
                       onPressed: () {
                         setState(() {
                           obscureText = !obscureText;
@@ -111,8 +113,6 @@ class _SigninState extends State<Signin> {
                       },
                     ),
                   ),
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: signinController.passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Password is required";
@@ -123,6 +123,7 @@ class _SigninState extends State<Signin> {
                     return null;
                   },
                 ),
+
                 SizedBox(height: screenheight * 0.01),
                 InkWell(
                   onTap: () {
@@ -144,7 +145,7 @@ class _SigninState extends State<Signin> {
                     height: 60,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(30),
                       border: Border.all(width: 2, color: Colors.grey),
                     ),
                     child: Row(
@@ -219,10 +220,14 @@ class _SigninState extends State<Signin> {
 
   void gotoHome() {
     if (_formKey.currentState?.validate() ?? false) {
+      if (!isCheck) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Tick this checkbox")),
+        );
+        return;
+      }
       print("✅ Form Validated - Navigating to Home Page");
       Get.to(Home());
-    } else {
-      print("❌ Form Not Valid");
     }
   }
 }

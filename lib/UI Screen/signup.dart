@@ -84,16 +84,18 @@ class _SignupState extends State<Signup> {
                   },
                 ),
                 SizedBox(height: screenheight * 0.02),
-
                 //password
                 TextFormField(
+                  controller: signUpController.passwordController,
+                  obscureText: obscureText,
+                  keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
                     hintText: "Password",
                     prefixIcon: Icon(Icons.lock),
                     suffixIcon: IconButton(
-                      icon: Icon(obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility),
+                      icon: Icon(
+                        obscureText ? Icons.visibility_off : Icons.visibility,
+                      ),
                       onPressed: () {
                         setState(() {
                           obscureText = !obscureText;
@@ -101,19 +103,7 @@ class _SignupState extends State<Signup> {
                       },
                     ),
                   ),
-                  keyboardType: TextInputType.visiblePassword,
-                  controller: signUpController.passwordController,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Password is required";
-                    }
-                    if (value.length < 6) {
-                      return "Password must be at least 6 characters long";
-                    }
-                    return null;
-                  },
                 ),
-
                 SizedBox(height: screenheight * 0.04),
 
                 /// Sign Up Button
@@ -149,7 +139,7 @@ class _SignupState extends State<Signup> {
                     height: 60,
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(30),
                       border: Border.all(width: 2, color: Colors.grey),
                     ),
                     child: Row(
