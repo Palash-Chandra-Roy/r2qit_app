@@ -20,22 +20,16 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: Container(
-          height: screenHeight * 0.04,
+          height: screenHeight * 0.05,
           width: screenWidth * 0.7,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(color: Colors.grey, width: 1)),
           child: TextField(
             onTap: () {},
-            obscureText: false,
             decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(vertical: 10),
-                prefixIcon: Icon(Icons.search),
-                hintText: "Search",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                )),
+              suffixIcon: Icon(Icons.search),
+              hintText: "Search",
+            ),
           ),
         ),
         actions: [
