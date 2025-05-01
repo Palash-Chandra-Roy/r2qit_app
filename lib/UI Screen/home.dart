@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/Controller/home_controller.dart';
+import 'package:r2ait_app/UI%20Screen/faq_page.dart';
 import 'package:r2ait_app/UI%20Screen/notification_page.dart';
-import 'package:r2ait_app/UI%20Screen/support_chat.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -279,7 +279,7 @@ class Home extends StatelessWidget {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => SupportChat(),
+          builder: (context) => FAQPage(),
         ),
         (predicate) => true);
   }

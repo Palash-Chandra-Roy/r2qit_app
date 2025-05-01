@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
+import 'package:r2ait_app/Coustom_Widget/custom_faq_tupper.dart';
+import 'package:r2ait_app/UI%20Screen/support_chat_page.dart';
 
 import '../Coustom_Widget/ask_box.dart';
-import '../Coustom_Widget/custom_service_card.dart';
+import '../Coustom_Widget/faq_card.dart';
 
-class SupportChat extends StatelessWidget {
-  SupportChat({super.key});
+class FAQPage extends StatelessWidget {
+  FAQPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +22,12 @@ class SupportChat extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                    ),
-                    Text(
-                      "FAQ",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    ),
-                    Icon(
-                      Icons.chat_bubble_outlined,
-                      size: 30,
-                    )
-                  ],
-                ),
+              CustomFaqTupper(
+                text: "FAQ",
+                goToSupportChatPage: goToSupportChatPage(context),
+                icon: Icons.chat_bubble_outlined,
               ),
+
               SizedBox(
                 height: height * 0.01,
               ),
@@ -54,7 +41,10 @@ class SupportChat extends StatelessWidget {
               SizedBox(
                 height: height * 0.03,
               ),
-              TextFormField(),
+              TextFormField(
+                decoration: InputDecoration(
+                    hintText: "Search", suffixIcon: Icon(Icons.search)),
+              ),
               SizedBox(
                 height: height * 0.03,
               ),
@@ -123,11 +113,10 @@ class SupportChat extends StatelessWidget {
     );
   }
 
-  List<String> faq = [
-    "How to create an account?",
-    "How to reset my password?",
-    "Where can I find my profile?",
-    "How to contact support?",
-    "Is my data secure?",
-  ];
+  goToSupportChatPage(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => SupportChatPage()),
+        (route) => true);
+  }
 }
