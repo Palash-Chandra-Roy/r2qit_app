@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/home/presentation/screen/edit_profile.dart';
 
+import '../../domain/change_dark_mode.dart';
+
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -10,6 +12,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  ThemeController themeController = ThemeController();
   @override
   Widget build(BuildContext context) {
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
@@ -19,7 +22,9 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            themeController.toggleTheme();
+          },
           icon: Icon(
             Icons.arrow_back_ios,
             size: 16,

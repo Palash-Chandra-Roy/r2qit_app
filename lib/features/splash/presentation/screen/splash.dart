@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
 
+import '../../../../core/constants/color_control/color_controller.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -26,6 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: splashColor,
       body: Center(
         child: Container(
           height: 300,

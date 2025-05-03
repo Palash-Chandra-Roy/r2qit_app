@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../firebase_messaging_page.dart';
+import '../../../notification/logic/firebase_messaging_page.dart';
 import '../widget/custom_notification_fild.dart';
 
 class NotificationPage extends StatefulWidget {
