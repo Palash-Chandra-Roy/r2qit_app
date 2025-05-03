@@ -3,8 +3,8 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/home.dart';
-import 'package:r2ait_app/features/home/presentation/screen/job.dart';
 import 'package:r2ait_app/features/home/presentation/screen/service.dart';
+import 'package:r2ait_app/features/job/presentation/job.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/profile.dart';
 
 import '../core/constants/controller_control/bottomnavbar_controller.dart';
