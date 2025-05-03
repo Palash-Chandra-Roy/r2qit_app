@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 
 import '../../../service_details/presentation/screen/service_details.dart';
@@ -43,7 +42,6 @@ class ServiceListPage extends StatelessWidget {
   }
 
   void goToDetailsPage() {
-    Logger().e("object");
     Get.to(() => ServiceDetails());
   }
 }

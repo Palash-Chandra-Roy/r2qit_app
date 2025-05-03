@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
-import '../../../../utils/notification_controller/notification_controler.dart';
+import '../../../notification/logic/notification_controler.dart';
 
 class CustomNotificationFild extends StatelessWidget {
   CustomNotificationFild({

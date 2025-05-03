@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 
+import '../../../../utils/custom_project_details.dart';
+
 class ServiceDetails extends StatelessWidget {
   final HomeController serviceList = HomeController();
 
@@ -12,81 +14,43 @@ class ServiceDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product'),
+        title: Text('Our Project'),
       ),
 
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 2 / 2.4,
-          ),
-          itemCount: serviceList.serviceCategories.length,
-          itemBuilder: (context, index) {
-            final service = serviceList.serviceCategories[index];
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(12), // কোনার রাউন্ড
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                      "https://www.shutterstock.com/image-photo/moraine-lake-alberta-canada-beautiful-600nw-2530299163.jpg",
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                            size: 25,
-                          ),
-                          onPressed: () {
-                            // Favorite logic
-                          },
-                        ),
-                      ),
-                      SizedBox(height: height * 0.1),
-                      Text(
-                        service.name,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white, // White text for visibility
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Spacer(),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  Colors.transparent.withOpacity(0.2)),
-                          onPressed: () => goToDetailsPage(),
-                          child: Text(
-                            "See Live",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+        child: Column(children: [
+          Container(
+            height: 180,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              image: DecorationImage(
+                image: AssetImage("assets/images/GroupProject.png"),
+                fit: BoxFit.cover,
               ),
-            );
-          },
-        ),
+            ),
+          ),
+          SizedBox(height: 12),
+          Expanded(
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 1.9 / 2.4,
+              ),
+              itemCount: serviceList.serviceCategories.length,
+              itemBuilder: (context, index) {
+                final service = serviceList.serviceCategories[index];
+                return CustomServiceDetailsCard(
+                  service: service,
+                  goToDetailsPage: goToDetailsPage,
+                );
+              },
+            ),
+          ),
+        ]),
       ),
 
       // Bottom Bar for price, payment & cart
