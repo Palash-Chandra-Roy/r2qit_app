@@ -7,6 +7,7 @@ import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.da
 
 import '../../../../core/constants/controller_control/home_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
+import '../../../service/presentation/screen/service_list.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -87,79 +88,73 @@ class Home extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
+                  Text("Service Categary ",
+                      style: AppWidget.homeTextFeildStyle()),
+                  GestureDetector(
                     onTap: () {},
-                    child: Text("Service Categary ",
-                        style: AppWidget.homeTextFeildStyle()),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "All Service",
-                        style: AppWidget.appBarTextFeildStyle(),
-                      ),
-                      InkWell(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.add,
-                            size: 16,
-                            color: Colors.black,
-                          )),
-                    ],
+                    child: Text(
+                      "See More",
+                      style: AppWidget.appBarTextFeildStyle(),
+                    ),
                   )
                 ],
               ),
-              Container(
-                height: screenHeight * 0.15,
-                width: double.infinity,
-                child: ListView.builder(
-                    itemCount: _homeController.serviceCategories.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return SizedBox(
-                        height: screenHeight * 0.15,
-                        width: screenWidth * 0.31,
-                        child: Card(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 8, left: 5, right: 5)),
-                              SizedBox(
-                                  height: 55,
-                                  width: 55,
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      _homeController
-                                          .serviceCategories[index].image,
-                                      fit: BoxFit.cover,
-                                      height: screenHeight * 0.5,
-                                      width: screenWidth * 0.5,
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: screenHeight * 0.01,
-                              ),
-                              Text(
-                                _homeController.serviceCategories[index].name,
-                                style: TextStyle(
-                                    fontSize: 10, color: Colors.black),
-                              ),
-                              // Center(
-                              //   child: Text(
-                              //     _homeController
-                              //         .serviceCategories[index].discription,
-                              //     style: TextStyle(
-                              //         fontSize: 7, color: Colors.black),
-                              //   ),
-                              // ),
-                            ],
+              GestureDetector(
+                onTap: () {
+                  goToServiceListPage();
+                },
+                child: Container(
+                  height: screenHeight * 0.15,
+                  width: double.infinity,
+                  child: ListView.builder(
+                      itemCount: _homeController.serviceCategories.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          height: screenHeight * 0.15,
+                          width: screenWidth * 0.31,
+                          child: Card(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 8, left: 5, right: 5)),
+                                SizedBox(
+                                    height: 55,
+                                    width: 55,
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        _homeController
+                                            .serviceCategories[index].image,
+                                        fit: BoxFit.cover,
+                                        height: screenHeight * 0.5,
+                                        width: screenWidth * 0.5,
+                                      ),
+                                    )),
+                                SizedBox(
+                                  height: screenHeight * 0.01,
+                                ),
+                                Text(
+                                  _homeController.serviceCategories[index].name,
+                                  style: TextStyle(
+                                      fontSize: 10, color: Colors.black),
+                                ),
+                                // Center(
+                                //   child: Text(
+                                //     _homeController
+                                //         .serviceCategories[index].discription,
+                                //     style: TextStyle(
+                                //         fontSize: 7, color: Colors.black),
+                                //   ),
+                                // ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    }),
+                        );
+                      }),
+                ),
               ),
               SizedBox(
                 height: screenHeight * 0.01,
@@ -409,6 +404,10 @@ class Home extends StatelessWidget {
         context,
         MaterialPageRoute(builder: (builder) => NotificationPage()),
         (predicate) => true);
+  }
+
+  void goToServiceListPage() {
+    Get.to(() => ServiceListPage());
   }
 
   void goToFaqPage() {
