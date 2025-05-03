@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/constants/Controller/job_controller.dart';
+import '../../../../core/constants/controller_control/job_controller.dart';
 
 class Job extends StatelessWidget {
   Job({super.key});
-
   JobController _jobController = Get.put(JobController());
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: Drawer(

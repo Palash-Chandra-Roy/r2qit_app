@@ -5,7 +5,7 @@ import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
 
-import '../../../../core/constants/Controller/home_controller.dart';
+import '../../../../core/constants/controller_control/home_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 
 class Home extends StatelessWidget {
