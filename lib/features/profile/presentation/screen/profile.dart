@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/features/home/presentation/screen/about.dart';
 import 'package:r2ait_app/features/home/presentation/screen/edit_profile.dart';
 
 import '../../domain/change_dark_mode.dart';
@@ -65,14 +66,7 @@ class _ProfileState extends State<Profile> {
                           height: 100,
                           fit: BoxFit.cover, // Ensure proper fitting
                         ),
-                      )
-                      //  ClipRRect(
-                      //   borderRadius: BorderRadius.circular(100),
-                      //   child: Image(
-                      //     image: AssetImage("assets/images/palash.jpg"),
-                      //   ),
-                      // ),
-                      ),
+                      )),
                   Positioned(
                     bottom: 0,
                     right: 0,
@@ -96,10 +90,6 @@ class _ProfileState extends State<Profile> {
                   ),
                 ],
               ),
-              // CircleAvatar(
-              //   radius: 60,
-              //   backgroundImage: AssetImage("assets/image/palash.jpg"),
-              // ),
               SizedBox(
                 height: 10,
               ),
@@ -107,7 +97,6 @@ class _ProfileState extends State<Profile> {
                 "Palash Chandra Roy ",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
-
               Text(
                 "palash@r2ait.com ",
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
@@ -115,7 +104,6 @@ class _ProfileState extends State<Profile> {
               SizedBox(
                 height: 10,
               ),
-
               ElevatedButton(
                   onPressed: () {
                     Get.to(EditProfile());
@@ -129,29 +117,41 @@ class _ProfileState extends State<Profile> {
                     padding: EdgeInsets.symmetric(vertical: 14, horizontal: 30),
                   ),
                   child: Text("Edit Profile ")),
-              // SizedBox(
-              //   height: 20,
-              // ),
               SizedBox(
                 height: 20,
               ),
               ProfileManWidget(
                 title: "Setting",
-                icon: Icons.settings,
+                icon: Icon(Icons.settings),
                 onPress: () {},
               ),
               ProfileManWidget(
-                  title: "Billing Details", icon: Icons.book, onPress: () {}),
+                title: "About",
+                icon: Image.asset(
+                  "assets/images/logo.png",
+                  height: 24,
+                  width: 24,
+                ),
+                onPress: () {
+                  Get.to(About());
+                },
+              ),
+              ProfileManWidget(
+                  title: "Billing Details",
+                  icon: Icon(
+                    Icons.book,
+                  ),
+                  onPress: () {}),
               ProfileManWidget(
                   title: "User Managment",
-                  icon: Icons.personal_injury,
+                  icon: Icon(Icons.personal_injury),
                   onPress: () {}),
               Divider(),
               ProfileManWidget(
-                  title: "Information", icon: Icons.info, onPress: () {}),
+                  title: "Information", icon: Icon(Icons.info), onPress: () {}),
               ProfileManWidget(
                 title: "Logout",
-                icon: Icons.logout,
+                icon: Icon(Icons.logout),
                 onPress: () {},
                 textColor: Colors.red,
                 endIcon: false,
@@ -173,8 +173,9 @@ class ProfileManWidget extends StatelessWidget {
     this.endIcon = true,
     this.textColor,
   }) : super(key: key);
+
   final String title;
-  final IconData icon;
+  final Widget icon; // <-- This can be Icon(...) or Image.asset(...)
   final VoidCallback onPress;
   final bool endIcon;
   final Color? textColor;
@@ -183,26 +184,27 @@ class ProfileManWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onPress,
-      title: Text(title,
-          style:
-              Theme.of(context).textTheme.bodyLarge?.apply(color: textColor)),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.bodyLarge?.apply(color: textColor),
+      ),
       leading: Container(
         height: 40,
         width: 40,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100), color: Colors.white),
-        child: Icon(
-          icon,
-          size: 18,
+          borderRadius: BorderRadius.circular(100),
+          color: Colors.white,
         ),
+        child: Center(child: icon), // ✅ directly use the passed icon Widget
       ),
       trailing: endIcon
           ? Container(
               height: 30,
               width: 30,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: Colors.white),
+                borderRadius: BorderRadius.circular(100),
+                color: Colors.white,
+              ),
               child: Icon(
                 Icons.arrow_forward_ios,
                 size: 18,
