@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
-import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/UI%20Screen/forget.dart';
+import 'package:r2ait_app/features/auth/presentation/screen/forget.dart';
+
+import '../../../../core/constants/fontsize_control/widget_support.dart';
+import '../widget/custombuttom.dart';
 
 class Verify extends StatefulWidget {
   const Verify({super.key});

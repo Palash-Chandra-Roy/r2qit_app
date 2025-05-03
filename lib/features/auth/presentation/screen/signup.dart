@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
-import 'package:r2ait_app/Controller/signup_controller.dart';
-import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/UI%20Screen/signin.dart';
+import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
+
+import '../../../../core/constants/Controller/signup_controller.dart';
+import '../../../../core/constants/fontsize_control/widget_support.dart';
+import '../widget/custombuttom.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});

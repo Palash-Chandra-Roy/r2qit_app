@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/Coustom_Widget/custom_faq_tupper.dart';
+
+import '../widget/custom_faq_tupper.dart';
 
 class SupportChatPage extends StatefulWidget {
   const SupportChatPage({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/Controller/service_controller.dart';
+
+import '../../../../core/constants/Controller/service_controller.dart';
 
 class Service extends StatefulWidget {
   const Service({super.key});

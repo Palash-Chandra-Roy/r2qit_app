@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/Controller/job_controller.dart';
+
+import '../../../../core/constants/Controller/job_controller.dart';
 
 class Job extends StatelessWidget {
   Job({super.key});

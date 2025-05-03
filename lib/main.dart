@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/UI%20Screen/splash.dart';
+import 'package:r2ait_app/features/auth/presentation/screen/splash.dart';
 import 'package:r2ait_app/firebase_options.dart';
 
 void main() async {
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'R2AIT',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        // scaffoldBackgroundColor: Colors.grey,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         inputDecorationTheme: InputDecorationTheme(
@@ -34,6 +35,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+      // darkTheme: ThemeData(
+      //   // Dark theme
+      //   brightness: Brightness.light,
+      //   // primarySwatch: Colors.blue,
+      // ),
+      // themeMode: ThemeMode.dark,
       home: SplashScreen(),
       //HomeScreen(),
     );
