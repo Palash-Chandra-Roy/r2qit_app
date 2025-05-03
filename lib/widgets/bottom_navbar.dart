@@ -5,11 +5,10 @@ import 'package:r2ait_app/features/home/presentation/screen/job.dart';
 import 'package:r2ait_app/features/home/presentation/screen/profile.dart';
 import 'package:r2ait_app/features/home/presentation/screen/service.dart';
 
-import '../core/constants/Controller/bottomnavbar_controller.dart';
+import '../core/constants/controller_control/bottomnavbar_controller.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});
-
   @override
   State<BottomNavbar> createState() => _Bottomnavbar();
 }

@@ -24,7 +24,7 @@ import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
 
-import '../../../../core/constants/Controller/signin_controller.dart';
+import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../../../../widgets/bottom_navbar.dart';
 import '../widget/custombuttom.dart'; // Add this import if missing

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/verify.dart';
 
-import '../../../../core/constants/Controller/otp_controller.dart';
+import '../../../../core/constants/controller_control/otp_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../widget/custombuttom.dart';
 
