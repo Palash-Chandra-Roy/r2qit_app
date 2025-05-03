@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
 
@@ -99,6 +98,47 @@ class Home extends StatelessWidget {
                   )
                 ],
               ),
+
+              Container(
+                height: screenHeight * 0.15,
+                width: double.infinity,
+                child: ListView.builder(
+                    itemCount: _homeController.serviceCategories.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return SizedBox(
+                        height: screenHeight * 0.15,
+                        width: screenWidth * 0.31,
+                        child: Card(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 8, left: 5, right: 5)),
+                              SizedBox(
+                                  height: 55,
+                                  width: 55,
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      _homeController
+                                          .serviceCategories[index].image,
+                                      fit: BoxFit.cover,
+                                      height: screenHeight * 0.5,
+                                      width: screenWidth * 0.5,
+                                    ),
+                                  )),
+                              SizedBox(
+                                height: screenHeight * 0.01,
+                              ),
+                              Text(
+                                _homeController.serviceCategories[index].name,
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.black),
+                              ),
+                            ],
+
               GestureDetector(
                 onTap: () {
                   goToServiceListPage();
@@ -151,6 +191,7 @@ class Home extends StatelessWidget {
                                 // ),
                               ],
                             ),
+
                           ),
                         );
                       }),
@@ -296,22 +337,14 @@ class Home extends StatelessWidget {
                     }),
               ),
               SizedBox(
-                height: screenHeight * 0.01,
+                height: screenHeight * 0.02,
               ),
               Center(
-                child: Text(
-                  " Your Team Member",
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              SizedBox(
-                height: screenHeight * 0.01,
+                child: Text(" Your Team Member",
+                    style: AppWidget.homeTextFeildStyle()),
               ),
               Container(
-                height: screenHeight * 0.4,
+                height: screenHeight * 0.45,
                 width: double.infinity,
                 child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -358,42 +391,10 @@ class Home extends StatelessWidget {
                     }),
               ),
               SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              InkWell(
-                onTap: () {},
-                child: Center(
-                  child: Text(
-                    "About Us",
-                    style: AppWidget.homeTextFeildStyle(),
-                  ),
-                ),
-              ),
-              CustomAboutAs()
-            ],
-          ),
-        ),
-      ),
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          goToFaqPage();
-        },
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          margin: EdgeInsets.symmetric(vertical: 10),
-          decoration: BoxDecoration(
-            color: Colors.grey.shade500,
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 30,
-                offset: Offset(0, 4),
+                height: 20,
               ),
             ],
           ),
-          child: Icon(MaterialCommunityIcons.frequently_asked_questions,
-              size: 35, color: Colors.white),
         ),
       ),
     );
@@ -406,6 +407,8 @@ class Home extends StatelessWidget {
         (predicate) => true);
   }
 
+
+
   void goToServiceListPage() {
     Get.to(() => ServiceListPage());
   }
@@ -414,52 +417,8 @@ class Home extends StatelessWidget {
     Get.to(() => FAQPage());
   }
 
+
   void goToSupportPage() {
     Get.to(() => SupportChatPage());
-  }
-}
-
-class CustomAboutAs extends StatelessWidget {
-  const CustomAboutAs({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final height = size.height;
-    final width = size.width;
-    return Container(
-      height: height * 0.2,
-      width: double.infinity,
-      color: Colors.green.shade100,
-      child: Row(
-        children: [
-          SizedBox(
-            height: height,
-            width: width * 0.4,
-            child: Image.network(
-              "https://img.freepik.com/free-photo/team-developers-doing-brainstorming-optimizing-code_482257-112972.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                "At our company, our Customer Service Department is wholly "
-                "committed to delivering unparalleled service to our valued customers."
-                " From the very first point of contact, customers are warmly welcomed with "
-                "a friendly smile and a supportive demeanor. Our team undergoes rigorous "
-                "training to adeptly handle customer requests and inquiries with efficiency "
-                "and efficacy, ensuring a remarkable experience that upholds the elevated"
-                " standards we hold dear.",
-                style: TextStyle(fontSize: 14),
-                overflow: TextOverflow.fade,
-                softWrap: true,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

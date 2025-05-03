@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/home.dart';
 import 'package:r2ait_app/features/home/presentation/screen/service.dart';
 import 'package:r2ait_app/features/job/presentation/job.dart';
@@ -27,15 +29,26 @@ class _Bottomnavbar extends State<BottomNavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: () {
-          // Get.to(QrCodeGenerator());
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          goToFaqPage();
         },
-        child: Icon(
-          Icons.center_focus_strong,
-          color: Colors.amber,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          //margin: EdgeInsets.symmetric(vertical: 8),
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(255, 4, 56, 5),
+            borderRadius: BorderRadius.circular(10),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 30,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Icon(MaterialCommunityIcons.frequently_asked_questions,
+              size: 30, color: Colors.white),
         ),
       ),
       body: Obx(() => pages[controller.selectedIndex.value]),
@@ -94,5 +107,9 @@ class _Bottomnavbar extends State<BottomNavbar> {
         ),
       ),
     );
+  }
+
+  void goToFaqPage() {
+    Get.to(() => FAQPage());
   }
 }
