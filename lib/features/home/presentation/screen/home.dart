@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
-import 'package:r2ait_app/Controller/home_controller.dart';
-import 'package:r2ait_app/UI%20Screen/faq_page.dart';
-import 'package:r2ait_app/UI%20Screen/notification_page.dart';
-import 'package:r2ait_app/UI%20Screen/support_chat_page.dart';
+import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
+import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
+import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
+
+import '../../../../core/constants/Controller/home_controller.dart';
+import '../../../../core/constants/fontsize_control/widget_support.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -17,7 +18,6 @@ class Home extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,

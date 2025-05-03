@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/Coustom_Widget/custom_faq_tupper.dart';
-import 'package:r2ait_app/UI%20Screen/support_chat_page.dart';
+import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
 
-import '../Coustom_Widget/ask_box.dart';
-import '../Coustom_Widget/faq_card.dart';
+import '../widget/ask_box.dart';
+import '../widget/custom_faq_tupper.dart';
+import '../widget/faq_card.dart';
 
 class FAQPage extends StatefulWidget {
   FAQPage({super.key});

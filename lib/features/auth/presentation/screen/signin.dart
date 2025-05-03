@@ -21,12 +21,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/App%20Fontsize/widget_support.dart';
-import 'package:r2ait_app/Controller/signin_controller.dart';
-import 'package:r2ait_app/Coustom_Widget/bottom_navbar.dart';
-import 'package:r2ait_app/Coustom_Widget/custombuttom.dart';
-import 'package:r2ait_app/UI%20Screen/otp.dart';
-import 'package:r2ait_app/UI%20Screen/signup.dart'; // Add this import if missing
+import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
+import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
+
+import '../../../../core/constants/Controller/signin_controller.dart';
+import '../../../../core/constants/fontsize_control/widget_support.dart';
+import '../../../../widgets/bottom_navbar.dart';
+import '../widget/custombuttom.dart'; // Add this import if missing
 
 class Signin extends StatefulWidget {
   const Signin({super.key});

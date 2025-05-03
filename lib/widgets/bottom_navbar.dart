@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/Controller/bottomnavbar_controller.dart';
-import 'package:r2ait_app/UI%20Screen/home.dart';
-import 'package:r2ait_app/UI%20Screen/job.dart';
-import 'package:r2ait_app/UI%20Screen/profile.dart';
-import 'package:r2ait_app/UI%20Screen/service.dart';
+import 'package:r2ait_app/features/home/presentation/screen/home.dart';
+import 'package:r2ait_app/features/home/presentation/screen/job.dart';
+import 'package:r2ait_app/features/home/presentation/screen/profile.dart';
+import 'package:r2ait_app/features/home/presentation/screen/service.dart';
+
+import '../core/constants/Controller/bottomnavbar_controller.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({super.key});

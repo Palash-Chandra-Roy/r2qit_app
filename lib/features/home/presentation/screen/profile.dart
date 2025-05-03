@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/UI%20Screen/edit_profile.dart';
+import 'package:r2ait_app/features/home/presentation/screen/edit_profile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -19,9 +19,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
+          onPressed: () {},
           icon: Icon(
             Icons.arrow_back_ios,
             size: 16,
