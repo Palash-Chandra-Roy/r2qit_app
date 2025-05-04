@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
+import 'package:r2ait_app/utils/custom_Resentproject_Details.dart';
+import 'package:r2ait_app/utils/custom_project_details.dart';
 
 import '../../../../core/constants/controller_control/home_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
@@ -84,61 +87,19 @@ class Home extends StatelessWidget {
                 ),
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Service Categary ",
-                      style: AppWidget.homeTextFeildStyle()),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      "See More",
-                      style: AppWidget.appBarTextFeildStyle(),
-                    ),
-                  )
-                ],
-              ),
-
-              Container(
-                height: screenHeight * 0.15,
-                width: double.infinity,
-                child: ListView.builder(
-                    itemCount: _homeController.serviceCategories.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return SizedBox(
-                        height: screenHeight * 0.15,
-                        width: screenWidth * 0.31,
-                        child: Card(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      top: 8, left: 5, right: 5)),
-                              SizedBox(
-                                  height: 55,
-                                  width: 55,
-                                  child: ClipOval(
-                                    child: Image.asset(
-                                      _homeController
-                                          .serviceCategories[index].image,
-                                      fit: BoxFit.cover,
-                                      height: screenHeight * 0.5,
-                                      width: screenWidth * 0.5,
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: screenHeight * 0.01,
-                              ),
-                              Text(
-                                _homeController.serviceCategories[index].name,
-                                style: TextStyle(
-                                    fontSize: 10, color: Colors.black),
-                              ),
-                            ],
-
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Service Categary ",
+                        style: AppWidget.homeTextFeildStyle()),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        "See More",
+                        style: AppWidget.appBarTextFeildStyle(),
+                      ),
+                    )
+                  ]),
               GestureDetector(
                 onTap: () {
                   goToServiceListPage();
@@ -181,17 +142,8 @@ class Home extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 10, color: Colors.black),
                                 ),
-                                // Center(
-                                //   child: Text(
-                                //     _homeController
-                                //         .serviceCategories[index].discription,
-                                //     style: TextStyle(
-                                //         fontSize: 7, color: Colors.black),
-                                //   ),
-                                // ),
                               ],
                             ),
-
                           ),
                         );
                       }),
@@ -213,54 +165,28 @@ class Home extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                height: screenHeight * 0.15,
+              SizedBox(
+                height: screenHeight * 0.27,
                 width: double.infinity,
                 child: ListView.builder(
-                    itemCount: _homeController.serviceCategories.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 5),
-                        height: screenHeight * 0.12,
-                        width: screenWidth * 0.28,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: Colors.grey),
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(30),
-                              bottomLeft: Radius.circular(30)),
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  itemCount: _homeController.serviceCategories.length,
+                  itemBuilder: (context, index) {
+                    final service = _homeController.serviceCategories[index];
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 12), // item spacing
+                      child: SizedBox(
+                        width: screenWidth *
+                            0.4, // Adjust width as needed for each card
+                        child: CustomServiceDetailsCard(
+                          service: service,
+                          goToDetailsPage: () => goToDetaileProject(),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                                padding:
-                                    EdgeInsets.only(top: 8, left: 5, right: 5)),
-                            SizedBox(
-                                height: 55,
-                                width: 55,
-                                child: ClipOval(
-                                  child: Image.asset(
-                                    _homeController
-                                        .serviceCategories[index].image,
-                                    fit: BoxFit.cover,
-                                    height: screenHeight * 0.5,
-                                    width: screenWidth * 0.5,
-                                  ),
-                                )),
-                            SizedBox(
-                              height: screenHeight * 0.01,
-                            ),
-                            Text(
-                              _homeController.serviceCategories[index].name,
-                              style:
-                                  TextStyle(fontSize: 10, color: Colors.black),
-                            ),
-                          ],
-                        ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               ),
               SizedBox(
                 height: screenHeight * 0.01,
@@ -279,59 +205,24 @@ class Home extends StatelessWidget {
                 ],
               ),
               Container(
-                height: screenHeight * 0.15,
+                height: screenHeight * 0.28,
                 width: double.infinity,
                 child: ListView.builder(
                     itemCount: _homeController.serviceCategories.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.symmetric(horizontal: 5),
-                        height: screenHeight * 0.15,
-                        width: screenWidth * 0.28,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 238, 45, 55),
-                          border: Border.all(width: 1, color: Colors.grey),
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(50),
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
+                      final service = _homeController.serviceCategories[index];
+                      return Padding(
+                        padding:
+                            const EdgeInsets.only(right: 15), // item spacing
+                        child: SizedBox(
+                          width: screenWidth *
+                              0.4, // Adjust width as needed for each card
+                          child: CustomResentprojectDetails(
+                            service: service,
+                            goToResentDetailsProject: () =>
+                                goToResentDetailsProject(),
                           ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                padding:
-                                    EdgeInsets.only(top: 8, left: 5, right: 5),
-                                height: 60,
-                                width: 80,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Image.asset(
-                                  _homeController
-                                      .serviceCategories[index].image,
-                                  fit: BoxFit.cover,
-                                )),
-                            SizedBox(
-                              height: screenHeight * 0.001,
-                            ),
-                            Text(
-                              _homeController.serviceCategories[index].name,
-                              style:
-                                  TextStyle(fontSize: 10, color: Colors.black),
-                            ),
-                            SizedBox(
-                              height: screenHeight * 0.001,
-                            ),
-                            Text(
-                              _homeController.serviceCategories[index].name,
-                              style:
-                                  TextStyle(fontSize: 10, color: Colors.black),
-                            ),
-                          ],
                         ),
                       );
                     }),
@@ -407,8 +298,6 @@ class Home extends StatelessWidget {
         (predicate) => true);
   }
 
-
-
   void goToServiceListPage() {
     Get.to(() => ServiceListPage());
   }
@@ -417,8 +306,10 @@ class Home extends StatelessWidget {
     Get.to(() => FAQPage());
   }
 
-
   void goToSupportPage() {
     Get.to(() => SupportChatPage());
   }
+
+  void goToDetaileProject() {}
+  void goToResentDetailsProject() {}
 }

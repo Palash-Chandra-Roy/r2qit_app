@@ -237,9 +237,9 @@ class Job extends StatelessWidget {
                                         color: Colors.black),
                                   ),
                                   Image.asset(
-                                    "assets/images/company_logo.jpg",
-                                    height: 50,
-                                    width: 50,
+                                    "assets/images/logo.png",
+                                    height: 40,
+                                    width: 40,
                                   ),
                                   Text(
                                     " 'Easy Apply .",

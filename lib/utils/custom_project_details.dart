@@ -27,7 +27,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
                     topRight: Radius.circular(12),
                   ),
                   child: Image.asset(
-                    "assets/images/Screenshot_2.png",
+                    "assets/images/project1.png",
                     height: height * 0.18,
                     width: double.infinity,
                     fit: BoxFit.cover,
