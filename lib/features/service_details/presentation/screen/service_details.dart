@@ -26,7 +26,7 @@ class ServiceDetails extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
-                image: AssetImage("assets/images/GroupProject.png"),
+                image: AssetImage("assets/images/project-group.png"),
                 fit: BoxFit.cover,
               ),
             ),

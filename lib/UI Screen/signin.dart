@@ -49,7 +49,7 @@ class _SigninState extends State<Signin> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+          padding: EdgeInsets.only(left: 20, right: 20),
           child: Form(
             autovalidateMode: AutovalidateMode.onUserInteraction,
             key: _formKey,
@@ -57,10 +57,11 @@ class _SigninState extends State<Signin> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  height: 200,
                   "assets/images/logo.png",
+                  height: 120,
+                  width: 200,
+                  fit: BoxFit.cover,
                 ),
-
                 Text("Sign In", style: AppWidget.hederTextFeildStyle()),
                 SizedBox(height: screenheight * 0.01),
                 Row(
