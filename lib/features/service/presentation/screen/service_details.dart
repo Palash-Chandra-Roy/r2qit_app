@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 
-import '../../../../utils/custom_project_details.dart';
+import '../../../../widgets/custom_project_details.dart';
 
 class ServiceDetails extends StatelessWidget {
   final HomeController serviceList = HomeController();

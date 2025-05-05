@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
-import 'package:r2ait_app/utils/custom_project_details.dart';
+import 'package:r2ait_app/widgets/custom_project_details.dart';
 
 import '../../../../core/constants/controller_control/home_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
