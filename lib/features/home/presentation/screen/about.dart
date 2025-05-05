@@ -32,7 +32,7 @@ class About extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        title: Text("About", style: AppWidget.appBarTextFeildStyle()),
+        title: Text("aboutTitle".tr, style: AppWidget.appBarTextFeildStyle()),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -41,7 +41,7 @@ class About extends StatelessWidget {
           children: [
             const SizedBox(height: 20),
             Semantics(
-              label: "R2A IT",
+              label: "companyName".tr,
               child: Image.asset(
                 "assets/images/logo.png",
                 height: 100,
@@ -51,13 +51,7 @@ class About extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SelectableText(
-              "R2A IT Service Agency, Delivering Custom Solutions. "
-              "Custom Web Design Solutions To Drive Conversions. Effective SEO Campaigns To Generate Growth. "
-              "Tailored Branding Strategies To Drive Engagement. "
-              "At R2AIT, we believe technology is more than just code—it's the backbone of modern business success. "
-              "We're a full-service IT agency delivering tailored digital solutions that help brands thrive in a competitive landscape. "
-              "From high-converting websites and intuitive web apps to data-driven dashboards and standout presentations, "
-              "we combine design, development, and strategy to bring your ideas to life.",
+              "aboutDescription".tr,
               style: AppWidget.appBarTextFeildStyle(),
               textAlign: TextAlign.justify,
             ),
@@ -68,7 +62,7 @@ class About extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Operated by",
+                  "operatedBy".tr,
                   style: AppWidget.simpleTextFeildStyle(),
                 ),
                 const SizedBox(width: 8),
@@ -86,7 +80,7 @@ class About extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Technology Solutions Provider",
+                  "technologyProvider".tr,
                   style: AppWidget.simpleTextFeildStyle(),
                 ),
                 const SizedBox(width: 8),

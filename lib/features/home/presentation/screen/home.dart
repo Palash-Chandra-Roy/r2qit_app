@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
             onTap: () {},
             decoration: InputDecoration(
               suffixIcon: Icon(Icons.search),
-              hintText: "Search",
+              hintText: "search".tr,
             ),
           ),
         ),
@@ -89,12 +89,12 @@ class Home extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Service Categary ",
+                    Text("service_category".tr,
                         style: AppWidget.homeTextFeildStyle()),
                     GestureDetector(
                       onTap: () {},
                       child: Text(
-                        "See More",
+                        "see_more".tr,
                         style: AppWidget.appBarTextFeildStyle(),
                       ),
                     )
@@ -154,11 +154,12 @@ class Home extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Resent Project", style: AppWidget.homeTextFeildStyle()),
+                  Text("recent_project".tr,
+                      style: AppWidget.homeTextFeildStyle()),
                   InkWell(
                     onTap: () {},
                     child: Text(
-                      "All Project",
+                      "all_project".tr,
                       style: AppWidget.appBarTextFeildStyle(),
                     ),
                   )
@@ -187,11 +188,12 @@ class Home extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Best Project", style: AppWidget.homeTextFeildStyle()),
+                  Text("best_project".tr,
+                      style: AppWidget.homeTextFeildStyle()),
                   InkWell(
                     onTap: () {},
                     child: Text(
-                      "All Project",
+                      "all_project".tr,
                       style: AppWidget.appBarTextFeildStyle(),
                     ),
                   )
@@ -218,7 +220,7 @@ class Home extends StatelessWidget {
                 height: screenHeight * 0.02,
               ),
               Center(
-                child: Text(" Your Team Member",
+                child: Text("your_team_member".tr,
                     style: AppWidget.homeTextFeildStyle()),
               ),
               Container(

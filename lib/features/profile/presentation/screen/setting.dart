@@ -103,16 +103,18 @@ class Setting extends StatelessWidget {
 
     // Controller update
     controller.changeLanguage(value);
-
+    final langCode = controller.languageMap[value];
     // Save preference
-    await prefs.setString('language', value);
+    await prefs.setString(
+      'language',
+      langCode,
+    );
 
     // Get saved value safely
     final savedLanguage = prefs.getString('language');
-    final langCode = controller.languageMap[savedLanguage];
 
-    if (langCode != null) {
-      Get.updateLocale(Locale(langCode));
+    if (savedLanguage != null) {
+      Get.updateLocale(Locale(savedLanguage));
     }
   }
 }

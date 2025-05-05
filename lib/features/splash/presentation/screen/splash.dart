@@ -5,7 +5,7 @@ import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/color_control/color_controller.dart';
-import '../../../home/presentation/screen/home.dart';
+import '../../../../widgets/bottom_navbar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       String? email = _prefs.getString("email");
       if (email != null && email.isNotEmpty) {
-        Get.to(() => Home());
+        Get.to(() => BottomNavbar());
         Logger().e("email is not null: $email");
       } else {
         Get.to(() => Signin());

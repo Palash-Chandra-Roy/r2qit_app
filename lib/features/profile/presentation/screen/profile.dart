@@ -110,14 +110,16 @@ class _ProfileState extends State<Profile> {
                     Get.to(EditProfile());
                   },
                   style: ElevatedButton.styleFrom(
-                    elevation: 5,
-                    backgroundColor: Colors.amber,
+                    elevation: 1,
+                    backgroundColor: Colors.grey.shade300,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 30),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   ),
-                  child: Text("Edit Profile ")),
+                  child: Text(
+                    "Edit Profile ",
+                  )),
               SizedBox(
                 height: 20,
               ),
