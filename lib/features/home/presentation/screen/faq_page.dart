@@ -29,7 +29,7 @@ class _FAQPageState extends State<FAQPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomFaqTupper(
-                  text: "FAQ",
+                  text: "faq_title".tr,
                   goToSupportChatPage: goToSupportChatPage,
                   icon: Icons.chat_bubble_outlined,
                   backButton: () {
@@ -40,8 +40,8 @@ class _FAQPageState extends State<FAQPage> {
                 height: height * 0.01,
               ),
               Center(
-                child: const Text(
-                  "How can we help you?",
+                child: Text(
+                  "help_heading".tr,
                   style: const TextStyle(
                       fontSize: 22, fontWeight: FontWeight.bold),
                 ),
@@ -51,7 +51,7 @@ class _FAQPageState extends State<FAQPage> {
               ),
               TextFormField(
                 decoration: InputDecoration(
-                    hintText: "Search", suffixIcon: Icon(Icons.search)),
+                    hintText: "search_hint".tr, suffixIcon: Icon(Icons.search)),
               ),
               SizedBox(
                 height: height * 0.03,
@@ -62,20 +62,20 @@ class _FAQPageState extends State<FAQPage> {
                   children: [
                     CustomServiceCard(
                       icon: Icons.notifications_none_rounded,
-                      title: "Questions about",
-                      subtitle: "Getting Stared",
+                      title: "card_1_title".tr,
+                      subtitle: "card_1_subtitle".tr,
                       color: Colors.blue.shade100,
                     ),
                     CustomServiceCard(
                       icon: Icons.settings,
-                      title: "Questions about",
-                      subtitle: "How to Inves",
+                      title: "card_1_subtitle".tr,
+                      subtitle: "card_2_subtitle".tr,
                       color: Colors.green.shade100,
                     ),
                     CustomServiceCard(
                       icon: FontAwesome5Solid.money_bill,
-                      title: "Questions about",
-                      subtitle: "Payment Meth…",
+                      title: "card_1_subtitle".tr,
+                      subtitle: "card_3_subtitle".tr,
                       color: Colors.red.shade100,
                     ),
                   ],
@@ -87,12 +87,12 @@ class _FAQPageState extends State<FAQPage> {
               Row(
                 children: [
                   Text(
-                    "Top Questions",
+                    "top_questions".tr,
                     style: TextStyle(fontSize: 20),
                   ),
                   Spacer(),
                   Text(
-                    "See All",
+                    "see_all".tr,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
