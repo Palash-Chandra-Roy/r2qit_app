@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/home/presentation/screen/about.dart';
 import 'package:r2ait_app/features/home/presentation/screen/edit_profile.dart';
+import 'package:r2ait_app/features/profile/presentation/screen/setting.dart';
 
 import '../../domain/change_dark_mode.dart';
 
@@ -123,7 +124,9 @@ class _ProfileState extends State<Profile> {
               ProfileManWidget(
                 title: "Setting",
                 icon: Icon(Icons.settings),
-                onPress: () {},
+                onPress: () {
+                  goToSettingPage();
+                },
               ),
               ProfileManWidget(
                 title: "About",
@@ -161,6 +164,10 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+
+  void goToSettingPage() {
+    Get.to(Setting());
   }
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 
-import '../../../../utils/custom_project_details.dart';
+import '../../../../widgets/custom_project_details.dart';
 
 class ServiceDetails extends StatelessWidget {
   final HomeController serviceList = HomeController();
@@ -36,7 +36,7 @@ class ServiceDetails extends StatelessWidget {
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 12,
+                mainAxisSpacing: 20,
                 crossAxisSpacing: 12,
                 childAspectRatio: 1.9 / 2.4,
               ),

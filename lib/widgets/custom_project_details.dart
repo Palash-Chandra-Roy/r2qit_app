@@ -4,7 +4,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
   var service;
   VoidCallback goToDetailsPage;
   CustomServiceDetailsCard(
-      {super.key, this.service, required this.goToDetailsPage});
+      {super.key, required this.service, required this.goToDetailsPage});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +12,10 @@ class CustomServiceDetailsCard extends StatelessWidget {
     final width = size.width;
     final height = size.height;
     return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
+        height: height * 0.2,
+        width: 200,
         color: Colors.grey[200],
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -27,7 +29,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
                     topRight: Radius.circular(12),
                   ),
                   child: Image.asset(
-                    "assets/images/project1.png",
+                    "assets/images/web.jpeg",
                     height: height * 0.18,
                     width: double.infinity,
                     fit: BoxFit.cover,
