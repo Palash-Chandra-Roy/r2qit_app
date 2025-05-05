@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
             onTap: () {},
             decoration: InputDecoration(
               suffixIcon: Icon(Icons.search),
-              hintText: "Search",
+              hintText: "search".tr,
             ),
           ),
         ),
@@ -67,6 +67,7 @@ class Home extends StatelessWidget {
                     BoxDecoration(borderRadius: BorderRadius.circular(20)),
                 height: 150,
                 child: PageView.builder(
+                  controller: _homeController.bannerPageController,
                   itemCount: _homeController.bannerImages.length,
                   onPageChanged: (index) {
                     _homeController.currentPage.value = index;
@@ -89,15 +90,15 @@ class Home extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Service Categary ",
+                    Text("service_category".tr,
                         style: AppWidget.homeTextFeildStyle()),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        "See More",
-                        style: AppWidget.appBarTextFeildStyle(),
-                      ),
-                    )
+                    // GestureDetector(
+                    //   onTap: () {},
+                    //   child: Text(
+                    //     "see_more".tr,
+                    //     style: AppWidget.appBarTextFeildStyle(),
+                    //   ),
+                    // )
                   ]),
               Stack(
                 children: [
@@ -105,7 +106,7 @@ class Home extends StatelessWidget {
                     height: screenHeight * 0.15,
                     width: double.infinity,
                     child: ListView.builder(
-                      controller: _homeController.scrollController,
+                      controller: _homeController.categoryScrollController,
                       itemCount: _homeController.serviceCategories.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
@@ -133,7 +134,7 @@ class Home extends StatelessWidget {
                                   Text(
                                     _homeController
                                         .serviceCategories[index].name,
-                                    style: TextStyle(fontSize: 10),
+                                    style: const TextStyle(fontSize: 10),
                                   ),
                                 ],
                               ),
@@ -144,18 +145,86 @@ class Home extends StatelessWidget {
                     ),
                   ),
 
-                  // ⬅️ Back Button
+                  // Left Button
                   Positioned(
-                    left: -8,
+                    left: -5,
                     bottom: 45,
-                    child: LeftScrollerButton(homeController: _homeController),
+                    child: LeftScrollerButton(
+                      scrollController:
+                          _homeController.categoryScrollController,
+                      isAtStart: _homeController.isCategoryAtStart,
+                    ),
                   ),
 
-                  // ➡️ Forward Button
+                  // Right Button
+                  Positioned(
+                    right: -5,
+                    bottom: 45,
+                    child: RightScrollerButton(
+                      scrollController:
+                          _homeController.categoryScrollController,
+                      isAtEnd: _homeController.isCategoryAtEnd,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("recent_project".tr,
+                      style: AppWidget.homeTextFeildStyle()),
+                  // InkWell(
+                  //   onTap: () {},
+                  //   child: Text(
+                  //     "all_project".tr,
+                  //     style: AppWidget.appBarTextFeildStyle(),
+                  //   ),
+                  // )
+                ],
+              ),
+              Stack(
+                children: [
+                  SizedBox(
+                    height: screenHeight * 0.3,
+                    width: screenWidth,
+                    child: ListView.builder(
+                      controller: _homeController.resetProjectController,
+                      itemCount: _homeController.serviceCategories.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final service =
+                            _homeController.serviceCategories[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomServiceDetailsCard(
+                            goToDetailsPage: goToDetailsPage,
+                            service: service,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  // Left Button
+                  Positioned(
+                    left: -8,
+                    bottom: 120,
+                    child: LeftScrollerButton(
+                      scrollController: _homeController.resetProjectController,
+                      isAtStart: _homeController.isProjectAtStart,
+                    ),
+                  ),
+
+                  // Right Button
                   Positioned(
                     right: -8,
-                    bottom: 45,
-                    child: rightScrollerButton(homeController: _homeController),
+                    bottom: 120,
+                    child: RightScrollerButton(
+                      scrollController: _homeController.resetProjectController,
+                      isAtEnd: _homeController.isProjectAtEnd,
+                    ),
                   ),
                 ],
               ),
@@ -165,14 +234,15 @@ class Home extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Resent Project", style: AppWidget.homeTextFeildStyle()),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      "All Project",
-                      style: AppWidget.appBarTextFeildStyle(),
-                    ),
-                  )
+                  Text("best_project".tr,
+                      style: AppWidget.homeTextFeildStyle()),
+                  // InkWell(
+                  //   onTap: () {},
+                  //   child: Text(
+                  //     "all_project".tr,
+                  //     style: AppWidget.appBarTextFeildStyle(),
+                  //   ),
+                  // )
                 ],
               ),
               Stack(
@@ -181,6 +251,7 @@ class Home extends StatelessWidget {
                     height: screenHeight * 0.3,
                     width: screenWidth,
                     child: ListView.builder(
+                        controller: _homeController.baseProjectController,
                         itemCount: _homeController.serviceCategories.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -196,70 +267,30 @@ class Home extends StatelessWidget {
                         }),
                   ),
                   Positioned(
-                      right: -8,
-                      bottom: 120,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Colors.red,
-                        ),
-                      )),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight * 0.01,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Best Project", style: AppWidget.homeTextFeildStyle()),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      "All Project",
-                      style: AppWidget.appBarTextFeildStyle(),
+                    left: -8,
+                    bottom: 120,
+                    child: LeftScrollerButton(
+                      scrollController: _homeController.baseProjectController,
+                      isAtStart: _homeController.isBestProjectAtStart,
                     ),
-                  )
-                ],
-              ),
-              Stack(
-                children: [
-                  SizedBox(
-                    height: screenHeight * 0.3,
-                    width: screenWidth,
-                    child: ListView.builder(
-                        itemCount: _homeController.serviceCategories.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          final service =
-                              _homeController.serviceCategories[index];
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CustomServiceDetailsCard(
-                              goToDetailsPage: goToDetailsPage,
-                              service: service,
-                            ),
-                          );
-                        }),
                   ),
+
+                  // Right Button
                   Positioned(
-                      right: -8,
-                      bottom: 120,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Colors.red,
-                        ),
-                      )),
+                    right: -8,
+                    bottom: 120,
+                    child: RightScrollerButton(
+                      scrollController: _homeController.baseProjectController,
+                      isAtEnd: _homeController.isBestProjectAtEnd,
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
               Center(
-                child: Text(" Meet the Team",
+                child: Text("our_team_members".tr,
                     style: AppWidget.homeTextFeildStyle()),
               ),
               Stack(
@@ -268,6 +299,7 @@ class Home extends StatelessWidget {
                     height: screenHeight * 0.15,
                     width: double.infinity,
                     child: ListView.builder(
+                        controller: _homeController.teamController,
                         itemCount: _homeController.serviceCategories.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -313,15 +345,23 @@ class Home extends StatelessWidget {
                         }),
                   ),
                   Positioned(
-                      right: -8,
-                      bottom: 50,
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.arrow_forward_ios_outlined,
-                          color: Colors.red,
-                        ),
-                      )),
+                    left: -5,
+                    bottom: 45,
+                    child: LeftScrollerButton(
+                      scrollController: _homeController.teamController,
+                      isAtStart: _homeController.isTeamStart,
+                    ),
+                  ),
+
+                  // Right Button
+                  Positioned(
+                    right: -5,
+                    bottom: 45,
+                    child: RightScrollerButton(
+                      scrollController: _homeController.teamController,
+                      isAtEnd: _homeController.isTeamEnd,
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
@@ -359,57 +399,61 @@ class Home extends StatelessWidget {
   void goToResentDetailsProject() {}
 }
 
-class rightScrollerButton extends StatelessWidget {
-  const rightScrollerButton({
-    super.key,
-    required HomeController homeController,
-  }) : _homeController = homeController;
-
-  final HomeController _homeController;
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(() => IconButton(
-          onPressed: _homeController.isAtEnd.value
-              ? null
-              : () {
-                  _homeController.scrollController.animateTo(
-                    _homeController.scrollController.offset + 150,
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeOut,
-                  );
-                },
-          icon: Icon(
-            Icons.arrow_forward_ios_outlined,
-            color: _homeController.isAtEnd.value ? Colors.grey : Colors.red,
-          ),
-        ));
-  }
-}
-
 class LeftScrollerButton extends StatelessWidget {
+  final ScrollController scrollController;
+  final RxBool isAtStart;
+
   const LeftScrollerButton({
     super.key,
-    required HomeController homeController,
-  }) : _homeController = homeController;
-
-  final HomeController _homeController;
+    required this.scrollController,
+    required this.isAtStart,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Obx(() => IconButton(
-          onPressed: _homeController.isAtStart.value
+          onPressed: isAtStart.value
               ? null
               : () {
-                  _homeController.scrollController.animateTo(
-                    _homeController.scrollController.offset - 150,
-                    duration: Duration(milliseconds: 300),
+                  scrollController.animateTo(
+                    scrollController.offset - 150,
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.easeOut,
                   );
                 },
           icon: Icon(
             Icons.arrow_back_ios_new_outlined,
-            color: _homeController.isAtStart.value ? Colors.grey : Colors.red,
+            color: isAtStart.value ? Colors.grey : Colors.green,
+          ),
+        ));
+  }
+}
+
+class RightScrollerButton extends StatelessWidget {
+  final ScrollController scrollController;
+  final RxBool isAtEnd;
+
+  const RightScrollerButton({
+    super.key,
+    required this.scrollController,
+    required this.isAtEnd,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() => IconButton(
+          onPressed: isAtEnd.value
+              ? null
+              : () {
+                  scrollController.animateTo(
+                    scrollController.offset + 150,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                },
+          icon: Icon(
+            Icons.arrow_forward_ios_outlined,
+            color: isAtEnd.value ? Colors.grey : Colors.green,
           ),
         ));
   }

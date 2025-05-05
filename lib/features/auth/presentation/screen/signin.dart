@@ -58,9 +58,12 @@ class _SigninState extends State<Signin> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  height: 200,
-                  "assets/images/logo.png",
+                Container(
+                  height: 150,
+                  width: 200,
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                  ),
                 ),
                 Text("Sign In", style: AppWidget.hederTextFeildStyle()),
                 SizedBox(height: screenheight * 0.01),

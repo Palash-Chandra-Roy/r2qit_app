@@ -7,13 +7,14 @@ import '../../theme/dark_theme.dart';
 import 'core/utils/translation_text.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Locale locale;
+  MyApp({super.key, required this.locale});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: AppTranslations(),
-      locale: Locale('en'),
+      locale: locale,
       fallbackLocale: Locale('bn'),
       title: 'R2AIT',
       debugShowCheckedModeBanner: false,

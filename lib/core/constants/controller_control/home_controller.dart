@@ -1,26 +1,97 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  var bannerPageController = PageController();
+  var categoryScrollController = ScrollController();
+  var resetProjectController = ScrollController();
+  var baseProjectController = ScrollController();
+  var teamController = ScrollController();
+
   var selectedCategoryIndex = 0.obs;
+  var currentBannerPage = 0.obs;
+  var currentPage = 0.obs;
 
-  //Add file
-  final scrollController = ScrollController();
+  RxBool isCategoryAtStart = true.obs;
+  RxBool isCategoryAtEnd = false.obs;
 
-  RxBool isAtStart = true.obs;
-  RxBool isAtEnd = false.obs;
+  RxBool isProjectAtStart = true.obs;
+  RxBool isProjectAtEnd = false.obs;
+
+  RxBool isBestProjectAtStart = true.obs;
+  RxBool isBestProjectAtEnd = false.obs;
+
+  RxBool isTeamStart = true.obs;
+  RxBool isTeamEnd = false.obs;
+
+  Timer? _autoScrollTimer;
 
   @override
   void onInit() {
     super.onInit();
 
-    scrollController.addListener(() {
-      final maxScroll = scrollController.position.maxScrollExtent;
-      final currentScroll = scrollController.offset;
+    _startAutoScrollBanner();
 
-      isAtStart.value = currentScroll <= 0;
-      isAtEnd.value = currentScroll >= maxScroll;
+    // Scroll listener for category list
+    categoryScrollController.addListener(() {
+      final max = categoryScrollController.position.maxScrollExtent;
+      final current = categoryScrollController.offset;
+      isCategoryAtStart.value = current <= 0;
+      isCategoryAtEnd.value = current >= max;
     });
+
+    // Scroll listener for recent project list
+    resetProjectController.addListener(() {
+      final max = resetProjectController.position.maxScrollExtent;
+      final current = resetProjectController.offset;
+      isProjectAtStart.value = current <= 0;
+      isProjectAtEnd.value = current >= max;
+    });
+
+    //BestProject
+    baseProjectController.addListener(() {
+      final max = baseProjectController.position.maxScrollExtent;
+      final current = baseProjectController.offset;
+      isBestProjectAtStart.value = current <= 0;
+      isBestProjectAtEnd.value = current >= max;
+    });
+
+    teamController.addListener(() {
+      final max = teamController.position.maxScrollExtent;
+      final current = teamController.offset;
+      isTeamStart.value = current <= 0;
+      isTeamEnd.value = current >= max;
+    });
+  }
+
+  void _startAutoScrollBanner() {
+    _autoScrollTimer = Timer.periodic(Duration(seconds: 3), (timer) {
+      if (bannerPageController.hasClients) {
+        int nextPage = currentBannerPage.value + 1;
+        if (nextPage >= bannerImages.length) {
+          nextPage = 0;
+        }
+        bannerPageController.animateToPage(
+          nextPage,
+          duration: Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    _autoScrollTimer?.cancel();
+    bannerPageController.dispose();
+    categoryScrollController.dispose();
+    resetProjectController.dispose();
+    baseProjectController.dispose();
+    teamController.dispose();
+
+    super.onClose();
   }
 
 //End
@@ -127,7 +198,6 @@ class HomeController extends GetxController {
         name: "Palash Chandra  Roy",
         department: "Flutter Developer"),
   ].obs;
-  var currentPage = 0.obs;
 
   List<String> bannerImages = [
     'assets/images/banner.png',
