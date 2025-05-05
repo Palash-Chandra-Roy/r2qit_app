@@ -23,6 +23,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
@@ -61,7 +62,6 @@ class _SigninState extends State<Signin> {
                   height: 200,
                   "assets/images/logo.png",
                 ),
-
                 Text("Sign In", style: AppWidget.hederTextFeildStyle()),
                 SizedBox(height: screenheight * 0.01),
                 Row(
@@ -192,7 +192,11 @@ class _SigninState extends State<Signin> {
                 CustomButton(
                   buttonText: "Sign In",
                   color: const Color.fromARGB(255, 4, 56, 5),
-                  onPressed: gotoHome,
+                  onPressed: () {
+                    gotoHome(
+                        email: signinController.emailController.text,
+                        password: signinController.emailController.text);
+                  },
                   textColor: Colors.white,
                 ),
 
@@ -222,8 +226,11 @@ class _SigninState extends State<Signin> {
     );
   }
 
-  void gotoHome() {
+  void gotoHome({email, password}) async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
     if (_formKey.currentState?.validate() ?? false) {
+      _preferences.setString("email", email);
+      _preferences.setString("email", password);
       if (!isCheck) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text("Tick this checkbox")),

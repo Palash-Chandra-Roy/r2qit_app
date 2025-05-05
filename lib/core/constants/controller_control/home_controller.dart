@@ -1,8 +1,29 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   var selectedCategoryIndex = 0.obs;
 
+  //Add file
+  final scrollController = ScrollController();
+
+  RxBool isAtStart = true.obs;
+  RxBool isAtEnd = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    scrollController.addListener(() {
+      final maxScroll = scrollController.position.maxScrollExtent;
+      final currentScroll = scrollController.offset;
+
+      isAtStart.value = currentScroll <= 0;
+      isAtEnd.value = currentScroll >= maxScroll;
+    });
+  }
+
+//End
   // List of Generate addItem & Remove Item ;
   var items = List.generate(10, (index) => "Item $index").obs;
   void addItem() {
