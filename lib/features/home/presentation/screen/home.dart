@@ -231,8 +231,52 @@ class Home extends StatelessWidget {
                 height: screenHeight * 0.02,
               ),
               Center(
-                child: Text(" Your Team Member",
+                child: Text(" Meet the Team",
                     style: AppWidget.homeTextFeildStyle()),
+              ),
+              Container(
+                height: screenHeight * 0.15,
+                width: double.infinity,
+                child: ListView.builder(
+                    itemCount: _homeController.serviceCategories.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return SizedBox(
+                        height: screenHeight * 0.15,
+                        width: screenWidth * 0.31,
+                        child: Card(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 8, left: 5, right: 5)),
+                              SizedBox(
+                                  height: 55,
+                                  width: 55,
+                                  child: ClipOval(
+                                    child: Image.asset(
+                                      _homeController
+                                          .serviceCategories[index].image,
+                                      fit: BoxFit.cover,
+                                      height: screenHeight * 0.5,
+                                      width: screenWidth * 0.5,
+                                    ),
+                                  )),
+                              SizedBox(
+                                height: screenHeight * 0.01,
+                              ),
+                              Text(
+                                _homeController.serviceCategories[index].name,
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.black),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
               ),
               Container(
                 height: screenHeight * 0.45,
