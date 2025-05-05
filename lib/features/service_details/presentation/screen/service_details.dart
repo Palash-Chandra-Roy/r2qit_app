@@ -36,7 +36,7 @@ class ServiceDetails extends StatelessWidget {
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 12,
+                mainAxisSpacing: 20,
                 crossAxisSpacing: 12,
                 childAspectRatio: 1.9 / 2.4,
               ),

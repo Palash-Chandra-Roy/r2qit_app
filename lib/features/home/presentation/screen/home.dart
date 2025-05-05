@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
-import 'package:r2ait_app/utils/custom_Resentproject_Details.dart';
 import 'package:r2ait_app/utils/custom_project_details.dart';
 
 import '../../../../core/constants/controller_control/home_controller.dart';
@@ -166,27 +165,21 @@ class Home extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: screenHeight * 0.27,
-                width: double.infinity,
+                height: screenHeight * 0.3,
+                width: screenWidth,
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  itemCount: _homeController.serviceCategories.length,
-                  itemBuilder: (context, index) {
-                    final service = _homeController.serviceCategories[index];
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 12), // item spacing
-                      child: SizedBox(
-                        width: screenWidth *
-                            0.4, // Adjust width as needed for each card
+                    itemCount: _homeController.serviceCategories.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      final service = _homeController.serviceCategories[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: CustomServiceDetailsCard(
+                          goToDetailsPage: goToDetailsPage,
                           service: service,
-                          goToDetailsPage: () => goToDetaileProject(),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    }),
               ),
               SizedBox(
                 height: screenHeight * 0.01,
@@ -204,25 +197,19 @@ class Home extends StatelessWidget {
                   )
                 ],
               ),
-              Container(
-                height: screenHeight * 0.28,
-                width: double.infinity,
+              SizedBox(
+                height: screenHeight * 0.3,
+                width: screenWidth,
                 child: ListView.builder(
                     itemCount: _homeController.serviceCategories.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       final service = _homeController.serviceCategories[index];
                       return Padding(
-                        padding:
-                            const EdgeInsets.only(right: 15), // item spacing
-                        child: SizedBox(
-                          width: screenWidth *
-                              0.4, // Adjust width as needed for each card
-                          child: CustomResentprojectDetails(
-                            service: service,
-                            goToResentDetailsProject: () =>
-                                goToResentDetailsProject(),
-                          ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomServiceDetailsCard(
+                          goToDetailsPage: goToDetailsPage,
+                          service: service,
                         ),
                       );
                     }),
@@ -290,6 +277,8 @@ class Home extends StatelessWidget {
       ),
     );
   }
+
+  void goToDetailsPage() {}
 
   void goToNotificationPage(BuildContext context) {
     Navigator.pushAndRemoveUntil(
