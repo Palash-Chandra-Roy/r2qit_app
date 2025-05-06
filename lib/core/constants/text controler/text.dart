@@ -30,6 +30,7 @@ const Map<String, String> homeTextEn = {
   'all_project': 'All Projects',
   'best_project': 'Best Projects',
   'your_team_member': 'Your Team Members',
+
 };
 const Map<String, String> homeTextBn = {
   'search': 'অনুসন্ধান করুন',

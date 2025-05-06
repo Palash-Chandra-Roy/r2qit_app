@@ -77,18 +77,12 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ],
               ),
-              // CircleAvatar(
-              //   radius: 60,
-              //   backgroundImage: AssetImage("assets/image/palash.jpg"),
-              // ),
               SizedBox(
                 height: 30,
               ),
-
               SizedBox(
                 height: 20,
               ),
-
               Form(
                 child: Column(
                   children: [
