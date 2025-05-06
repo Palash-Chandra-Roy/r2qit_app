@@ -1,0 +1,2 @@
+C:/Users/USER/StudioProjects/r2qit_app/android/app/.cxx/Debug/w6u4x3a8/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/USER/StudioProjects/r2qit_app/android/app/.cxx/Debug/w6u4x3a8/x86_64/CMakeFiles/rebuild_cache.dir
