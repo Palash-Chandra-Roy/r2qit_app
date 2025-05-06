@@ -25,7 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
       String? email = _prefs.getString("email");
       if (email != null && email.isNotEmpty) {
         Get.to(() => BottomNavbar());
-        Logger().e("email is not null: $email");
       } else {
         Get.to(() => Signin());
       }

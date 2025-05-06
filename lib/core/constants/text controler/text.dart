@@ -27,9 +27,10 @@ const Map<String, String> homeTextEn = {
   'service_category': 'Service Categary',
   'see_more': 'See More',
   'recent_project': 'Recent Projects',
-  'all_project': 'All Project',
-  'best_project': 'Best Project',
-  'your_team_member': 'Your Team Member',
+  'all_project': 'All Projects',
+  'best_project': 'Best Projects',
+  'your_team_member': 'Your Team Members',
+
 };
 const Map<String, String> homeTextBn = {
   'search': 'অনুসন্ধান করুন',

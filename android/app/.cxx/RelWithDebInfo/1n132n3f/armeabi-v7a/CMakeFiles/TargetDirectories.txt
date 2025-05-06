@@ -1,0 +1,2 @@
+C:/Users/USER/StudioProjects/r2qit_app/android/app/.cxx/RelWithDebInfo/1n132n3f/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/USER/StudioProjects/r2qit_app/android/app/.cxx/RelWithDebInfo/1n132n3f/armeabi-v7a/CMakeFiles/rebuild_cache.dir

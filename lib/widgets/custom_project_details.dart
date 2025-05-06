@@ -14,8 +14,8 @@ class CustomServiceDetailsCard extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Container(
-        height: height * 0.2,
-        width: 200,
+        height: height,
+        width: width*0.42,
         color: Colors.grey[200],
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,7 +54,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
 
             // 📄 Service Name
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 1.5),
+              padding: const EdgeInsets.only(top: 8),
               child: Text(
                 service.name ?? "",
                 style: TextStyle(
@@ -67,9 +67,10 @@ class CustomServiceDetailsCard extends StatelessWidget {
 
             // 🔘 See Live Button
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 15),
+              padding: const EdgeInsets.symmetric( horizontal: 20),
               child: SizedBox(
                 width: double.infinity,
+                height: 30,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade500,

@@ -9,6 +9,11 @@ import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.da
 import 'package:r2ait_app/features/service/presentation/screen/service_list.dart';
 import 'package:r2ait_app/widgets/custom_project_details.dart';
 
+import '../../../../core/constants/controller_control/home_controller.dart';
+import '../../../../core/constants/fontsize_control/widget_support.dart';
+import '../../../service/presentation/screen/service_list.dart';
+import '../widget/contract_from.dart';
+
 class Home extends StatelessWidget {
   Home({Super, Key});
   final HomeController _homeController = Get.put(HomeController());
@@ -359,6 +364,13 @@ class Home extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
+              // ... your_team_member grid এর নিচে
+              SizedBox(height: 20),
+
+              /// ✅ Contract Form Section
+              ContractFormWidget(),
+
+              SizedBox(height: 20),
             ],
           ),
         ),
