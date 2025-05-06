@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
+import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
+import 'package:r2ait_app/features/service/presentation/screen/service_list.dart';
 import 'package:r2ait_app/widgets/custom_project_details.dart';
-
-import '../../../../core/constants/controller_control/home_controller.dart';
-import '../../../../core/constants/fontsize_control/widget_support.dart';
-import '../../../service/presentation/screen/service_list.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -92,13 +91,6 @@ class Home extends StatelessWidget {
                   children: [
                     Text("service_category".tr,
                         style: AppWidget.homeTextFeildStyle()),
-                    // GestureDetector(
-                    //   onTap: () {},
-                    //   child: Text(
-                    //     "see_more".tr,
-                    //     style: AppWidget.appBarTextFeildStyle(),
-                    //   ),
-                    // )
                   ]),
               Stack(
                 children: [
