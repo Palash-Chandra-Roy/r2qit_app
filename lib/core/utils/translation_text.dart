@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:r2ait_app/core/constants/text%20controler/setting_text.dart';
+import 'package:r2ait_app/core/constants/text%20controler/text.dart';
 
 class AppTranslations extends Translations {
   @override

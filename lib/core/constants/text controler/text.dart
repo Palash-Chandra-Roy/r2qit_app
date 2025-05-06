@@ -26,7 +26,7 @@ const Map<String, String> homeTextEn = {
   'search': 'Search',
   'service_category': 'Service Categary',
   'see_more': 'See More',
-  'recent_project': 'Resent Project',
+  'recent_project': 'Recent Projects',
   'all_project': 'All Project',
   'best_project': 'Best Project',
   'your_team_member': 'Your Team Member',
