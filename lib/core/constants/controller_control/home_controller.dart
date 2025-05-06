@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class HomeController extends GetxController {
   var bannerPageController = PageController();
@@ -9,6 +11,24 @@ class HomeController extends GetxController {
   var resetProjectController = ScrollController();
   var baseProjectController = ScrollController();
   var teamController = ScrollController();
+
+  var teamMembers = <TeamMember>[].obs; // ✅ Moved inside
+
+  Future<void> fetchTeamMembers() async {
+    try {
+      final response =
+          await http.get(Uri.parse('http://103.145.138.116:3000/teams'));
+      if (response.statusCode == 200) {
+        List data = json.decode(response.body);
+        teamMembers.value =
+            data.map((item) => TeamMember.fromJson(item)).toList();
+      } else {
+        print('Error: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching team members: $e');
+    }
+  }
 
   var selectedCategoryIndex = 0.obs;
   var currentBannerPage = 0.obs;
@@ -31,6 +51,9 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    //team api
+    fetchTeamMembers();
 
     _startAutoScrollBanner();
 
@@ -73,11 +96,14 @@ class HomeController extends GetxController {
         if (nextPage >= bannerImages.length) {
           nextPage = 0;
         }
+
         bannerPageController.animateToPage(
           nextPage,
           duration: Duration(milliseconds: 500),
           curve: Curves.easeInOut,
         );
+
+        currentBannerPage.value = nextPage; // ✅ Update reactive value
       }
     });
   }
@@ -213,6 +239,24 @@ class TermMember {
 
   TermMember(
       {required this.image, required this.name, required this.department});
+}
+
+//Api Code demo
+class TeamMember {
+  final String name;
+  final String department;
+  final String image;
+
+  TeamMember(
+      {required this.name, required this.department, required this.image});
+
+  factory TeamMember.fromJson(Map<String, dynamic> json) {
+    return TeamMember(
+      name: json['name'],
+      department: json['department'],
+      image: json['image'], // assume it's a full URL
+    );
+  }
 }
 
 class ServiceCategory {

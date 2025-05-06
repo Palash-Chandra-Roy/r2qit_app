@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
+import 'package:r2ait_app/features/auth/Auth%20Controller/auth_Controller.dart';
+import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
 import 'package:r2ait_app/features/home/presentation/screen/about.dart';
 import 'package:r2ait_app/features/home/presentation/screen/edit_profile.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/setting.dart';
@@ -15,6 +18,8 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   ThemeController themeController = ThemeController();
+  final AuthController _authController = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
@@ -34,11 +39,7 @@ class _ProfileState extends State<Profile> {
           ),
         ),
         title: Center(
-          child: Text(
-            "Profile",
-            style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
-          ),
+          child: Text("Profile", style: AppWidget.appBarTextFeildStyle()),
         ),
         actions: [
           IconButton(
@@ -157,7 +158,20 @@ class _ProfileState extends State<Profile> {
               ProfileManWidget(
                 title: "Logout",
                 icon: Icon(Icons.logout),
-                onPress: () {},
+                onPress: () {
+                  Get.defaultDialog(
+                    title: "Logout",
+                    middleText: "Are you sure you want to logout?",
+                    textConfirm: "Yes",
+                    textCancel: "No",
+                    confirmTextColor: Colors.white,
+                    onConfirm: () {
+                      Get.back(); // Close dialog
+                      _authController.logout();
+                      Get.to(Signin());
+                    },
+                  );
+                },
                 textColor: Colors.red,
                 endIcon: false,
               ),
