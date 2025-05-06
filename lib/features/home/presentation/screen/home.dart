@@ -9,9 +9,6 @@ import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.da
 import 'package:r2ait_app/features/service/presentation/screen/service_list.dart';
 import 'package:r2ait_app/widgets/custom_project_details.dart';
 
-import '../../../../core/constants/controller_control/home_controller.dart';
-import '../../../../core/constants/fontsize_control/widget_support.dart';
-import '../../../service/presentation/screen/service_list.dart';
 import '../widget/contract_from.dart';
 
 class Home extends StatelessWidget {
@@ -340,6 +337,44 @@ class Home extends StatelessWidget {
                             ),
                           );
                         }),
+// API Code add
+                    /*  child: Obx(() => ListView.builder(
+                            controller: _homeController.teamController,
+                            itemCount: _homeController.teamMembers.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              var member = _homeController.teamMembers[index];
+                              return SizedBox(
+                                height: screenHeight * 0.15,
+                                width: screenWidth * 0.31,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                        height: 55,
+                                        width: 55,
+                                        child: ClipOval(
+                                          child: Image.network(
+                                            member.image,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )),
+                                    SizedBox(height: screenHeight * 0.01),
+                                    Text(member.name,
+                                        style: TextStyle(
+                                            fontSize: 10, color: Colors.black)),
+                                    Text(member.department,
+                                        style: TextStyle(
+                                            fontSize: 8,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold)),
+                                  ],
+                                ),
+                              );
+                            },
+                          ))),
+                          */
                   ),
                   Positioned(
                     left: -5,
