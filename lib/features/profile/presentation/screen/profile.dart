@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
-import 'package:r2ait_app/features/auth/Auth%20Controller/auth_Controller.dart';
-import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
 import 'package:r2ait_app/features/home/presentation/screen/about.dart';
 import 'package:r2ait_app/features/home/presentation/screen/edit_profile.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/setting.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../auth/presentation/screen/signin.dart';
 import '../../domain/change_dark_mode.dart';
 
 class Profile extends StatefulWidget {
@@ -18,7 +18,6 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   ThemeController themeController = ThemeController();
-  final AuthController _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -167,9 +166,7 @@ class _ProfileState extends State<Profile> {
                     textCancel: "No",
                     confirmTextColor: Colors.white,
                     onConfirm: () {
-                      Get.back(); // Close dialog
-                      _authController.logout();
-                      Get.to(Signin());
+                      LogOut();
                     },
                   );
                 },
@@ -181,6 +178,12 @@ class _ProfileState extends State<Profile> {
         ),
       ),
     );
+  }
+
+  void LogOut() async {
+    SharedPreferences _preferences = await SharedPreferences.getInstance();
+    _preferences.clear();
+    Get.offAll(() => Signin());
   }
 
   void goToSettingPage() {

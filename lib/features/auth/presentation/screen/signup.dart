@@ -4,6 +4,7 @@ import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
 
 import '../../../../core/constants/controller_control/signup_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
+import '../../logic/register_controller.dart';
 import '../widget/custombuttom.dart';
 
 class Signup extends StatefulWidget {
@@ -17,15 +18,6 @@ class _SignupState extends State<Signup> {
   SignUpController signUpController = Get.put(SignUpController());
   bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
-
-  void gotoSignin() {
-    if (_formKey.currentState!.validate()) {
-      print("✅ Form Validated - Navigating to Signin Page");
-      Get.to(Signin());
-    } else {
-      print("❌ Form Not Valid");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +47,21 @@ class _SignupState extends State<Signup> {
                     prefixIcon: Icon(Icons.person),
                   ),
                   controller: signUpController.nameController,
+                  keyboardType: TextInputType.name,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Enter your name";
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: screenheight * 0.03),
+                TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "username",
+                    prefixIcon: Icon(Icons.drive_file_rename_outline),
+                  ),
+                  controller: signUpController.usernameController,
                   keyboardType: TextInputType.name,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -111,7 +118,9 @@ class _SignupState extends State<Signup> {
                 CustomButton(
                   buttonText: "Sign Up",
                   color: const Color.fromARGB(255, 4, 56, 5),
-                  onPressed: gotoSignin,
+                  onPressed: () {
+                    gotoSignin();
+                  },
                   // () {
                   //   Get.to(Signin());
                   // },
@@ -179,5 +188,15 @@ class _SignupState extends State<Signup> {
         ),
       ),
     );
+  }
+
+  void gotoSignin() {
+    if (_formKey.currentState!.validate()) {
+      RegisterController.signUp(
+          name: signUpController.nameController.text,
+          email: signUpController.emailController.text,
+          password: signUpController.passwordController.text,
+          username: signUpController.usernameController.text);
+    } else {}
   }
 }

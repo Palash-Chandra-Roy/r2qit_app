@@ -125,7 +125,10 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                       backgroundColor: Colors.green,
                       minimumSize: Size(width, 40),
                     ),
-                    child: Text("Submit"),
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

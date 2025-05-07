@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpController extends GetxController {
   TextEditingController nameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 

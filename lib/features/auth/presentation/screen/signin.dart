@@ -21,13 +21,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/features/auth/logic/login_controller.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
-import '../../../../widgets/bottom_navbar.dart';
 import '../widget/custombuttom.dart'; // Add this import if missing
 
 class Signin extends StatefulWidget {
@@ -196,9 +195,7 @@ class _SigninState extends State<Signin> {
                   buttonText: "Sign In",
                   color: const Color.fromARGB(255, 4, 56, 5),
                   onPressed: () {
-                    gotoHome(
-                        email: signinController.emailController.text,
-                        password: signinController.emailController.text);
+                    login();
                   },
                   textColor: Colors.white,
                 ),
@@ -229,19 +226,27 @@ class _SigninState extends State<Signin> {
     );
   }
 
-  void gotoHome({email, password}) async {
-    SharedPreferences _preferences = await SharedPreferences.getInstance();
+  // void gotoHome({email, password}) async {
+  //   SharedPreferences _preferences = await SharedPreferences.getInstance();
+  //   if (_formKey.currentState?.validate() ?? false) {
+  //     _preferences.setString("email", email);
+  //     _preferences.setString("email", password);
+  //     if (!isCheck) {
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         const SnackBar(content: Text("Tick this checkbox")),
+  //       );
+  //       return;
+  //     }
+  //     print("✅ Form Validated - Navigating to Home Page");
+  //     Get.to(BottomNavbar());
+  //   }
+  // }
+
+  void login() {
     if (_formKey.currentState?.validate() ?? false) {
-      _preferences.setString("email", email);
-      _preferences.setString("email", password);
-      if (!isCheck) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Tick this checkbox")),
-        );
-        return;
-      }
-      print("✅ Form Validated - Navigating to Home Page");
-      Get.to(BottomNavbar());
+      LoginController.login(
+          email: signinController.emailController.text,
+          password: signinController.passwordController.text);
     }
   }
 }

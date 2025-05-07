@@ -5,7 +5,6 @@ import '../../../../widgets/custom_project_details.dart';
 
 class ServiceDetails extends StatelessWidget {
   final HomeController serviceList = HomeController();
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -38,7 +37,7 @@ class ServiceDetails extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 12,
-                childAspectRatio: 1.9 / 2.4,
+                childAspectRatio: 1.85 / 2.4,
               ),
               itemCount: serviceList.serviceCategories.length,
               itemBuilder: (context, index) {
