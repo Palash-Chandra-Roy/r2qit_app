@@ -1,32 +1,13 @@
-//     final GoogleSignInAuthentication googleAuth =
-//         await googleUser.authentication;
-
-//     final OAuthCredential credential = GoogleAuthProvider.credential(
-//       accessToken: googleAuth.accessToken,
-//       idToken: googleAuth.idToken,
-//     );
-
-//     // Sign in to Firebase
-//     await _auth.signInWithCredential(credential);
-
-//     // After successful sign-in, you can navigate to your home screen or another screen
-//     print("User Signed In: ${_auth.currentUser?.displayName}");
-//     // Example: Navigate to HomeScreen
-//     // Get.to(HomeScreen());
-//   } catch (e) {
-//     print("Error during Google Sign-In: $e");
-//     Get.snackbar("Error", "Google Sign-In failed");
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/logic/login_controller.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
+import '../../../../widgets/bottom_navbar.dart';
 import '../widget/custombuttom.dart'; // Add this import if missing
 
 class Signin extends StatefulWidget {
@@ -38,7 +19,7 @@ class Signin extends StatefulWidget {
 
 class _SigninState extends State<Signin> {
   SigninController signinController = Get.put(SigninController());
-  bool isCheck = false;
+  var isCheck = false.obs;
   bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
 
@@ -166,38 +147,49 @@ class _SigninState extends State<Signin> {
                     ),
                   ),
                 ),
-                // Divider
 
                 SizedBox(height: screenheight * 0.02),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Checkbox(
-                      value: isCheck,
-                      onChanged: (bool? newVal) {
-                        setState(() {
-                          isCheck = newVal!;
-                        });
+                    Obx(() => Checkbox(
+                          value: signinController.isCheck.value,
+                          onChanged: (val) {
+                            signinController.isCheck.value = val ?? false;
+                          },
+                        )),
+                    GestureDetector(
+                      onTap: () {
+                        signinController.isCheck.value =
+                            !signinController.isCheck.value;
                       },
-                    ),
-                    Flexible(
-                      child: Text(
-                        "Remember me",
-                        style: AppWidget.appBarTextFeildStyle(),
-                      ),
-                    ),
+                      child: Text("Remember me"),
+                    )
                   ],
                 ),
-                // Sign In Button
 
                 SizedBox(height: screenheight * 0.02),
+
                 CustomButton(
                   buttonText: "Sign In",
                   color: const Color.fromARGB(255, 4, 56, 5),
-                  onPressed: () {
-                    login();
-                  },
                   textColor: Colors.white,
+                  onPressed: () {
+                    String email = signinController.emailController.text;
+                    String password = signinController.passwordController.text;
+
+                    if (signinController.isCheck.value) {
+                      print("Remembered credentials: $email / $password");
+                    } else {
+                      print("Not remembering credentials");
+                    }
+
+                    login();
+
+                    // Go to home screen
+                    // gotoHome(email: email, password: password);
+                  },
                 ),
 
                 SizedBox(height: 30),
@@ -226,27 +218,28 @@ class _SigninState extends State<Signin> {
     );
   }
 
-  // void gotoHome({email, password}) async {
-  //   SharedPreferences _preferences = await SharedPreferences.getInstance();
-  //   if (_formKey.currentState?.validate() ?? false) {
-  //     _preferences.setString("email", email);
-  //     _preferences.setString("email", password);
-  //     if (!isCheck) {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(content: Text("Tick this checkbox")),
-  //       );
-  //       return;
-  //     }
-  //     print("✅ Form Validated - Navigating to Home Page");
-  //     Get.to(BottomNavbar());
-  //   }
-  // }
-
   void login() {
     if (_formKey.currentState?.validate() ?? false) {
       LoginController.login(
           email: signinController.emailController.text,
           password: signinController.passwordController.text);
+
+      void gotoHome({required String email, required String password}) async {
+        final prefs = await SharedPreferences.getInstance();
+
+        if (_formKey.currentState?.validate() ?? false) {
+          if (signinController.isCheck.value) {
+            await prefs.setString("email", email);
+            await prefs.setString("password", password);
+          } else {
+            await prefs.remove("email");
+            await prefs.remove("password");
+          }
+
+          print("✅ Navigating to Home Page");
+          Get.to(() => BottomNavbar());
+        }
+      }
     }
   }
 }

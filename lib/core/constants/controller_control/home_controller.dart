@@ -1,48 +1,73 @@
+// List tremMember = <TermMember>[
+//   TermMember(
+//       image: "assets/images/palash.jpg",
+//       name: "Palash Roy",
+//       department: "Flutter Developer"),
+//   TermMember(
+//       image: "assets/images/rasel.png",
+//       name: "Palash ",
+//       department: "Flutter Developer"),
+//   TermMember(
+//       image: "assets/images/gohighlevel.png",
+//       name: "Palash Chandra ",
+//       department: "Flutter Developer"),
+//   TermMember(
+//       image: "assets/images/reactjs.jpeg",
+//       name: "Palash ",
+//       department: "Flutter Developer"),
+//   TermMember(
+//       image: "assets/images/wowrdpress.png",
+//       name: "Palash",
+//       department: "Flutter Developer"),
+//   TermMember(
+//       image: "assets/images/shopify.png",
+//       name: "Palash ",
+//       department: "Flutter Developer"),
+//   TermMember(
+//       image: "assets/images/ios.jpeg",
+//       name: "Palash ",
+//       department: "Flutter Developer"),
+//   TermMember(
+//       image: "assets/images/web.jpeg",
+//       name: "Palash ",
+//       department: "Flutter Developer"),
+//   TermMember(
+//       image: "assets/images/sdlc.jpg",
+//       name: "Palash ",
+//       department: "Flutter Developer"),
+// ].obs;
+
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 
 class HomeController extends GetxController {
+  // Page and scroll controllers
   var bannerPageController = PageController();
   var categoryScrollController = ScrollController();
   var resetProjectController = ScrollController();
   var baseProjectController = ScrollController();
   var teamController = ScrollController();
 
-  var teamMembers = <TeamMember>[].obs; // ✅ Moved inside
+  var teamPageController = PageController(viewportFraction: 0.5);
 
-  Future<void> fetchTeamMembers() async {
-    try {
-      final response =
-          await http.get(Uri.parse('http://103.145.138.116:3000/teams'));
-      if (response.statusCode == 200) {
-        List data = json.decode(response.body);
-        teamMembers.value =
-            data.map((item) => TeamMember.fromJson(item)).toList();
-      } else {
-        print('Error: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error fetching team members: $e');
-    }
-  }
-
+  // Observables
+  var currentTeamPage = 0.obs;
+  var teamMembers = <TeamMember>[].obs;
   var selectedCategoryIndex = 0.obs;
   var currentBannerPage = 0.obs;
   var currentPage = 0.obs;
 
   RxBool isCategoryAtStart = true.obs;
   RxBool isCategoryAtEnd = false.obs;
-
   RxBool isProjectAtStart = true.obs;
   RxBool isProjectAtEnd = false.obs;
-
   RxBool isBestProjectAtStart = true.obs;
   RxBool isBestProjectAtEnd = false.obs;
-
   RxBool isTeamStart = true.obs;
   RxBool isTeamEnd = false.obs;
 
@@ -52,12 +77,12 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
 
-    //team api
+    teamController.addListener(_updateScrollButtonState);
     fetchTeamMembers();
 
+    bannerPageController = PageController(initialPage: 0);
     _startAutoScrollBanner();
 
-    // Scroll listener for category list
     categoryScrollController.addListener(() {
       final max = categoryScrollController.position.maxScrollExtent;
       final current = categoryScrollController.offset;
@@ -65,7 +90,6 @@ class HomeController extends GetxController {
       isCategoryAtEnd.value = current >= max;
     });
 
-    // Scroll listener for recent project list
     resetProjectController.addListener(() {
       final max = resetProjectController.position.maxScrollExtent;
       final current = resetProjectController.offset;
@@ -73,38 +97,11 @@ class HomeController extends GetxController {
       isProjectAtEnd.value = current >= max;
     });
 
-    //BestProject
     baseProjectController.addListener(() {
       final max = baseProjectController.position.maxScrollExtent;
       final current = baseProjectController.offset;
       isBestProjectAtStart.value = current <= 0;
       isBestProjectAtEnd.value = current >= max;
-    });
-
-    teamController.addListener(() {
-      final max = teamController.position.maxScrollExtent;
-      final current = teamController.offset;
-      isTeamStart.value = current <= 0;
-      isTeamEnd.value = current >= max;
-    });
-  }
-
-  void _startAutoScrollBanner() {
-    _autoScrollTimer = Timer.periodic(Duration(seconds: 3), (timer) {
-      if (bannerPageController.hasClients) {
-        int nextPage = currentBannerPage.value + 1;
-        if (nextPage >= bannerImages.length) {
-          nextPage = 0;
-        }
-
-        bannerPageController.animateToPage(
-          nextPage,
-          duration: Duration(milliseconds: 500),
-          curve: Curves.easeInOut,
-        );
-
-        currentBannerPage.value = nextPage; // ✅ Update reactive value
-      }
     });
   }
 
@@ -116,16 +113,54 @@ class HomeController extends GetxController {
     resetProjectController.dispose();
     baseProjectController.dispose();
     teamController.dispose();
-
     super.onClose();
   }
 
-//End
-  // List of Generate addItem & Remove Item ;
+  void _startAutoScrollBanner() {
+    _autoScrollTimer = Timer.periodic(Duration(seconds: 3), (timer) {
+      if (bannerPageController.hasClients) {
+        int nextPage = bannerPageController.page!.round() + 1;
+        if (nextPage >= bannerImages.length) {
+          nextPage = 0;
+        }
+        bannerPageController.animateToPage(
+          nextPage,
+          duration: Duration(milliseconds: 10),
+          curve: Curves.easeInOut,
+        );
+      }
+    });
+  }
+
+  void _updateScrollButtonState() {
+    isTeamStart.value =
+        teamController.offset <= teamController.position.minScrollExtent + 10;
+    isTeamEnd.value =
+        teamController.offset >= teamController.position.maxScrollExtent - 10;
+  }
+
+  Future<void> fetchTeamMembers() async {
+    final url = Uri.parse('http://103.145.138.116:3000/teams');
+    try {
+      final response = await http.get(url);
+      if (response.statusCode == 200) {
+        final List data = jsonDecode(response.body);
+        teamMembers.value =
+            data.map((item) => TeamMember.fromJson(item)).toList();
+        Logger().i(" Team members fetched: ${teamMembers.length}");
+      } else {
+        Logger()
+            .e(" Failed to fetch team members. Status: ${response.statusCode}");
+      }
+    } catch (e) {
+      Logger().e(" Error fetching team members: $e");
+    }
+  }
+
+  // Dynamic item list management
   var items = List.generate(10, (index) => "Item $index").obs;
   void addItem() {
-    int nextIndex = items.length;
-    items.add("Item $nextIndex");
+    items.add("Item ${items.length}");
   }
 
   void removeItem(int index) {
@@ -138,123 +173,45 @@ class HomeController extends GetxController {
     selectedCategoryIndex.value = index;
   }
 
-  // List of Service Categories//
-  List serviceCategories = <ServiceCategory>[
-    ServiceCategory(
-      image: "assets/images/grapic_design.png",
-      name: "GRAPHIC DESIGN",
-    ),
-    ServiceCategory(
-      image: "assets/images/webflow.jpeg",
-      name: "WEBFLOW",
-    ),
-    ServiceCategory(
-      image: "assets/images/gohighlevel.png",
-      name: "GOHIGHLEVEL",
-    ),
-    ServiceCategory(
-      image: "assets/images/reactjs.jpeg",
-      name: "REACT JS",
-    ),
-    ServiceCategory(
-      image: "assets/images/wowrdpress.png",
-      name: "WORDPRESS",
-    ),
-    ServiceCategory(
-      image: "assets/images/shopify.png",
-      name: "SHOPIFY",
-    ),
-    ServiceCategory(
-      image: "assets/images/ios.jpeg",
-      name: "App Development",
-    ),
-    ServiceCategory(
-      image: "assets/images/sdlc.jpg",
-      name: "SOFTWARE DESIGN",
-    ),
-    ServiceCategory(
-      image: "assets/images/js.png",
-      name: "JS",
-    ),
-  ].obs;
-
-  List tremMember = <TermMember>[
-    TermMember(
-        image: "assets/images/palash.jpg",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/webflow.jpeg",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/gohighlevel.png",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/reactjs.jpeg",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/wowrdpress.png",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/shopify.png",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/ios.jpeg",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/web.jpeg",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/sdlc.jpg",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/js.png",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-    TermMember(
-        image: "assets/images/web.jpeg",
-        name: "Palash Chandra  Roy",
-        department: "Flutter Developer"),
-  ].obs;
-
+  // Static banner images
   List<String> bannerImages = [
     'assets/images/banner.png',
     'assets/images/banner1.png',
     'assets/images/banner.png',
   ].obs;
+
+  // Static service categories
+  List<ServiceCategory> serviceCategories = <ServiceCategory>[
+    ServiceCategory(
+        image: "assets/images/grapic_design.png", name: "GRAPHIC DESIGN"),
+    ServiceCategory(image: "assets/images/webflow.jpeg", name: "WEBFLOW"),
+    ServiceCategory(
+        image: "assets/images/gohighlevel.png", name: "GOHIGHLEVEL"),
+    ServiceCategory(image: "assets/images/reactjs.jpeg", name: "REACT JS"),
+    ServiceCategory(image: "assets/images/wowrdpress.png", name: "WORDPRESS"),
+    ServiceCategory(image: "assets/images/shopify.png", name: "SHOPIFY"),
+    ServiceCategory(image: "assets/images/ios.jpeg", name: "App Development"),
+    ServiceCategory(image: "assets/images/sdlc.jpg", name: "SOFTWARE DESIGN"),
+    ServiceCategory(image: "assets/images/js.png", name: "JS"),
+  ].obs;
 }
 
-class TermMember {
-  final String image;
-  final String name;
-  final String department;
-
-  TermMember(
-      {required this.image, required this.name, required this.department});
-}
-
-//Api Code demo
 class TeamMember {
   final String name;
   final String department;
   final String image;
 
-  TeamMember(
-      {required this.name, required this.department, required this.image});
+  TeamMember({
+    required this.name,
+    required this.department,
+    required this.image,
+  });
 
   factory TeamMember.fromJson(Map<String, dynamic> json) {
     return TeamMember(
-      name: json['name'],
-      department: json['department'],
-      image: json['image'], // assume it's a full URL
+      name: json['name'] ?? '',
+      department: json['department'] ?? '',
+      image: json['image'] ?? '',
     );
   }
 }

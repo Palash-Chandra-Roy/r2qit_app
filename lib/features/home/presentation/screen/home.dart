@@ -65,30 +65,59 @@ class Home extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                height: 150,
-                child: PageView.builder(
-                  controller: _homeController.bannerPageController,
-                  itemCount: _homeController.bannerImages.length,
-                  onPageChanged: (index) {
-                    _homeController.currentPage.value = index;
-                  },
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.all(4),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Image.asset(
-                          _homeController.bannerImages[index],
-                          fit: BoxFit.cover,
+              Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    height: 150,
+                    child: Obx(() => PageView.builder(
+                          controller: _homeController.bannerPageController,
+                          itemCount: _homeController.bannerImages.length,
+                          onPageChanged: (index) {
+                            _homeController.currentPage.value = index;
+                          },
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(
+                                  _homeController.bannerImages[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          },
+                        )),
+                  ),
+                  const SizedBox(height: 8),
+                  Obx(() => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          _homeController.bannerImages.length,
+                          (index) => AnimatedContainer(
+                            duration: Duration(milliseconds: 300),
+                            margin: EdgeInsets.symmetric(horizontal: 4),
+                            width: _homeController.currentPage.value == index
+                                ? 12
+                                : 8,
+                            height: _homeController.currentPage.value == index
+                                ? 12
+                                : 8,
+                            decoration: BoxDecoration(
+                              color: _homeController.currentPage.value == index
+                                  ? Colors.green
+                                  : Colors.grey,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      )),
+                ],
               ),
+
               Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,13 +201,6 @@ class Home extends StatelessWidget {
                 children: [
                   Text("recent_project".tr,
                       style: AppWidget.homeTextFeildStyle()),
-                  // InkWell(
-                  //   onTap: () {},
-                  //   child: Text(
-                  //     "all_project".tr,
-                  //     style: AppWidget.appBarTextFeildStyle(),
-                  //   ),
-                  // )
                 ],
               ),
               Stack(
@@ -232,13 +254,6 @@ class Home extends StatelessWidget {
                 children: [
                   Text("best_project".tr,
                       style: AppWidget.homeTextFeildStyle()),
-                  // InkWell(
-                  //   onTap: () {},
-                  //   child: Text(
-                  //     "all_project".tr,
-                  //     style: AppWidget.appBarTextFeildStyle(),
-                  //   ),
-                  // )
                 ],
               ),
               Stack(
@@ -289,108 +304,67 @@ class Home extends StatelessWidget {
                 child: Text("your_team_member".tr,
                     style: AppWidget.homeTextFeildStyle()),
               ),
+
               Stack(
                 children: [
                   Container(
-                    height: screenHeight * 0.15,
+                    height: screenHeight * 0.2,
                     width: double.infinity,
-                    child: ListView.builder(
+                    child: Obx(() {
+                      if (_homeController.teamMembers.isEmpty) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      return ListView.builder(
                         controller: _homeController.teamController,
-                        itemCount: _homeController.serviceCategories.length,
+                        itemCount: _homeController.teamMembers.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return SizedBox(
-                            height: screenHeight * 0.15,
-                            width: screenWidth * 0.31,
+                          var member = _homeController.teamMembers[index];
+                          return Container(
+                            width: screenWidth * 0.4,
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 8, left: 5, right: 5)),
-                                SizedBox(
-                                    height: 55,
-                                    width: 55,
-                                    child: ClipOval(
-                                      child: Image.asset(
-                                        _homeController.tremMember[index].image,
-                                        fit: BoxFit.cover,
-                                        height: screenHeight * 0.5,
-                                        width: screenWidth * 0.5,
-                                      ),
-                                    )),
-                                SizedBox(
-                                  height: screenHeight * 0.01,
+                                Container(
+                                  height: screenWidth * 0.23,
+                                  width: screenWidth * 0.23,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                      image: NetworkImage(member.image),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
-                                Text(
-                                  _homeController.tremMember[index].name,
-                                  style: TextStyle(
-                                      fontSize: 10, color: Colors.black),
-                                ),
-                                Text(
-                                  _homeController.tremMember[index].department,
-                                  style: TextStyle(
-                                      fontSize: 8,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                )
+                                SizedBox(height: screenHeight * 0.01),
+                                Text(member.name,
+                                    style: AppWidget.simpleTextFeildStyle()),
+                                Text(member.department,
+                                    style: AppWidget.descriptionText()),
                               ],
                             ),
                           );
-                        }),
-// API Code add
-                    /*  child: Obx(() => ListView.builder(
-                            controller: _homeController.teamController,
-                            itemCount: _homeController.teamMembers.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              var member = _homeController.teamMembers[index];
-                              return SizedBox(
-                                height: screenHeight * 0.15,
-                                width: screenWidth * 0.31,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                        height: 55,
-                                        width: 55,
-                                        child: ClipOval(
-                                          child: Image.network(
-                                            member.image,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        )),
-                                    SizedBox(height: screenHeight * 0.01),
-                                    Text(member.name,
-                                        style: TextStyle(
-                                            fontSize: 10, color: Colors.black)),
-                                    Text(member.department,
-                                        style: TextStyle(
-                                            fontSize: 8,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold)),
-                                  ],
-                                ),
-                              );
-                            },
-                          ))),
-                          */
+                        },
+                      );
+                    }),
                   ),
+
+                  // Left Scroll Button
                   Positioned(
-                    left: -5,
-                    bottom: 45,
+                    left: 0,
+                    top: screenHeight * 0.1,
                     child: LeftScrollerButton(
                       scrollController: _homeController.teamController,
                       isAtStart: _homeController.isTeamStart,
                     ),
                   ),
 
-                  // Right Button
+                  // Right Scroll Button
                   Positioned(
-                    right: -5,
-                    bottom: 45,
+                    right: 0,
+                    top: screenHeight * 0.1,
                     child: RightScrollerButton(
                       scrollController: _homeController.teamController,
                       isAtEnd: _homeController.isTeamEnd,
@@ -398,6 +372,7 @@ class Home extends StatelessWidget {
                   ),
                 ],
               ),
+
               SizedBox(
                 height: 20,
               ),

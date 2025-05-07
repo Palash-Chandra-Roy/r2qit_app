@@ -58,10 +58,10 @@ class AppWidget {
     );
   }
 
-  static TextStyle priceTextFeildStyle() {
+  static TextStyle descriptionText() {
     return TextStyle(
       color: Colors.black,
-      fontSize: 24,
+      fontSize: 12,
       fontWeight: FontWeight.bold,
     );
   }
