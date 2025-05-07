@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +18,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Navigate to Home Screen after 3 seconds
-
     Future<void> checkEmail() async {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       String? email = _prefs.getString("email");
