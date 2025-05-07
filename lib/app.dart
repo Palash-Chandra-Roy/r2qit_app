@@ -22,7 +22,10 @@ class MyApp extends StatelessWidget {
       darkTheme: darkMode,
       themeMode: ThemeMode.system,
       initialRoute: AppRoutes.initial,
-      routes: AppRoutes.routes,
+      getPages: AppRoutes.routes,
+      defaultTransition: Transition.fade,
+
+      // routes: AppRoutes.routes,
     );
   }
 }

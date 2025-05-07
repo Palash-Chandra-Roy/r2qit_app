@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ContractFormWidget extends StatefulWidget {
-  const ContractFormWidget({super.key});
+class ContactFormWidget extends StatefulWidget {
+  const ContactFormWidget({super.key});
 
   @override
-  State<ContractFormWidget> createState() => _ContractFormWidgetState();
+  State<ContactFormWidget> createState() => _ContactFormWidgetState();
 }
 
-class _ContractFormWidgetState extends State<ContractFormWidget> {
+class _ContactFormWidgetState extends State<ContactFormWidget> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -57,17 +57,21 @@ class _ContractFormWidgetState extends State<ContractFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final heigth = size.height;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: screenWidth > 600 ? 600 : screenWidth,
+        width: width > 600 ? 600 : width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Contract Form",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Center(
+              child: Text("Contact Form",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
             Form(
               key: _formKey,
               child: Column(
@@ -75,17 +79,20 @@ class _ContractFormWidgetState extends State<ContractFormWidget> {
                   _buildTextField(
                     label: 'Name',
                     controller: _nameController,
-                    validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter your name' : null,
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Enter your name'
+                        : null,
                   ),
                   _buildTextField(
                     label: 'Email',
                     controller: _emailController,
                     inputType: TextInputType.emailAddress,
                     validator: (value) {
-                      if (value == null || value.isEmpty) return 'Enter your email';
+                      if (value == null || value.isEmpty)
+                        return 'Enter your email';
                       final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-                      if (!emailRegex.hasMatch(value)) return 'Enter a valid email';
+                      if (!emailRegex.hasMatch(value))
+                        return 'Enter a valid email';
                       return null;
                     },
                   ),
@@ -93,25 +100,31 @@ class _ContractFormWidgetState extends State<ContractFormWidget> {
                     label: 'Phone Number',
                     controller: _phoneController,
                     inputType: TextInputType.phone,
-                    validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter your phone number' : null,
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Enter your phone number'
+                        : null,
                   ),
                   _buildTextField(
                     label: 'Subject',
                     controller: _subjectController,
                     validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter subject' : null,
+                        value == null || value.isEmpty ? 'Enter subject' : null,
                   ),
                   _buildTextField(
                     label: 'Message',
                     controller: _messageController,
-                    validator: (value) =>
-                    value == null || value.isEmpty ? 'Enter your message' : null,
+                    validator: (value) => value == null || value.isEmpty
+                        ? 'Enter your message'
+                        : null,
                     maxLines: 4,
                   ),
                   SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _submitForm,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      minimumSize: Size(width, 40),
+                    ),
                     child: Text("Submit"),
                   ),
                 ],

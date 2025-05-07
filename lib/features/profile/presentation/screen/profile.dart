@@ -22,6 +22,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    final id = Get.parameters['id']; // Dynamically received parameter from URL
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Colors.white,

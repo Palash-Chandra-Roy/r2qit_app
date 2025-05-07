@@ -9,7 +9,7 @@ import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.da
 import 'package:r2ait_app/features/service/presentation/screen/service_list.dart';
 import 'package:r2ait_app/widgets/custom_project_details.dart';
 
-import '../widget/contract_from.dart';
+import '../widget/contact_from.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -17,6 +17,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tab =
+        Get.parameters['tab']; // Dynamically received parameter from URL
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -284,7 +286,7 @@ class Home extends StatelessWidget {
                 height: screenHeight * 0.02,
               ),
               Center(
-                child: Text("our_team_members".tr,
+                child: Text("your_team_member".tr,
                     style: AppWidget.homeTextFeildStyle()),
               ),
               Stack(
@@ -403,7 +405,7 @@ class Home extends StatelessWidget {
               SizedBox(height: 20),
 
               /// ✅ Contract Form Section
-              ContractFormWidget(),
+              ContactFormWidget(),
 
               SizedBox(height: 20),
             ],
