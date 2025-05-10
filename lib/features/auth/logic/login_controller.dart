@@ -40,6 +40,7 @@ class LoginController {
         headers: headers,
         body: jsonEncode(body), // note: using jsonEncode for JSON body
       );
+      Logger().e("Login response: ${res.body}");
 
       final jsondata = jsonDecode(res.body);
       if (res.statusCode == 200) {
