@@ -65,7 +65,7 @@ class _SignupState extends State<Signup> {
                   keyboardType: TextInputType.name,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Enter your name";
+                      return "Enter your username";
                     }
                     return null;
                   },

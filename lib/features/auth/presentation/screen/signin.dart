@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/logic/login_controller.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
-import '../../../../widgets/bottom_navbar.dart';
 import '../widget/custombuttom.dart'; // Add this import if missing
 
 class Signin extends StatefulWidget {
@@ -63,18 +61,19 @@ class _SigninState extends State<Signin> {
                 // Email
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Email",
+                    hintText: "Email Or username",
                     prefixIcon: Icon(Icons.email),
                   ),
                   keyboardType: TextInputType.emailAddress,
-                  controller: signinController.emailController,
+                  controller: signinController.userOrEmailController,
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Email is required";
+                      return "Email Or username is required";
                     } else if (!RegExp(
-                            r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-                        .hasMatch(value)) {
-                      return "Please enter a valid email";
+                                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                            .hasMatch(value) &&
+                        !RegExp(r'^[a-zA-Z0-9_]{3,20}$').hasMatch(value)) {
+                      return "Please enter a valid email Or username";
                     } else {
                       return null;
                     }
@@ -176,7 +175,7 @@ class _SigninState extends State<Signin> {
                   color: const Color.fromARGB(255, 4, 56, 5),
                   textColor: Colors.white,
                   onPressed: () {
-                    String email = signinController.emailController.text;
+                    String email = signinController.userOrEmailController.text;
                     String password = signinController.passwordController.text;
 
                     if (signinController.isCheck.value) {
@@ -221,25 +220,8 @@ class _SigninState extends State<Signin> {
   void login() {
     if (_formKey.currentState?.validate() ?? false) {
       LoginController.login(
-          email: signinController.emailController.text,
+          user_or_email: signinController.userOrEmailController.text,
           password: signinController.passwordController.text);
-
-      void gotoHome({required String email, required String password}) async {
-        final prefs = await SharedPreferences.getInstance();
-
-        if (_formKey.currentState?.validate() ?? false) {
-          if (signinController.isCheck.value) {
-            await prefs.setString("email", email);
-            await prefs.setString("password", password);
-          } else {
-            await prefs.remove("email");
-            await prefs.remove("password");
-          }
-
-          print("✅ Navigating to Home Page");
-          Get.to(() => BottomNavbar());
-        }
-      }
     }
   }
 }

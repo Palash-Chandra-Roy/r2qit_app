@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomServiceDetailsCard extends StatelessWidget {
   var service;
   VoidCallback goToDetailsPage;
   CustomServiceDetailsCard(
       {super.key, required this.service, required this.goToDetailsPage});
-
+  final Uri _url = Uri.parse('https://r2ait.com');
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -15,7 +16,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: Container(
         height: height,
-        width: width*0.42,
+        width: width * 0.42,
         color: Colors.grey[200],
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -67,7 +68,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
 
             // 🔘 See Live Button
             Padding(
-              padding: const EdgeInsets.symmetric( horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SizedBox(
                 width: double.infinity,
                 height: 30,
@@ -75,7 +76,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade500,
                   ),
-                  onPressed: () => goToDetailsPage(),
+                  onPressed: () => _launchUrl(),
                   child: Text(
                     "See Live",
                     style: TextStyle(color: Colors.white),
@@ -87,5 +88,11 @@ class CustomServiceDetailsCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }

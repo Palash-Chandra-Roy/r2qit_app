@@ -4,7 +4,7 @@ import 'package:r2ait_app/widgets/bottom_navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SigninController extends GetxController {
-  final emailController = TextEditingController();
+  final userOrEmailController = TextEditingController();
   final passwordController = TextEditingController();
   var isCheck = false.obs;
 
@@ -21,7 +21,7 @@ class SigninController extends GetxController {
     final savedEmail = prefs.getString('email') ?? '';
     final savedPassword = prefs.getString('password') ?? '';
 
-    emailController.text = savedEmail;
+    userOrEmailController.text = savedEmail;
     passwordController.text = savedPassword;
     isCheck.value = savedEmail.isNotEmpty && savedPassword.isNotEmpty;
   }
@@ -31,7 +31,7 @@ class SigninController extends GetxController {
 
     if (formKey.currentState?.validate() ?? false) {
       if (isCheck.value) {
-        await prefs.setString("email", emailController.text);
+        await prefs.setString("email", userOrEmailController.text);
         await prefs.setString("password", passwordController.text);
         print("✅ Credentials remembered");
       } else {
