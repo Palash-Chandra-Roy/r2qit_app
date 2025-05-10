@@ -36,10 +36,12 @@ class RegisterController {
     if (res.statusCode == 201) {
       Get.to(() => Signin());
       flutterToast(decode['message']);
-    } else if (res.statusCode == 404) {
-      Get.snackbar("Sign Up Failed", "User not found");
+    } else if (res.statusCode == 409) {
+      Get.snackbar("Sign Up Failed", "Already Have an account");
     } else if (res.statusCode == 403) {
       Get.snackbar("Access Denied", "Invalid credentials");
+    } else {
+      Get.snackbar("Error", "Unexpected error occurred");
     }
   }
 }
