@@ -121,9 +121,6 @@ class _SignupState extends State<Signup> {
                   onPressed: () {
                     gotoSignin();
                   },
-                  // () {
-                  //   Get.to(Signin());
-                  // },
                   textColor: Colors.white,
                 ),
                 SizedBox(height: screenheight * 0.04),
