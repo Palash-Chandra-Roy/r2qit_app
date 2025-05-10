@@ -8,6 +8,8 @@ import 'package:r2ait_app/features/admin/presentation/screen/admin_screen.dart';
 import 'package:r2ait_app/widgets/bottom_navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../data/headers.dart';
+
 class LoginController {
   static void goToDashboard(String role) {
     switch (role) {
@@ -23,23 +25,16 @@ class LoginController {
   }
 
   static Future<void> login({
-    required String email,
+    required String user_or_email,
     required String password,
   }) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      var url = Uri.parse(AuthAPIController.userLogin);
-
-      final Map<String, String> headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      };
-
       final Map<String, String> body = {
-        'email': email,
+        'user_or_mail': user_or_email,
         'password': password,
       };
-
+      Uri url = Uri.parse(AuthAPIController.userLogin);
       final http.Response res = await http.post(
         url,
         headers: headers,
