@@ -20,8 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
     // Navigate to Home Screen after 3 seconds
     Future<void> checkEmail() async {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
-      String? email = _prefs.getString("email");
-      if (email != null && email.isNotEmpty) {
+      String? id = _prefs.getString("id");
+      if (id != null && id.isNotEmpty) {
         Get.to(() => BottomNavbar());
       } else {
         Get.to(() => Signin());
