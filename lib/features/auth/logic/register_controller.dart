@@ -42,6 +42,9 @@ class RegisterController {
       Get.snackbar("Access Denied", "Invalid credentials");
     } else {
       Get.snackbar("Error", "Unexpected error occurred");
+
+   
+
     }
   }
 }
