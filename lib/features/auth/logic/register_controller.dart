@@ -25,13 +25,15 @@ class RegisterController {
       "username": username,
       'role': 'user'
     };
-    Logger().e(body);
     Uri url = Uri.parse(AuthAPIController.userSignUp);
+    Logger().e(url);
     final http.Response res = await http.post(
       url,
       headers: headers,
       body: jsonEncode(body), // note: using jsonEncode for JSON body
     );
+    Logger().e(res.body);
+    Logger().e(res.statusCode);
     var decode = jsonDecode(res.body);
     if (res.statusCode == 201) {
       Get.to(() => Signin());
@@ -42,9 +44,6 @@ class RegisterController {
       Get.snackbar("Access Denied", "Invalid credentials");
     } else {
       Get.snackbar("Error", "Unexpected error occurred");
-
-   
-
     }
   }
 }
