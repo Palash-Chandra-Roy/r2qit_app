@@ -3,7 +3,11 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
+<<<<<<< HEAD
 import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
+=======
+import 'package:r2ait_app/features/home/logic/team_data_controller.dart';
+>>>>>>> 5d9c9e4bc213e699330b41c97a3f8a8c99de8681
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
@@ -18,6 +22,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final teamController = Get.put<TeamController>(TeamController());
     final tab =
         Get.parameters['tab']; // Dynamically received parameter from URL
     double screenWidth = MediaQuery.of(context).size.width;
@@ -313,45 +318,47 @@ class Home extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: screenHeight * 0.2,
+                    height: screenHeight * 0.25,
                     width: double.infinity,
                     child: Obx(() {
-                      if (_homeController.teamMembers.isEmpty) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-
-                      return ListView.builder(
-                        controller: _homeController.teamController,
-                        itemCount: _homeController.teamMembers.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          var member = _homeController.teamMembers[index];
-                          return Container(
-                            width: screenWidth * 0.4,
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: screenWidth * 0.23,
-                                  width: screenWidth * 0.23,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                      image: NetworkImage(member.image),
-                                      fit: BoxFit.cover,
+                      return Visibility(
+                        visible: teamController
+                            .members.isNotEmpty, // যখন member থাকবে তখনই দেখাবে
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          controller: _homeController.teamController,
+                          itemCount: teamController.members.length,
+                          itemBuilder: (context, index) {
+                            var member = teamController.members[index];
+                            return Container(
+                              width: screenWidth * 0.45,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: screenWidth * 0.23,
+                                    width: screenWidth * 0.23,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            "https://th.bing.com/th/id/OIP.LaqUI6r2JJkOq_W8VFLb1AHaEK?rs=1&pid=ImgDetMain"), // এখানেই member.image দেওয়া উচিত
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: screenHeight * 0.01),
-                                Text(member.name,
-                                    style: AppWidget.simpleTextFeildStyle()),
-                                Text(member.department,
-                                    style: AppWidget.descriptionText()),
-                              ],
-                            ),
-                          );
-                        },
+                                  SizedBox(height: screenHeight * 0.01),
+                                  Text(member.name,
+                                      style: AppWidget.simpleTextFeildStyle()),
+                                  Text("${member.title}",
+                                      style: AppWidget.descriptionText()),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
                       );
                     }),
                   ),

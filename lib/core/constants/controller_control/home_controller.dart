@@ -1,11 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+<<<<<<< HEAD
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
+=======
+>>>>>>> 5d9c9e4bc213e699330b41c97a3f8a8c99de8681
 
 class HomeController extends GetxController {
   // Page and scroll controllers
@@ -19,7 +21,6 @@ class HomeController extends GetxController {
 
   // Observables
   var currentTeamPage = 0.obs;
-  var teamMembers = <TeamMember>[].obs;
   var selectedCategoryIndex = 0.obs;
   var currentBannerPage = 0.obs;
   var currentPage = 0.obs;
@@ -40,7 +41,6 @@ class HomeController extends GetxController {
     super.onInit();
 
     teamController.addListener(_updateScrollButtonState);
-    fetchTeamMembers();
 
     bannerPageController = PageController(initialPage: 0);
     _startAutoScrollBanner();
@@ -115,24 +115,6 @@ class HomeController extends GetxController {
         teamController.offset >= teamController.position.maxScrollExtent - 10;
   }
 
-  Future<void> fetchTeamMembers() async {
-    final url = Uri.parse('http://103.145.138.116:3000/teams');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final List data = jsonDecode(response.body);
-        teamMembers.value =
-            data.map((item) => TeamMember.fromJson(item)).toList();
-        Logger().i(" Team members fetched: ${teamMembers.length}");
-      } else {
-        Logger()
-            .e(" Failed to fetch team members. Status: ${response.statusCode}");
-      }
-    } catch (e) {
-      Logger().e(" Error fetching team members: $e");
-    }
-  }
-
   // Dynamic item list management
   var items = List.generate(10, (index) => "Item $index").obs;
   void addItem() {
@@ -147,26 +129,6 @@ class HomeController extends GetxController {
 
   void updateSelectedIndex(int index) {
     selectedCategoryIndex.value = index;
-  }
-}
-
-class TeamMember {
-  final String name;
-  final String department;
-  final String image;
-
-  TeamMember({
-    required this.name,
-    required this.department,
-    required this.image,
-  });
-
-  factory TeamMember.fromJson(Map<String, dynamic> json) {
-    return TeamMember(
-      name: json['name'] ?? '',
-      department: json['department'] ?? '',
-      image: json['image'] ?? '',
-    );
   }
 }
 

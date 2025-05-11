@@ -24,14 +24,23 @@ class RegisterController {
       "username": username,
       'role': 'user'
     };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5d9c9e4bc213e699330b41c97a3f8a8c99de8681
     Uri url = Uri.parse(AuthAPIController.userSignUp);
+    Logger().e(url);
     final http.Response res = await http.post(
       url,
       headers: headers,
       body: jsonEncode(body), // note: using jsonEncode for JSON body
     );
+<<<<<<< HEAD
 
+=======
+    Logger().e(res.body);
+    Logger().e(res.statusCode);
+>>>>>>> 5d9c9e4bc213e699330b41c97a3f8a8c99de8681
     var decode = jsonDecode(res.body);
     if (res.statusCode == 201) {
       Get.to(() => Signin());
