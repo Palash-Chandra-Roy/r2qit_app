@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
 
-class EditProfile extends StatefulWidget {
+class EditProfile extends StatelessWidget {
   const EditProfile({super.key});
 
   @override
-  State<EditProfile> createState() => _EditProfileState();
-}
-
-class _EditProfileState extends State<EditProfile> {
-  @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-    bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    bool _obscureText = true;
+    final screenWidth = MediaQuery.of(context).size.width;
+    TextEditingController dobController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
           onPressed: () {
@@ -26,182 +21,169 @@ class _EditProfileState extends State<EditProfile> {
           icon: Icon(
             Icons.arrow_back_ios,
             size: 16,
+            color: Colors.black,
           ),
         ),
         title: Center(
-          child: Text(
-            "Edit Profile",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
+          child: Text("Edit Profile", style: AppWidget.appBarTextFeildStyle()),
         ),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(20),
-          child: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Stack(
-                children: [
-                  SizedBox(
-                      height: 120,
-                      width: 120,
-                      child: ClipOval(
-                        child: Image.asset(
-                          "assets/images/palash.jpg",
-                          width: 100, // Set width and height as needed
-                          height: 100,
-                          fit: BoxFit.cover, // Ensure proper fitting
-                        ),
-                      )),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: InkWell(
-                      onTap: () {
-                        // Get to Edit profile picture
-                      },
-                      child: Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: Colors.yellow),
-                        child: Icon(
-                          Icons.camera_alt,
-                          color: Colors.black,
-                          size: 20,
-                        ),
-                      ),
+        child: Column(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Container(
+                  height: 150,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Colors.blueGrey,
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480"),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Form(
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "Full name",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        prefixIcon: Icon(Icons.person),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "Email ",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        prefixIcon: Icon(Icons.person),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        labelText: "Phone number ",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        prefixIcon: Icon(Icons.person),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      obscureText: _obscureText, // Hide the text for passwords
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                  child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        radius: 15,
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.black,
                         ),
-                        prefixIcon: Icon(Icons.lock), // Change to lock icon
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _obscureText
-                                ? Icons.visibility_off
-                                : Icons.visibility,
+                      )),
+                ),
+                Positioned(
+                  bottom: -50,
+                  left: screenWidth / 2 - 50,
+                  child: Stack(
+                    children: [
+                      ClipOval(
+                        child: Image.asset(
+                          "assets/images/palash.jpg",
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          width: 25,
+                          height: 25,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(100)),
+                          child: const Icon(Icons.camera_alt,
+                              size: 18, color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 60),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          decoration:
+                              const InputDecoration(labelText: "First Name*"),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: TextFormField(
+                          decoration:
+                              const InputDecoration(labelText: "Last Name*"),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: "Email"),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: dobController,
+                          readOnly: true, //
+                          decoration: const InputDecoration(
+                            labelText: "Date of Birth*",
+                            suffixIcon: Icon(Icons.calendar_today),
+                            border: OutlineInputBorder(),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _obscureText =
-                                  !_obscureText; // Toggle password visibility
-                            });
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime(1994, 10, 17),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                            );
+
+                            if (pickedDate != null) {
+                              dobController.text =
+                                  "${pickedDate.toLocal()}".split(' ')[0];
+                            }
                           },
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: screenHeight * 0.04,
-                    ),
-                    SizedBox(
-                      height: 60,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            elevation: 5,
-                            backgroundColor: Colors.amber,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 14, horizontal: 30),
-                          ),
-                          child: Text("Edit Profile ")),
-                    ),
-                    SizedBox(
-                      height: screenHeight * 0.1,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Joined 12 March 2025 ',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: DropdownButtonFormField(
+                          items: ['Male', 'Female', 'Other']
+                              .map((e) =>
+                                  DropdownMenuItem(value: e, child: Text(e)))
+                              .toList(),
+                          onChanged: (value) {},
+                          decoration:
+                              const InputDecoration(labelText: "Gender"),
                         ),
-                        InkWell(
-                            onTap: () {},
-                            child: Text(
-                              "Delete ",
-                              style: TextStyle(fontSize: 16, color: Colors.red),
-                            )),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    decoration:
+                        const InputDecoration(labelText: "Phone Number"),
+                    keyboardType: TextInputType.phone,
+                  ),
+                  const SizedBox(height: 10),
+                  DropdownButtonFormField(
+                    items: ['High School', 'Bachelor', 'Master']
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {},
+                    decoration: const InputDecoration(labelText: "Education"),
+                  ),
+                  const SizedBox(height: 10),
+                  DropdownButtonFormField(
+                    items: ['Engineer', 'Doctor', 'Artist']
+                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
+                        .toList(),
+                    onChanged: (value) {},
+                    decoration: const InputDecoration(labelText: "Profession"),
+                  ),
+                  const SizedBox(height: 10),
+                  TextFormField(
+                    decoration: const InputDecoration(labelText: "Website"),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: screenHeight * 0.15,
-              ),
-              Container(
-                height: screenHeight * 0.005,
-                width: screenWidth * 0.5,
-                color: Colors.grey,
-              )
-            ]),
-          ),
+            ),
+          ],
         ),
       ),
     );

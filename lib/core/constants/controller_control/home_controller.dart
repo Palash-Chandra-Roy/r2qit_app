@@ -2,12 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-<<<<<<< HEAD
-import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
 import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
-=======
->>>>>>> 5d9c9e4bc213e699330b41c97a3f8a8c99de8681
 
 class HomeController extends GetxController {
   // Page and scroll controllers

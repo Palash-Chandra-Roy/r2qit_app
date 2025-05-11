@@ -52,7 +52,10 @@ class _SigninState extends State<Signin> {
                         height: 4,
                         color: const Color.fromARGB(255, 4, 56, 5)),
                     SizedBox(width: 5),
-                    Container(width: 90, height: 4, color: Colors.red),
+                    Container(
+                        width: 90,
+                        height: 4,
+                        color: const Color.fromARGB(255, 121, 13, 6)),
                   ],
                 ),
                 SizedBox(height: screenheight * 0.03),

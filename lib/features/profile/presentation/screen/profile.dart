@@ -21,8 +21,10 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    final id = Get.parameters['id']; // Dynamically received parameter from URL
+    final id = Get.parameters['id'];
+
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -51,131 +53,63 @@ class _ProfileState extends State<Profile> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(20),
-          child: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Stack(
-                children: [
-                  SizedBox(
-                      height: 120,
-                      width: 120,
-                      child: ClipOval(
-                        child: Image.asset(
-                          "assets/images/palash.jpg",
-                          width: 100, // Set width and height as needed
-                          height: 100,
-                          fit: BoxFit.cover, // Ensure proper fitting
-                        ),
-                      )),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: InkWell(
-                      onTap: () {
-                        Get.to(EditProfile());
-                      },
-                      child: Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: Colors.yellow),
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.black,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Palash Chandra Roy ",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "palash@r2ait.com ",
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    Get.to(EditProfile());
-                  },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 1,
-                    backgroundColor: Colors.grey.shade300,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  ),
-                  child: Text(
-                    "Edit Profile ",
-                  )),
-              SizedBox(
-                height: 20,
-              ),
-              ProfileManWidget(
-                title: "Setting",
-                icon: Icon(Icons.settings),
-                onPress: () {
-                  goToSettingPage();
-                },
-              ),
-              ProfileManWidget(
-                title: "About",
-                icon: Image.asset(
-                  "assets/images/logo.png",
-                  height: 24,
-                  width: 24,
-                ),
-                onPress: () {
-                  Get.to(About());
-                },
-              ),
-              ProfileManWidget(
-                  title: "Billing Details",
-                  icon: Icon(
-                    Icons.book,
-                  ),
-                  onPress: () {}),
-              ProfileManWidget(
-                  title: "User Managment",
-                  icon: Icon(Icons.personal_injury),
-                  onPress: () {}),
-              Divider(),
-              ProfileManWidget(
-                  title: "Information", icon: Icon(Icons.info), onPress: () {}),
-              ProfileManWidget(
-                title: "Logout",
-                icon: Icon(Icons.logout),
-                onPress: () {
-                  Get.defaultDialog(
-                    title: "Logout",
-                    middleText: "Are you sure you want to logout?",
-                    textConfirm: "Yes",
-                    textCancel: "No",
-                    confirmTextColor: Colors.white,
-                    onConfirm: () {
-                      LogOut();
-                    },
-                  );
-                },
-                textColor: Colors.red,
-                endIcon: false,
-              ),
-            ]),
+        child: Column(children: [
+          GestureDetector(
+              onTap: () {
+                Get.to(EditProfile());
+              },
+              child: profileCart(screenHeight: screenHeight)),
+          Divider(),
+          ProfileManWidget(
+            title: "Setting",
+            icon: Icon(Icons.settings),
+            onPress: () {
+              goToSettingPage();
+            },
           ),
-        ),
+          ProfileManWidget(
+            title: "About",
+            icon: Image.asset(
+              "assets/images/logo.png",
+              height: 24,
+              width: 24,
+            ),
+            onPress: () {
+              Get.to(About());
+            },
+          ),
+          ProfileManWidget(
+              title: "Billing Details",
+              icon: Icon(
+                Icons.book,
+              ),
+              onPress: () {}),
+          ProfileManWidget(
+              title: "User Managment",
+              icon: Icon(Icons.personal_injury),
+              onPress: () {}),
+          Divider(),
+          ProfileManWidget(
+              title: "Information", icon: Icon(Icons.info), onPress: () {}),
+          ProfileManWidget(
+            title: "Logout",
+            icon: Icon(Icons.logout),
+            onPress: () {
+              Get.defaultDialog(
+                title: "Logout",
+                middleText: "Are you sure you want to logout?",
+                textConfirm: "Yes",
+                textCancel: "No",
+                confirmTextColor: Colors.white,
+                onConfirm: () {
+                  LogOut();
+                },
+              );
+            },
+            textColor: Colors.red,
+            endIcon: false,
+          ),
+        ]),
       ),
     );
   }
@@ -188,6 +122,55 @@ class _ProfileState extends State<Profile> {
 
   void goToSettingPage() {
     Get.to(Setting());
+  }
+}
+
+class profileCart extends StatelessWidget {
+  const profileCart({
+    super.key,
+    required this.screenHeight,
+  });
+
+  final double screenHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: screenHeight * 0.1,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white70,
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: ClipOval(
+              child: Image.asset(
+                "assets/images/palash.jpg",
+                width: 60,
+                height: 60,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(width: 20),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Palash Chandra Roy",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                Text("palashr2ait@gmail.com",
+                    style: TextStyle(fontSize: 14, color: Colors.black54)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

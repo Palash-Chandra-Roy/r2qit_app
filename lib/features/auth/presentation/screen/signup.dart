@@ -23,7 +23,6 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -38,7 +37,7 @@ class _SignupState extends State<Signup> {
                   "Create An\n Account",
                   style: AppWidget.hederTextFeildStyle(),
                 ),
-                SizedBox(height: screenheight * 0.03),
+                SizedBox(height: screenheight * 0.02),
 
                 /// Full Name
                 TextFormField(
@@ -56,7 +55,7 @@ class _SignupState extends State<Signup> {
                     return null;
                   },
                 ),
-                SizedBox(height: screenheight * 0.03),
+                SizedBox(height: screenheight * 0.02),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
@@ -126,7 +125,7 @@ class _SignupState extends State<Signup> {
                     return null;
                   },
                 ),
-                SizedBox(height: screenheight * 0.04),
+                SizedBox(height: screenheight * 0.03),
 
                 /// Sign Up Button
                 CustomButton(
