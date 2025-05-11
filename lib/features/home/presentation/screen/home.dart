@@ -3,17 +3,14 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
-<<<<<<< HEAD
-import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
-=======
-import 'package:r2ait_app/features/home/logic/team_data_controller.dart';
->>>>>>> 5d9c9e4bc213e699330b41c97a3f8a8c99de8681
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
 import 'package:r2ait_app/features/service/presentation/screen/service_list.dart';
 import 'package:r2ait_app/widgets/custom_project_details.dart';
 
+import '../../../../core/constants/image_controller/image_controller.dart';
+import '../../logic/team_data_controller.dart';
 import '../widget/contact_from.dart';
 
 class Home extends StatelessWidget {
