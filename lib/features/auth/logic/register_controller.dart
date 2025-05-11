@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:logger/logger.dart';
 import 'package:r2ait_app/core/constants/api_control/auth_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,12 +26,13 @@ class RegisterController {
     };
 
     Uri url = Uri.parse(AuthAPIController.userSignUp);
-    Logger().e(url);
+
     final http.Response res = await http.post(
       url,
       headers: headers,
       body: jsonEncode(body), // note: using jsonEncode for JSON body
     );
+
     var decode = jsonDecode(res.body);
     if (res.statusCode == 201) {
       Get.to(() => Signin());

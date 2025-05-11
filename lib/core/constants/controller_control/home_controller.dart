@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../image_controller/image_controller.dart';
+import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
 
 class HomeController extends GetxController {
   // Page and scroll controllers

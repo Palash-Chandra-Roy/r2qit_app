@@ -3,14 +3,14 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
+import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
+import 'package:r2ait_app/features/home/logic/team_data_controller.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
 import 'package:r2ait_app/features/service/presentation/screen/service_list.dart';
 import 'package:r2ait_app/widgets/custom_project_details.dart';
 
-import '../../../../core/constants/image_controller/image_controller.dart';
-import '../../logic/team_data_controller.dart';
 import '../widget/contact_from.dart';
 
 class Home extends StatelessWidget {
@@ -38,10 +38,9 @@ class Home extends StatelessWidget {
             decoration: InputDecoration(
               hintText: "search".tr,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.grey.shade300),
-              ),
-              contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(color: Colors.grey.shade200)),
+              //contentPadding: EdgeInsets.symmetric(horizontal: 12),
               suffixIcon: Icon(Icons.search),
             ),
           ),
@@ -381,17 +380,15 @@ class Home extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(
-                height: 20,
+                height: screenHeight * 0.01,
               ),
-              // ... your_team_member grid
-              SizedBox(height: 20),
 
               /// ✅ Contract Form Section
               ContactFormWidget(),
-
-              SizedBox(height: 20),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
             ],
           ),
         ),
