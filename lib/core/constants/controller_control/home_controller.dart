@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
+import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
 
 class HomeController extends GetxController {
   // Page and scroll controllers
@@ -81,7 +82,7 @@ class HomeController extends GetxController {
     _autoScrollTimer = Timer.periodic(Duration(seconds: 3), (timer) {
       if (bannerPageController.hasClients) {
         int nextPage = bannerPageController.page!.round() + 1;
-        if (nextPage >= bannerImages.length) {
+        if (nextPage >= ImageController.bannerImages.length) {
           nextPage = 0;
         }
         bannerPageController.animateToPage(
@@ -92,6 +93,20 @@ class HomeController extends GetxController {
       }
     });
   }
+
+  List<ServiceCategory> serviceCategories = <ServiceCategory>[
+    ServiceCategory(
+        image: "assets/images/grapic_design.png", name: "GRAPHIC DESIGN"),
+    ServiceCategory(image: "assets/images/webflow.jpeg", name: "WEBFLOW"),
+    ServiceCategory(
+        image: "assets/images/gohighlevel.png", name: "GOHIGHLEVEL"),
+    ServiceCategory(image: "assets/images/reactjs.jpeg", name: "REACT JS"),
+    ServiceCategory(image: "assets/images/wowrdpress.png", name: "WORDPRESS"),
+    ServiceCategory(image: "assets/images/shopify.png", name: "SHOPIFY"),
+    ServiceCategory(image: "assets/images/ios.jpeg", name: "App Development"),
+    ServiceCategory(image: "assets/images/sdlc.jpg", name: "SOFTWARE DESIGN"),
+    ServiceCategory(image: "assets/images/js.png", name: "JS"),
+  ].obs;
 
   void _updateScrollButtonState() {
     isTeamStart.value =
@@ -133,28 +148,6 @@ class HomeController extends GetxController {
   void updateSelectedIndex(int index) {
     selectedCategoryIndex.value = index;
   }
-
-  // Static banner images
-  List<String> bannerImages = [
-    'assets/images/banner.png',
-    'assets/images/banner1.png',
-    'assets/images/banner.png',
-  ].obs;
-
-  // Static service categories
-  List<ServiceCategory> serviceCategories = <ServiceCategory>[
-    ServiceCategory(
-        image: "assets/images/grapic_design.png", name: "GRAPHIC DESIGN"),
-    ServiceCategory(image: "assets/images/webflow.jpeg", name: "WEBFLOW"),
-    ServiceCategory(
-        image: "assets/images/gohighlevel.png", name: "GOHIGHLEVEL"),
-    ServiceCategory(image: "assets/images/reactjs.jpeg", name: "REACT JS"),
-    ServiceCategory(image: "assets/images/wowrdpress.png", name: "WORDPRESS"),
-    ServiceCategory(image: "assets/images/shopify.png", name: "SHOPIFY"),
-    ServiceCategory(image: "assets/images/ios.jpeg", name: "App Development"),
-    ServiceCategory(image: "assets/images/sdlc.jpg", name: "SOFTWARE DESIGN"),
-    ServiceCategory(image: "assets/images/js.png", name: "JS"),
-  ].obs;
 }
 
 class TeamMember {

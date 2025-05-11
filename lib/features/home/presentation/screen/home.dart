@@ -3,6 +3,7 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
+import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
@@ -33,8 +34,13 @@ class Home extends StatelessWidget {
           child: TextField(
             onTap: () {},
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.search),
               hintText: "search".tr,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              contentPadding: EdgeInsets.symmetric(horizontal: 12),
+              suffixIcon: Icon(Icons.search),
             ),
           ),
         ),
@@ -74,7 +80,7 @@ class Home extends StatelessWidget {
                     height: 150,
                     child: Obx(() => PageView.builder(
                           controller: _homeController.bannerPageController,
-                          itemCount: _homeController.bannerImages.length,
+                          itemCount: ImageController.bannerImages.length,
                           onPageChanged: (index) {
                             _homeController.currentPage.value = index;
                           },
@@ -84,7 +90,7 @@ class Home extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: Image.asset(
-                                  _homeController.bannerImages[index],
+                                  ImageController.bannerImages[index],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -96,7 +102,7 @@ class Home extends StatelessWidget {
                   Obx(() => Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: List.generate(
-                          _homeController.bannerImages.length,
+                          ImageController.bannerImages.length,
                           (index) => AnimatedContainer(
                             duration: Duration(milliseconds: 300),
                             margin: EdgeInsets.symmetric(horizontal: 4),
@@ -135,6 +141,7 @@ class Home extends StatelessWidget {
                       itemCount: _homeController.serviceCategories.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
+                        var service = _homeController.serviceCategories[index];
                         return GestureDetector(
                           onTap: () => goToServiceListPage(),
                           child: SizedBox(
@@ -149,16 +156,14 @@ class Home extends StatelessWidget {
                                     width: 55,
                                     child: ClipOval(
                                       child: Image.asset(
-                                        _homeController
-                                            .serviceCategories[index].image,
+                                        service.image,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
                                   SizedBox(height: screenHeight * 0.01),
                                   Text(
-                                    _homeController
-                                        .serviceCategories[index].name,
+                                    service.name,
                                     style: const TextStyle(fontSize: 10),
                                   ),
                                 ],
@@ -376,7 +381,7 @@ class Home extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              // ... your_team_member grid এর নিচে
+              // ... your_team_member grid
               SizedBox(height: 20),
 
               /// ✅ Contract Form Section

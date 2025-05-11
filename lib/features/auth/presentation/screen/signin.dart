@@ -31,7 +31,6 @@ class _SigninState extends State<Signin> {
         child: Padding(
           padding: EdgeInsets.only(top: 60, left: 20, right: 20),
           child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,6 +59,7 @@ class _SigninState extends State<Signin> {
 
                 // Email
                 TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
                     hintText: "Email Or username",
                     prefixIcon: Icon(Icons.email),
@@ -82,6 +82,7 @@ class _SigninState extends State<Signin> {
                 SizedBox(height: screenheight * 0.02),
                 //password
                 TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: signinController.passwordController,
                   obscureText: obscureText,
                   keyboardType: TextInputType.visiblePassword,

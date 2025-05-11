@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
 
 import '../../../../core/constants/controller_control/signup_controller.dart';
@@ -29,7 +30,6 @@ class _SignupState extends State<Signup> {
         child: Padding(
           padding: const EdgeInsets.only(top: 100, left: 20, right: 20),
           child: Form(
-            autovalidateMode: AutovalidateMode.onUserInteraction,
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,6 +42,7 @@ class _SignupState extends State<Signup> {
 
                 /// Full Name
                 TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
                     hintText: "Name",
                     prefixIcon: Icon(Icons.person),
@@ -57,6 +58,7 @@ class _SignupState extends State<Signup> {
                 ),
                 SizedBox(height: screenheight * 0.03),
                 TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
                     hintText: "username",
                     prefixIcon: Icon(Icons.drive_file_rename_outline),
@@ -73,6 +75,7 @@ class _SignupState extends State<Signup> {
                 SizedBox(height: screenheight * 0.02),
                 //Email
                 TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: InputDecoration(
                     hintText: "Email",
                     prefixIcon: Icon(Icons.email),
@@ -93,7 +96,9 @@ class _SignupState extends State<Signup> {
                 ),
                 SizedBox(height: screenheight * 0.02),
                 //password
+
                 TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   controller: signUpController.passwordController,
                   obscureText: obscureText,
                   keyboardType: TextInputType.visiblePassword,
@@ -111,6 +116,15 @@ class _SignupState extends State<Signup> {
                       },
                     ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Password is required";
+                    }
+                    if (value.length < 6) {
+                      return "Password must be at least 6 characters long";
+                    }
+                    return null;
+                  },
                 ),
                 SizedBox(height: screenheight * 0.04),
 
@@ -189,6 +203,7 @@ class _SignupState extends State<Signup> {
 
   void gotoSignin() {
     if (_formKey.currentState!.validate()) {
+      Logger().e("Done ");
       RegisterController.signUp(
           name: signUpController.nameController.text,
           email: signUpController.emailController.text,
