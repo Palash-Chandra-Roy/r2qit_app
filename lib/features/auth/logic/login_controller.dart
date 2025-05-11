@@ -53,10 +53,9 @@ class LoginController {
       } else if (res.statusCode == 403) {
         Get.snackbar("Access Denied", "Invalid credentials");
       } else {
-        Get.snackbar("Error", "Unexpected error occurred");
+        Get.snackbar("Error", "Your email and password are incorrect.");
       }
     } catch (e) {
-      Logger().e("Login error: $e");
       Get.snackbar("Error", "Something went wrong");
     }
   }

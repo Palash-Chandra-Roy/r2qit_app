@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
+import 'package:r2ait_app/features/service/logic/admin_check.dart';
 
 import '../../../../widgets/custom_project_details.dart';
 
 class ServiceDetails extends StatelessWidget {
   final HomeController serviceList = HomeController();
+  final ServiceControl _serviceControl = Get.find<ServiceControl>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -13,7 +16,24 @@ class ServiceDetails extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Our Project'),
+        title: Center(child: Text('Our Project')),
+        actions: [
+          _serviceControl.isAdmin.value
+              ? IconButton(
+                  style: IconButton.styleFrom(
+                    backgroundColor: Colors.grey.shade200,
+                    shape: const CircleBorder(),
+                  ),
+                  onPressed: () {
+                    // Add your action here
+                  },
+                  icon: const Icon(
+                    Icons.add,
+                    color: Colors.black,
+                  ),
+                )
+              : Text("")
+        ],
       ),
 
       body: Padding(
