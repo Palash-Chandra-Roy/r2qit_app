@@ -4,6 +4,7 @@ import 'package:r2ait_app/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app.dart';
+import 'features/notification/logic/firebase_messaging_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +15,7 @@ void main() async {
   );
   final prefs = await SharedPreferences.getInstance();
   final savedLangCode = prefs.getString('language') ?? 'en';
+  await FirebaseMessageController().initsFCM();
 
   runApp(MyApp(
     locale: Locale(savedLangCode),
