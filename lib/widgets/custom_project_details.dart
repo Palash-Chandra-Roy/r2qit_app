@@ -2,15 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../features/service/logic/admin_check.dart';
+import '../utils/admin_check.dart';
 
-class CustomServiceDetailsCard extends StatelessWidget {
+class CustomServiceDetailsCard extends StatefulWidget {
   var service;
   VoidCallback goToDetailsPage;
   CustomServiceDetailsCard(
       {super.key, required this.service, required this.goToDetailsPage});
+
+  @override
+  State<CustomServiceDetailsCard> createState() =>
+      _CustomServiceDetailsCardState();
+}
+
+class _CustomServiceDetailsCardState extends State<CustomServiceDetailsCard> {
   final Uri _url = Uri.parse('https://r2ait.com');
+
   final ServiceControl _serviceControl = Get.find<ServiceControl>();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -63,7 +72,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 8),
                   child: Text(
-                    service.name ?? "",
+                    widget.service.name ?? "",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
@@ -93,7 +102,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
               ],
             ),
           ),
-          _serviceControl.isAdmin.value
+          _serviceControl.isAdmin
               ? Positioned(
                   bottom: -8,
                   left: -8,
@@ -107,7 +116,7 @@ class CustomServiceDetailsCard extends StatelessWidget {
                   ),
                 )
               : Text(""),
-          _serviceControl.isAdmin.value
+          _serviceControl.isAdmin
               ? Positioned(
                   bottom: -8,
                   right: 0,
@@ -124,6 +133,13 @@ class CustomServiceDetailsCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(_serviceControl.checkAdmin());
   }
 
   Future<void> _launchUrl() async {

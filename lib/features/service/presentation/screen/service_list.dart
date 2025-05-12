@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 
-import '../../logic/admin_check.dart';
+import '../../../../utils/admin_check.dart';
 import '../widget/custom_service_list.dart';
 import 'project_details.dart';
 
@@ -15,7 +15,7 @@ class ServiceListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          _serviceControl.isAdmin.value
+          _serviceControl.isAdmin
               ? IconButton(
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.grey.shade200,

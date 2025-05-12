@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../logic/admin_check.dart';
+import '../../../../utils/admin_check.dart';
 
 class service_toper_text extends StatelessWidget {
   service_toper_text({
@@ -48,7 +48,7 @@ class service_toper_text extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          _serviceControl.isAdmin.value
+          _serviceControl.isAdmin
               ? IconButton(
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.grey.shade200,

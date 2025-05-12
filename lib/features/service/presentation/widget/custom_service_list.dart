@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../logic/admin_check.dart';
+import '../../../../utils/admin_check.dart';
 
 class CustomServicesList extends StatelessWidget {
   final service;
@@ -15,7 +15,7 @@ class CustomServicesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (_serviceControl.isAdmin.value == false) {
+    if (_serviceControl.isAdmin == false) {
       return GestureDetector(
         onTap: goToDetailsPage,
         child: Card(

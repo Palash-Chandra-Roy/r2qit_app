@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../logic/admin_check.dart';
+import '../../../../utils/admin_check.dart';
 import 'custom_delete_show_dialog.dart';
 
 class CustomServicesCard extends StatelessWidget {
@@ -61,7 +61,7 @@ class CustomServicesCard extends StatelessWidget {
               ],
             ),
           ),
-          _serviceControl.isAdmin.value
+          _serviceControl.isAdmin
               ? Positioned(
                   bottom: -8,
                   left: 0,
@@ -77,7 +77,7 @@ class CustomServicesCard extends StatelessWidget {
                   ),
                 )
               : Text(""),
-          _serviceControl.isAdmin.value
+          _serviceControl.isAdmin
               ? Positioned(
                   bottom: -8,
                   right: 0,

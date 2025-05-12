@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
-import 'package:r2ait_app/features/service/logic/admin_check.dart';
+import 'package:r2ait_app/utils/admin_check.dart';
 
 import '../../../../widgets/custom_project_details.dart';
 
@@ -18,7 +18,7 @@ class ServiceDetails extends StatelessWidget {
       appBar: AppBar(
         title: Center(child: Text('Our Project')),
         actions: [
-          _serviceControl.isAdmin.value
+          _serviceControl.isAdmin
               ? IconButton(
                   style: IconButton.styleFrom(
                     backgroundColor: Colors.grey.shade200,
