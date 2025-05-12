@@ -1,6 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-class FirebaseMessageControler {
+import 'notification_device_save.dart';
+
+class FirebaseMessageController {
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
   @pragma("vm:entry-point")
   static void notificationSetup() async {
@@ -30,6 +32,7 @@ class FirebaseMessageControler {
     var token = await firebaseMessaging.getToken();
     FirebaseMessaging.onBackgroundMessage(hendleNotification);
     FirebaseMessaging.onMessage.listen(hendleNotification);
+    notificationDeviceToken(token);
   }
 }
 

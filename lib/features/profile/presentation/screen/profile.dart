@@ -7,6 +7,7 @@ import 'package:r2ait_app/features/profile/presentation/screen/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../auth/presentation/screen/signin.dart';
+import '../../../map/presentation/screen/map.dart';
 import '../../domain/change_dark_mode.dart';
 
 class Profile extends StatefulWidget {
@@ -26,7 +27,7 @@ class _ProfileState extends State<Profile> {
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -110,7 +111,11 @@ class _ProfileState extends State<Profile> {
               onPress: () {}),
           Divider(),
           ProfileManWidget(
-              title: "Information", icon: Icon(Icons.info), onPress: () {}),
+              title: "Location",
+              icon: Icon(Icons.location_on_outlined),
+              onPress: () {
+                Get.to(() => const MapPage());
+              }),
           ProfileManWidget(
             title: "Logout",
             icon: Icon(Icons.logout),

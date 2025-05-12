@@ -47,7 +47,7 @@ class CustomServiceCard extends StatelessWidget {
             ),
             Text(
               "$subtitle",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11),
             )
           ],
         ),
