@@ -55,11 +55,31 @@ class _ProfileState extends State<Profile> {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          GestureDetector(
-              onTap: () {
-                Get.to(EditProfile());
-              },
-              child: profileCart(screenHeight: screenHeight)),
+          profileCart(screenHeight: screenHeight),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Column(
+              children: [
+                ContactInfoRow(icon: Icons.phone, text: "+880123456789"),
+                SizedBox(height: 10),
+                ContactInfoRow(
+                    icon: Icons.location_on, text: "Dhaka, Bangladesh"),
+              ],
+            ),
+          ),
+          Center(
+            child: ElevatedButton(
+                onPressed: () {
+                  Get.to(EditProfile());
+                },
+                child: Text(
+                  "Edit Profile",
+                  style: AppWidget.appBarTextFeildStyle(),
+                )),
+          ),
           Divider(),
           ProfileManWidget(
             title: "Setting",
@@ -140,26 +160,68 @@ class profileCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      height: screenHeight * 0.1,
+      height: screenHeight * 0.30,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white70,
       ),
-      child: Row(
+      child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: ClipOval(
-              child: Image.asset(
-                "assets/images/palash.jpg",
-                width: 60,
-                height: 60,
-                fit: BoxFit.cover,
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              // Cover Image
+              Container(
+                height: 150,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.blueGrey,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
+
+              // Profile Image with Edit Icon
+              Positioned(
+                bottom: -50,
+                left: screenWidth / 2 - 50,
+                child: Stack(
+                  children: [
+                    ClipOval(
+                      child: Image.network(
+                        "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        width: 25,
+                        height: 25,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: Icon(Icons.edit, size: 18, color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          SizedBox(width: 20),
+          SizedBox(
+            height: screenHeight * 0.05,
+          ),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -175,6 +237,29 @@ class profileCart extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ContactInfoRow extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  const ContactInfoRow({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, color: Colors.blueGrey),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
     );
   }
 }
