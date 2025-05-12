@@ -62,8 +62,8 @@ class EditProfile extends StatelessWidget {
                   child: Stack(
                     children: [
                       ClipOval(
-                        child: Image.asset(
-                          "assets/images/palash.jpg",
+                        child: Image.network(
+                          "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
                           width: 100,
                           height: 100,
                           fit: BoxFit.cover,
@@ -162,14 +162,6 @@ class EditProfile extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   DropdownButtonFormField(
-                    items: ['High School', 'Bachelor', 'Master']
-                        .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                        .toList(),
-                    onChanged: (value) {},
-                    decoration: const InputDecoration(labelText: "Education"),
-                  ),
-                  const SizedBox(height: 10),
-                  DropdownButtonFormField(
                     items: ['Engineer', 'Doctor', 'Artist']
                         .map((e) => DropdownMenuItem(value: e, child: Text(e)))
                         .toList(),
@@ -179,6 +171,19 @@ class EditProfile extends StatelessWidget {
                   const SizedBox(height: 10),
                   TextFormField(
                     decoration: const InputDecoration(labelText: "Website"),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Get.to(EditProfile());
+                        },
+                        child: Text(
+                          "Submit",
+                          style: AppWidget.brand1TextFeildStyle(),
+                        )),
                   ),
                 ],
               ),
