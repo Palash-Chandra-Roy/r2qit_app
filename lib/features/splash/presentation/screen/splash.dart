@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
+import 'package:r2ait_app/utils/admin_check.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/color_control/color_controller.dart';
@@ -13,11 +14,14 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+final ServiceControl _serviceControl = Get.find<ServiceControl>();
+
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
     // Navigate to Home Screen after 3 seconds
+    _serviceControl.checkAdmin();
     Future<void> checkEmail() async {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       String? id = _prefs.getString("id");
