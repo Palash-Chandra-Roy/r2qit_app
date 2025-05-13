@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
 import 'package:r2ait_app/features/home/presentation/screen/about.dart';
-import 'package:r2ait_app/features/home/presentation/screen/edit_profile.dart';
+import 'package:r2ait_app/features/profile/presentation/screen/edit_profile.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../../model/user_data_model.dart';
 import '../../../auth/presentation/screen/signin.dart';
 import '../../../map/presentation/screen/map.dart';
 import '../../data/user_data_controller.dart';
@@ -27,7 +28,8 @@ class _ProfileState extends State<Profile> {
     final _id = Get.parameters['id'];
 
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
@@ -57,25 +59,45 @@ class _ProfileState extends State<Profile> {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          profileCart(screenHeight: screenHeight),
+          profileCart(
+            userDataController: _userDataController,
+          ),
           SizedBox(
             height: 10,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: [
-                ContactInfoRow(icon: Icons.phone, text: "+880123456789"),
-                SizedBox(height: 10),
-                ContactInfoRow(
-                    icon: Icons.location_on, text: "Dhaka, Bangladesh"),
-              ],
-            ),
+            child: GetBuilder(
+                init: _userDataController,
+                builder: (UserData) {
+                  var user = UserData.members;
+                  return Column(
+                    children: [
+                      ContactInfoRow(icon: Icons.phone, text: "${user?.iV}"),
+                      SizedBox(height: 10),
+                      ContactInfoRow(icon: Icons.email, text: "${user?.email}"),
+                      SizedBox(height: 10),
+                      ContactInfoRow(
+                          icon: Icons.calendar_month, text: "07-03-2001"),
+                      SizedBox(height: 10),
+                      ContactInfoRow(icon: Icons.man, text: "Male"),
+                      SizedBox(height: 10),
+                      ContactInfoRow(
+                          icon: Icons.language_sharp, text: "Webside"),
+                      SizedBox(height: 10),
+                      ContactInfoRow(
+                          icon: Icons.location_on, text: "Dhaka, Bangladesh"),
+                    ],
+                  );
+                }),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Center(
             child: ElevatedButton(
                 onPressed: () {
-                  Get.to(EditProfile());
+                  Get.to(() => EditProfile());
                 },
                 child: Text(
                   "Edit Profile",
@@ -160,12 +182,8 @@ class _ProfileState extends State<Profile> {
 }
 
 class profileCart extends StatelessWidget {
-  const profileCart({
-    super.key,
-    required this.screenHeight,
-  });
-
-  final double screenHeight;
+  UserDataController userDataController;
+  profileCart({super.key, required this.userDataController});
 
   @override
   Widget build(BuildContext context) {
@@ -177,75 +195,80 @@ class profileCart extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white70,
       ),
-      child: Column(
-        children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              // Cover Image
-              Container(
-                height: 150,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Colors.blueGrey,
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-
-              // Profile Image with Edit Icon
-              Positioned(
-                bottom: -50,
-                left: screenWidth / 2 - 50,
-                child: Stack(
+      child: GetBuilder(
+          init: userDataController,
+          builder: (userData) {
+            UserDataModel? user = userData.members;
+            return Column(
+              children: [
+                Stack(
+                  clipBehavior: Clip.none,
                   children: [
-                    ClipOval(
-                      child: Image.network(
-                        "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.cover,
+                    // Cover Image
+                    Container(
+                      height: 150,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480",
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
+                    // Profile Image with Edit Icon
                     Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(100),
-                        ),
-                        child: Icon(Icons.edit, size: 18, color: Colors.white),
+                      bottom: -50,
+                      left: screenWidth / 2 - 50,
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            radius: 50,
+                            backgroundImage: NetworkImage(
+                              "${user?.imageUrl}",
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Container(
+                              width: 25,
+                              height: 25,
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Icon(Icons.edit,
+                                  size: 18, color: Colors.white),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: screenHeight * 0.05,
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Palash Chandra Roy",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                Text("palashr2ait@gmail.com",
-                    style: TextStyle(fontSize: 14, color: Colors.black54)),
+                SizedBox(
+                  height: screenHeight * 0.05,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("${user?.name} ",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
+                      Text("${user?.username}",
+                          style:
+                              TextStyle(fontSize: 14, color: Colors.black54)),
+                    ],
+                  ),
+                ),
               ],
-            ),
-          ),
-        ],
-      ),
+            );
+          }),
     );
   }
 }

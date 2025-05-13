@@ -23,7 +23,7 @@ class UserDataModel {
       this.iV});
 
   factory UserDataModel.fromJson(Map<String, dynamic> json) {
-    String img = json['imageUrl'] ?? '';
+    String img = json["imageUrl"] ?? '';
     if (img.trim().isEmpty) {
       img =
           'https://i.pinimg.com/originals/6e/59/95/6e599501252c23bcf02658617b29c894.jpg';
@@ -50,7 +50,7 @@ class UserDataModel {
     data['email'] = this.email;
     data['password'] = this.password;
     data['role'] = this.role;
-    data['imageUrl'] = this.imageUrl;
+    data["imageUrl"] = this.imageUrl;
     data['createdAt'] = this.createdAt;
     data['updatedAt'] = this.updatedAt;
     data['__v'] = this.iV;
