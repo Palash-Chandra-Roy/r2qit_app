@@ -82,7 +82,7 @@ class HomeController extends GetxController {
         }
         bannerPageController.animateToPage(
           nextPage,
-          duration: Duration(milliseconds: 10),
+          duration: Duration(milliseconds: 300),
           curve: Curves.easeInOut,
         );
       }
