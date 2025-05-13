@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
 import 'package:r2ait_app/features/home/presentation/screen/about.dart';
-import 'package:r2ait_app/features/home/presentation/screen/edit_profile.dart';
+import 'package:r2ait_app/features/profile/presentation/screen/edit_profile.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -25,7 +25,8 @@ class _ProfileState extends State<Profile> {
     final id = Get.parameters['id'];
 
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
@@ -55,7 +56,7 @@ class _ProfileState extends State<Profile> {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          profileCart(screenHeight: screenHeight),
+          profileCart(),
           SizedBox(
             height: 10,
           ),
@@ -63,17 +64,29 @@ class _ProfileState extends State<Profile> {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                ContactInfoRow(icon: Icons.phone, text: "+880123456789"),
+                ContactInfoRow(icon: Icons.phone, text: "+8801826344872"),
+                SizedBox(height: 10),
+                ContactInfoRow(
+                    icon: Icons.email, text: "palashr2ait@gmail.com"),
+                SizedBox(height: 10),
+                ContactInfoRow(icon: Icons.calendar_month, text: "07-03-2001"),
+                SizedBox(height: 10),
+                ContactInfoRow(icon: Icons.man, text: "Male"),
+                SizedBox(height: 10),
+                ContactInfoRow(icon: Icons.language_sharp, text: "Webside"),
                 SizedBox(height: 10),
                 ContactInfoRow(
                     icon: Icons.location_on, text: "Dhaka, Bangladesh"),
               ],
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Center(
             child: ElevatedButton(
                 onPressed: () {
-                  Get.to(EditProfile());
+                  Get.to(() => EditProfile());
                 },
                 child: Text(
                   "Edit Profile",
@@ -153,10 +166,7 @@ class _ProfileState extends State<Profile> {
 class profileCart extends StatelessWidget {
   const profileCart({
     super.key,
-    required this.screenHeight,
   });
-
-  final double screenHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -177,16 +187,16 @@ class profileCart extends StatelessWidget {
               Container(
                 height: 150,
                 width: double.infinity,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.blueGrey,
                   image: DecorationImage(
                     image: NetworkImage(
-                        "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480"),
+                      "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480",
+                    ),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-
               // Profile Image with Edit Icon
               Positioned(
                 bottom: -50,
@@ -227,10 +237,10 @@ class profileCart extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Palash Chandra Roy",
+                Text("Palash Roy ",
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                Text("palashr2ait@gmail.com",
+                Text("Profession",
                     style: TextStyle(fontSize: 14, color: Colors.black54)),
               ],
             ),
