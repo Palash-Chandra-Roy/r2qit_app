@@ -1,19 +1,24 @@
-class TeamMember {
+class TeamMemberModel {
   final String name;
   final String title;
-  final String image;
+  final String imageUrl;
 
-  TeamMember({
+  TeamMemberModel({
     required this.name,
     required this.title,
-    required this.image,
+    required this.imageUrl,
   });
 
-  factory TeamMember.fromJson(Map<String, dynamic> json) {
-    return TeamMember(
+  factory TeamMemberModel.fromJson(Map<String, dynamic> json) {
+    String img = json['imageUrl'] ?? '';
+    if (img.trim().isEmpty) {
+      img =
+          'https://i.pinimg.com/originals/6e/59/95/6e599501252c23bcf02658617b29c894.jpg';
+    }
+    return TeamMemberModel(
       name: json['name'] ?? '',
       title: json['title'] ?? '',
-      image: json['image'] ?? '',
+      imageUrl: img,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 
+import 'get_fid_with_inappNotification.dart';
 import 'notification_device_save.dart';
 
 class FirebaseMessageController {
@@ -32,7 +33,8 @@ class FirebaseMessageController {
     var token = await firebaseMessaging.getToken();
     FirebaseMessaging.onBackgroundMessage(hendleNotification);
     FirebaseMessaging.onMessage.listen(hendleNotification);
-    notificationDeviceToken(token);
+    String fid = await FID();
+    notificationDeviceToken(token: token, fid: fid);
   }
 }
 

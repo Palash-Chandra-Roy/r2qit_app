@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../auth/presentation/screen/signin.dart';
 import '../../../map/presentation/screen/map.dart';
+import '../../data/user_data_controller.dart';
 import '../../domain/change_dark_mode.dart';
 
 class Profile extends StatefulWidget {
@@ -19,10 +20,11 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   ThemeController themeController = ThemeController();
+  UserDataController _userDataController = Get.find<UserDataController>();
 
   @override
   Widget build(BuildContext context) {
-    final id = Get.parameters['id'];
+    final _id = Get.parameters['id'];
 
     bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -137,6 +139,13 @@ class _ProfileState extends State<Profile> {
         ]),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _userDataController.getUserData();
   }
 
   void LogOut() async {
