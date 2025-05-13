@@ -73,20 +73,22 @@ class _ProfileState extends State<Profile> {
                   var user = UserData.members;
                   return Column(
                     children: [
-                      ContactInfoRow(icon: Icons.phone, text: "${user?.iV}"),
+                      ContactInfoRow(icon: Icons.phone, text: "${user?.phone}"),
                       SizedBox(height: 10),
                       ContactInfoRow(icon: Icons.email, text: "${user?.email}"),
                       SizedBox(height: 10),
                       ContactInfoRow(
-                          icon: Icons.calendar_month, text: "07-03-2001"),
+                          icon: Icons.calendar_month,
+                          text:
+                              "${user?.dateOfBirth == null ? ' ' : user?.dateOfBirth}"),
                       SizedBox(height: 10),
-                      ContactInfoRow(icon: Icons.man, text: "Male"),
+                      ContactInfoRow(icon: Icons.man, text: "${user?.gender}"),
                       SizedBox(height: 10),
                       ContactInfoRow(
-                          icon: Icons.language_sharp, text: "Webside"),
+                          icon: Icons.language_sharp, text: "${user?.website}"),
                       SizedBox(height: 10),
                       ContactInfoRow(
-                          icon: Icons.location_on, text: "Dhaka, Bangladesh"),
+                          icon: Icons.location_on, text: "${user?.address}"),
                     ],
                   );
                 }),
@@ -165,7 +167,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _userDataController.getUserData();
   }
@@ -211,9 +212,9 @@ class profileCart extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.blueGrey,
                         image: DecorationImage(
-                          image: NetworkImage(
-                            "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480",
-                          ),
+                          image: NetworkImage("${user?.coverImage}"
+                              //"https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480",
+                              ),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -227,7 +228,7 @@ class profileCart extends StatelessWidget {
                           CircleAvatar(
                             radius: 50,
                             backgroundImage: NetworkImage(
-                              "${user?.imageUrl}",
+                              "${user?.profileImage}",
                             ),
                           ),
                           Positioned(
@@ -255,12 +256,15 @@ class profileCart extends StatelessWidget {
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text("${user?.name} ",
+                      Text("${user?.firstName} ${user?.lastName}",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16)),
                       Text("${user?.username}",
+                          style:
+                              TextStyle(fontSize: 14, color: Colors.black54)),
+                      Text("${user?.profession}",
                           style:
                               TextStyle(fontSize: 14, color: Colors.black54)),
                     ],
