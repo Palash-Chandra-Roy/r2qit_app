@@ -4,7 +4,7 @@ import 'package:r2ait_app/utils/theme_controler.dart';
 
 import '../../routing/routes.dart';
 import 'binding.dart';
-import 'core/utils/translation_text.dart';
+import 'utils/translation_text.dart';
 
 class MyApp extends StatelessWidget {
   final Locale locale;

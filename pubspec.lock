@@ -153,6 +153,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.1"
+  firebase_app_installations:
+    dependency: "direct main"
+    description:
+      name: firebase_app_installations
+      sha256: a5a96194ab586660e4b4a4483ef858a063807fedda745df4bfebf88b62258dc9
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.2+5"
+  firebase_app_installations_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_app_installations_platform_interface
+      sha256: bd098d769e659e3584b5405ae433e0640f66e5320aebca207a5419a72e45e8e2
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.4+53"
+  firebase_app_installations_web:
+    dependency: transitive
+    description:
+      name: firebase_app_installations_web
+      sha256: "1f646e53e2a778617929f5730a073297155a6b0a4b89f0fb004627cd4aad5431"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6+11"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -225,6 +249,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.6+11"
+  firebase_in_app_messaging:
+    dependency: "direct main"
+    description:
+      name: firebase_in_app_messaging
+      sha256: "29e0e9c2013a6fa3a8399d6b626bfb24eae48b502f0e85483311a602a33e6a62"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.1+5"
+  firebase_in_app_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_in_app_messaging_platform_interface
+      sha256: ac2c85f27244ededa29d1503656ccad3786356477a77fd7d7c487d805703fde1
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.5+5"
   firebase_messaging:
     dependency: "direct main"
     description:
