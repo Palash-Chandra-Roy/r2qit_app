@@ -170,7 +170,7 @@ class EditProfile extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   TextFormField(
-                    decoration: const InputDecoration(labelText: "Website"),
+                    decoration: const InputDecoration(labelText: "Webside"),
                   ),
                   SizedBox(
                     height: 10,
