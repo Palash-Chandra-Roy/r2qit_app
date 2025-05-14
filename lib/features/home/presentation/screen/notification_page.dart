@@ -27,9 +27,8 @@ class _NotificationPageState extends State<NotificationPage> {
     // TODO: implement initState
     super.initState();
     setState(() {
-      FirebaseMessageController.notificationSetup();
       FirebaseMessageController().initsFCM();
-      FirebaseMessageController().notificationPermiton();
+      FirebaseMessageController().notificationPermission();
     });
   }
 }

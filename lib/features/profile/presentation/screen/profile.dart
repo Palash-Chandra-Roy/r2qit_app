@@ -4,25 +4,23 @@ import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
 import 'package:r2ait_app/features/home/presentation/screen/about.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/edit_profile.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/setting.dart';
+import 'package:r2ait_app/utils/theme_changer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../model/user_data_model.dart';
 import '../../../auth/presentation/screen/signin.dart';
 import '../../../map/presentation/screen/map.dart';
 import '../../data/user_data_controller.dart';
-import '../../domain/change_dark_mode.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
-
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  ThemeController themeController = ThemeController();
   UserDataController _userDataController = Get.find<UserDataController>();
-
+  ThemeChanger _themeChanger = Get.put(ThemeChanger());
   @override
   Widget build(BuildContext context) {
     final _id = Get.parameters['id'];
@@ -36,9 +34,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-            themeController.toggleTheme();
-          },
+          onPressed: () {},
           icon: Icon(
             Icons.arrow_back_ios,
             size: 16,
@@ -49,12 +45,22 @@ class _ProfileState extends State<Profile> {
           child: Text("Profile", style: AppWidget.appBarTextFeildStyle()),
         ),
         actions: [
-          IconButton(
-            onPressed: () {
-              // Your toggle logic here
-            },
-            icon: Icon(isDark ? Icons.sunny : Icons.dark_mode),
-          )
+          Obx(() {
+            bool isDark = _themeChanger.isDarkMode.value;
+            return IconButton(
+                onPressed: () {
+                  _themeChanger.toggleTheme();
+                },
+                icon: isDark
+                    ? Icon(
+                        Icons.sunny,
+                        color: Colors.black,
+                      )
+                    : Icon(
+                        Icons.dark_mode,
+                        color: Colors.black,
+                      ));
+          })
         ],
       ),
       body: SingleChildScrollView(

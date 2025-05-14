@@ -5,15 +5,11 @@ import 'notification_device_save.dart';
 
 class FirebaseMessageController {
   FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
-  @pragma("vm:entry-point")
-  static void notificationSetup() async {
-    FirebaseMessaging.onMessage.listen((message) {
-      // Logger().e("Notification name: ${message.notification!.title.toString()}");
-      // Logger().e("Notification name: ${message.notification!.body.toString()}");
-    });
-  }
 
-  notificationPermiton() async {
+  // Entry point for notification setup
+  @pragma("vm:entry-point")
+  // Request notification permission from the user
+  notificationPermission() async {
     NotificationSettings settings = await firebaseMessaging.requestPermission(
       alert: true,
       announcement: false,
@@ -23,19 +19,33 @@ class FirebaseMessageController {
       provisional: true,
       sound: true,
     );
+
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+      // Permission granted
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
-    } else {}
+      // Provisional permission granted
+    } else {
+      // Permission denied or restricted
+    }
   }
 
+  // Initialize Firebase Cloud Messaging (FCM)
   initsFCM() async {
-    var token = await firebaseMessaging.getToken();
-    FirebaseMessaging.onBackgroundMessage(hendleNotification);
-    FirebaseMessaging.onMessage.listen(hendleNotification);
+    String? token = await firebaseMessaging.getToken();
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {});
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {});
+    FirebaseMessaging.onBackgroundMessage(handleNotification);
+
+    // Get the FID (Firebase Instance ID) and send device token
     String fid = await FID();
-    notificationDeviceToken(token: token, fid: fid);
+    if (token != null) {
+      notificationDeviceToken(token: token, fid: fid);
+    }
   }
 }
 
-Future<void> hendleNotification(RemoteMessage msg) async {}
+// Handle incoming notifications
+Future<void> handleNotification(RemoteMessage msg) async {
+  // Add logic to handle the notification here
+}
