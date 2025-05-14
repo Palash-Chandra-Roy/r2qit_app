@@ -35,59 +35,86 @@ class EditProfile extends StatelessWidget {
               clipBehavior: Clip.none,
               children: [
                 Container(
-                  height: 150,
+                  height: screenWidth * 0.3,
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     color: Colors.blueGrey,
                     image: DecorationImage(
                       image: NetworkImage(
-                          "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480"),
+                        "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480",
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: Align(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
                       alignment: Alignment.bottomRight,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        radius: 15,
-                        child: Icon(
-                          Icons.edit,
-                          color: Colors.black,
+                      child: InkWell(
+                        onTap: () {
+                          print("Edit Cover Photo");
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey,
+                          radius: 18,
+                          child:
+                              Icon(Icons.edit, size: 16, color: Colors.white),
                         ),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
+
+                // Profile Image with edit icon
                 Positioned(
                   bottom: -50,
-                  left: screenWidth / 2 - 50,
-                  child: Stack(
-                    children: [
-                      ClipOval(
-                        child: Image.network(
-                          "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+                  left: MediaQuery.of(context).size.width / 2 - 50,
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        // Profile Image
+                        Container(
                           width: 100,
                           height: 100,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          width: 25,
-                          height: 25,
                           decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(100)),
-                          child: const Icon(Icons.camera_alt,
-                              size: 18, color: Colors.white),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 3),
+                          ),
+                          child: ClipOval(
+                            child: Image.network(
+                              "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+
+                        // Edit Icon
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: InkWell(
+                            onTap: () {
+                              print("Profile photo edit tapped");
+                              // অথবা: Get.to(EditProfile());
+                            },
+                            child: CircleAvatar(
+                              backgroundColor: Colors.grey.shade800,
+                              radius: 16,
+                              child: Icon(Icons.edit,
+                                  size: 14, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 60),
+            SizedBox(height: 60),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
