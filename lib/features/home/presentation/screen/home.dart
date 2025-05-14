@@ -3,15 +3,18 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
-import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
 import 'package:r2ait_app/features/home/data/team_data_controller.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
-import 'package:r2ait_app/features/service/presentation/screen/service_list.dart';
-import 'package:r2ait_app/widgets/custom_project_details.dart';
+import 'package:r2ait_app/features/home/presentation/widget/Custom_home_best_project.dart';
+import 'package:r2ait_app/features/home/presentation/widget/custom_home_recent_project.dart';
+import 'package:r2ait_app/features/home/presentation/widget/custom_home_service_category.dart';
+import 'package:r2ait_app/features/home/presentation/widget/custom_team_member.dart';
+import 'package:r2ait_app/features/service/presentation/screen/category.dart';
 
 import '../widget/contact_from.dart';
+import '../widget/custom_home_page_view.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -72,58 +75,7 @@ class Home extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    height: 150,
-                    child: Obx(() => PageView.builder(
-                          controller: _homeController.bannerPageController,
-                          itemCount: ImageController.bannerImages.length,
-                          onPageChanged: (index) {
-                            _homeController.currentPage.value = index;
-                          },
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(
-                                  ImageController.bannerImages[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          },
-                        )),
-                  ),
-                  const SizedBox(height: 8),
-                  Obx(() => Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          ImageController.bannerImages.length,
-                          (index) => AnimatedContainer(
-                            duration: Duration(milliseconds: 300),
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            width: _homeController.currentPage.value == index
-                                ? 12
-                                : 8,
-                            height: _homeController.currentPage.value == index
-                                ? 12
-                                : 8,
-                            decoration: BoxDecoration(
-                              color: _homeController.currentPage.value == index
-                                  ? Colors.green
-                                  : Colors.grey,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
-                      )),
-                ],
-              ),
+              CustomHomePageView(homeController: _homeController),
 
               Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,73 +83,17 @@ class Home extends StatelessWidget {
                   children: [
                     Text("service_category".tr,
                         style: AppWidget.homeTextFeildStyle()),
+                    InkWell(
+                        onTap: () {
+                          Get.to(Service());
+                        },
+                        child: Text(
+                          "See more",
+                          style: AppWidget.homeTextFeildStyle(),
+                        ))
                   ]),
-              Stack(
-                children: [
-                  Container(
-                    height: screenHeight * 0.15,
-                    width: double.infinity,
-                    child: ListView.builder(
-                      controller: _homeController.categoryScrollController,
-                      itemCount: _homeController.serviceCategories.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        var service = _homeController.serviceCategories[index];
-                        return GestureDetector(
-                          onTap: () => goToServiceListPage(),
-                          child: SizedBox(
-                            height: screenHeight * 0.15,
-                            width: screenWidth * 0.31,
-                            child: Card(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    height: 55,
-                                    width: 55,
-                                    child: ClipOval(
-                                      child: Image.asset(
-                                        service.image,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(height: screenHeight * 0.01),
-                                  Text(
-                                    service.name,
-                                    style: const TextStyle(fontSize: 10),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-
-                  // Left Button
-                  Positioned(
-                    left: -5,
-                    bottom: 45,
-                    child: LeftScrollerButton(
-                      scrollController:
-                          _homeController.categoryScrollController,
-                      isAtStart: _homeController.isCategoryAtStart,
-                    ),
-                  ),
-
-                  // Right Button
-                  Positioned(
-                    right: -5,
-                    bottom: 45,
-                    child: RightScrollerButton(
-                      scrollController:
-                          _homeController.categoryScrollController,
-                      isAtEnd: _homeController.isCategoryAtEnd,
-                    ),
-                  ),
-                ],
+              CustomHomeServiceCategory(
+                homeController: _homeController,
               ),
               SizedBox(
                 height: screenHeight * 0.01,
@@ -209,49 +105,7 @@ class Home extends StatelessWidget {
                       style: AppWidget.homeTextFeildStyle()),
                 ],
               ),
-              Stack(
-                children: [
-                  SizedBox(
-                    height: screenHeight * 0.3,
-                    width: screenWidth,
-                    child: ListView.builder(
-                      controller: _homeController.resetProjectController,
-                      itemCount: _homeController.serviceCategories.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        final service =
-                            _homeController.serviceCategories[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomServiceDetailsCard(
-                            goToDetailsPage: goToDetailsPage,
-                            service: service,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  // Left Button
-                  Positioned(
-                    left: -8,
-                    bottom: 120,
-                    child: LeftScrollerButton(
-                      scrollController: _homeController.resetProjectController,
-                      isAtStart: _homeController.isProjectAtStart,
-                    ),
-                  ),
-
-                  // Right Button
-                  Positioned(
-                    right: -8,
-                    bottom: 120,
-                    child: RightScrollerButton(
-                      scrollController: _homeController.resetProjectController,
-                      isAtEnd: _homeController.isProjectAtEnd,
-                    ),
-                  ),
-                ],
-              ),
+              CustomHomeRecentProject(homeController: _homeController),
               SizedBox(
                 height: screenHeight * 0.01,
               ),
@@ -262,47 +116,7 @@ class Home extends StatelessWidget {
                       style: AppWidget.homeTextFeildStyle()),
                 ],
               ),
-              Stack(
-                children: [
-                  SizedBox(
-                    height: screenHeight * 0.3,
-                    width: screenWidth,
-                    child: ListView.builder(
-                        controller: _homeController.baseProjectController,
-                        itemCount: _homeController.serviceCategories.length,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          final service =
-                              _homeController.serviceCategories[index];
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CustomServiceDetailsCard(
-                              goToDetailsPage: goToDetailsPage,
-                              service: service,
-                            ),
-                          );
-                        }),
-                  ),
-                  Positioned(
-                    left: -8,
-                    bottom: 120,
-                    child: LeftScrollerButton(
-                      scrollController: _homeController.baseProjectController,
-                      isAtStart: _homeController.isBestProjectAtStart,
-                    ),
-                  ),
-
-                  // Right Button
-                  Positioned(
-                    right: -8,
-                    bottom: 120,
-                    child: RightScrollerButton(
-                      scrollController: _homeController.baseProjectController,
-                      isAtEnd: _homeController.isBestProjectAtEnd,
-                    ),
-                  ),
-                ],
-              ),
+              CustomHomeBestProject(homeController: _homeController),
               SizedBox(
                 height: screenHeight * 0.02,
               ),
@@ -310,78 +124,8 @@ class Home extends StatelessWidget {
                 child: Text("your_team_member".tr,
                     style: AppWidget.homeTextFeildStyle()),
               ),
+              CustomTeamMember(homeController: _homeController),
 
-              Stack(
-                children: [
-                  Container(
-                      height: screenHeight * 0.25,
-                      width: double.infinity,
-                      child: GetBuilder<TeamController>(builder: (team_member) {
-                        return Visibility(
-                          visible: !team_member.isLoading,
-                          replacement: Center(
-                              child:
-                                  CircularProgressIndicator()), // যখন member থাকবে তখনই দেখাবে
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            controller: _homeController.teamController,
-                            itemCount: team_member.members.length,
-                            itemBuilder: (context, index) {
-                              var member = team_member.members[index];
-                              return Container(
-                                width: screenWidth * 0.45,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      height: screenWidth * 0.23,
-                                      width: screenWidth * 0.23,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                              "${member.imageUrl}"), // এখানেই member.image দেওয়া উচিত
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: screenHeight * 0.01),
-                                    Text(member.name,
-                                        style:
-                                            AppWidget.simpleTextFeildStyle()),
-                                    Text("${member.title}",
-                                        style: AppWidget.descriptionText()),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      })),
-
-                  // Left Scroll Button
-                  Positioned(
-                    left: 0,
-                    top: screenHeight * 0.1,
-                    child: LeftScrollerButton(
-                      scrollController: _homeController.teamController,
-                      isAtStart: _homeController.isTeamStart,
-                    ),
-                  ),
-
-                  // Right Scroll Button
-                  Positioned(
-                    right: 0,
-                    top: screenHeight * 0.1,
-                    child: RightScrollerButton(
-                      scrollController: _homeController.teamController,
-                      isAtEnd: _homeController.isTeamEnd,
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
                 height: screenHeight * 0.01,
               ),
@@ -398,17 +142,11 @@ class Home extends StatelessWidget {
     );
   }
 
-  void goToDetailsPage() {}
-
   void goToNotificationPage(BuildContext context) {
     Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (builder) => NotificationPage()),
         (predicate) => true);
-  }
-
-  void goToServiceListPage() {
-    Get.to(() => ServiceListPage());
   }
 
   void goToFaqPage() {

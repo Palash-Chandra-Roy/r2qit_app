@@ -54,7 +54,7 @@ class UserDataModel {
       password: json['password'],
       role: json['role'],
       coverImage: json["coverImage"],
-      profileImage: json["profileImage"],
+      profileImage: img,
       profession: json['profession'],
       address: json['address'],
       gender: json['gender'],
