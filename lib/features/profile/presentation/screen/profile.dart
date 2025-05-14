@@ -79,8 +79,7 @@ class _ProfileState extends State<Profile> {
                       SizedBox(height: 10),
                       ContactInfoRow(
                           icon: Icons.calendar_month,
-                          text:
-                              "${user?.dateOfBirth == null ? ' ' : user?.dateOfBirth}"),
+                          text: "${user?.dateOfBirth ?? ' 4-01-2200'}"),
                       SizedBox(height: 10),
                       ContactInfoRow(icon: Icons.man, text: "${user?.gender}"),
                       SizedBox(height: 10),
