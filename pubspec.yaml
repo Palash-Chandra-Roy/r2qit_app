@@ -54,10 +54,13 @@ dependencies:
   firebase_in_app_messaging: ^0.8.1+5
   firebase_app_installations: ^0.3.2+5
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
+  geolocator: ^14.0.0
+  google_maps_flutter: ^2.12.1
 flutter_icons:
   android: true
   ios: false
