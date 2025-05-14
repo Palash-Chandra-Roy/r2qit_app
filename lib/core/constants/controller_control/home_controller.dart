@@ -1,45 +1,34 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
+import 'package:r2ait_app/features/home/logic/home_page_view_scroll_controller.dart';
 
 class HomeController extends GetxController {
-  // Page and scroll controllers
-  var bannerPageController = PageController();
-  var currentBannerPage = 0.obs;
-  Timer? _autoScrollTimer;
-
   var categoryScrollController = ScrollController();
   var resetProjectController = ScrollController();
   var baseProjectController = ScrollController();
   var teamController = ScrollController();
-
+  var pageViwerScrollController = PageViwerScrollController();
   var teamPageController = PageController(viewportFraction: 0.5);
 
-  // Observables
   var currentTeamPage = 0.obs;
   var selectedCategoryIndex = 0.obs;
 
   var currentPage = 0.obs;
 
-  RxBool isCategoryAtStart = true.obs;
-  RxBool isCategoryAtEnd = false.obs;
-  RxBool isProjectAtStart = true.obs;
-  RxBool isProjectAtEnd = false.obs;
-  RxBool isBestProjectAtStart = true.obs;
-  RxBool isBestProjectAtEnd = false.obs;
-  RxBool isTeamStart = true.obs;
-  RxBool isTeamEnd = false.obs;
+  var isCategoryAtStart = true.obs;
+  var isCategoryAtEnd = false.obs;
+  var isProjectAtStart = true.obs;
+  var isProjectAtEnd = false.obs;
+  var isBestProjectAtStart = true.obs;
+  var isBestProjectAtEnd = false.obs;
+  var isTeamStart = true.obs;
+  var isTeamEnd = false.obs;
 
   @override
   void onInit() {
     super.onInit();
 
     teamController.addListener(_updateScrollButtonState);
-
-    bannerPageController = PageController(initialPage: 0);
-    _startAutoScrollBanner();
 
     categoryScrollController.addListener(() {
       final max = categoryScrollController.position.maxScrollExtent;
@@ -65,8 +54,6 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    _autoScrollTimer?.cancel();
-    bannerPageController.dispose();
     categoryScrollController.dispose();
     resetProjectController.dispose();
     baseProjectController.dispose();
@@ -74,20 +61,11 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  void _startAutoScrollBanner() {
-    _autoScrollTimer = Timer.periodic(Duration(seconds: 3), (timer) {
-      if (bannerPageController.hasClients) {
-        int nextPage = bannerPageController.page!.round() + 1;
-        if (nextPage >= ImageController.bannerImages.length) {
-          nextPage = 0;
-        }
-        bannerPageController.animateToPage(
-          nextPage,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      }
-    });
+  void _updateScrollButtonState() {
+    isTeamStart.value =
+        teamController.offset <= teamController.position.minScrollExtent + 10;
+    isTeamEnd.value =
+        teamController.offset >= teamController.position.maxScrollExtent - 10;
   }
 
   List<ServiceCategory> serviceCategories = <ServiceCategory>[
@@ -103,13 +81,6 @@ class HomeController extends GetxController {
     ServiceCategory(image: "assets/images/sdlc.jpg", name: "SOFTWARE DESIGN"),
     ServiceCategory(image: "assets/images/js.png", name: "JS"),
   ].obs;
-
-  void _updateScrollButtonState() {
-    isTeamStart.value =
-        teamController.offset <= teamController.position.minScrollExtent + 10;
-    isTeamEnd.value =
-        teamController.offset >= teamController.position.maxScrollExtent - 10;
-  }
 
   // Dynamic item list management
   var items = List.generate(10, (index) => "Item $index").obs;
