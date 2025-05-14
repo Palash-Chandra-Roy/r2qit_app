@@ -22,7 +22,8 @@ class CustomHomePageView extends StatelessWidget {
           ),
           height: 150,
           child: Obx(() => PageView.builder(
-                controller: _homeController.bannerPageController,
+                controller: _homeController
+                    .pageViwerScrollController.bannerPageController,
                 itemCount: ImageController.bannerImages.length,
                 onPageChanged: (index) {
                   _homeController.currentPage.value = index;
