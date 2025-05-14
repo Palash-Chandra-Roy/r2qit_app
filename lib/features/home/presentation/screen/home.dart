@@ -3,7 +3,6 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
-import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
 import 'package:r2ait_app/features/home/data/team_data_controller.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
@@ -12,6 +11,7 @@ import 'package:r2ait_app/features/service/presentation/screen/service_list.dart
 import 'package:r2ait_app/widgets/custom_project_details.dart';
 
 import '../widget/contact_from.dart';
+import '../widget/custom_home_page_view.dart';
 
 class Home extends StatelessWidget {
   Home({Super, Key});
@@ -72,58 +72,7 @@ class Home extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    height: 150,
-                    child: Obx(() => PageView.builder(
-                          controller: _homeController.bannerPageController,
-                          itemCount: ImageController.bannerImages.length,
-                          onPageChanged: (index) {
-                            _homeController.currentPage.value = index;
-                          },
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(
-                                  ImageController.bannerImages[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          },
-                        )),
-                  ),
-                  const SizedBox(height: 8),
-                  Obx(() => Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          ImageController.bannerImages.length,
-                          (index) => AnimatedContainer(
-                            duration: Duration(milliseconds: 300),
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            width: _homeController.currentPage.value == index
-                                ? 12
-                                : 8,
-                            height: _homeController.currentPage.value == index
-                                ? 12
-                                : 8,
-                            decoration: BoxDecoration(
-                              color: _homeController.currentPage.value == index
-                                  ? Colors.green
-                                  : Colors.grey,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
-                      )),
-                ],
-              ),
+              CustomHomePageView(homeController: _homeController),
 
               Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

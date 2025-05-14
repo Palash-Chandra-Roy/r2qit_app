@@ -7,6 +7,9 @@ import 'package:r2ait_app/core/constants/image_controller/image_controller.dart'
 class HomeController extends GetxController {
   // Page and scroll controllers
   var bannerPageController = PageController();
+  var currentBannerPage = 0.obs;
+  Timer? _autoScrollTimer;
+
   var categoryScrollController = ScrollController();
   var resetProjectController = ScrollController();
   var baseProjectController = ScrollController();
@@ -17,7 +20,7 @@ class HomeController extends GetxController {
   // Observables
   var currentTeamPage = 0.obs;
   var selectedCategoryIndex = 0.obs;
-  var currentBannerPage = 0.obs;
+
   var currentPage = 0.obs;
 
   RxBool isCategoryAtStart = true.obs;
@@ -28,8 +31,6 @@ class HomeController extends GetxController {
   RxBool isBestProjectAtEnd = false.obs;
   RxBool isTeamStart = true.obs;
   RxBool isTeamEnd = false.obs;
-
-  Timer? _autoScrollTimer;
 
   @override
   void onInit() {
