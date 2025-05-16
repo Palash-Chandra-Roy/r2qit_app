@@ -23,9 +23,9 @@ class _ProfileState extends State<Profile> {
   ThemeChanger _themeChanger = Get.put(ThemeChanger());
   @override
   Widget build(BuildContext context) {
-    final _id = Get.parameters['id'];
+    //final _id = Get.parameters['id'];
 
-    bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    // bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     // double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -196,7 +196,7 @@ class profileCart extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return Container(
-      height: screenHeight * 0.30,
+      height: screenHeight * 0.32,
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white70,
@@ -256,7 +256,7 @@ class profileCart extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: screenHeight * 0.05,
+                  height: screenHeight * 0.06,
                 ),
                 Expanded(
                   child: Column(

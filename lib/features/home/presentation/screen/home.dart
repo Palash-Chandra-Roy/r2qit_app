@@ -3,7 +3,6 @@ import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/controller_control/home_controller.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
-import 'package:r2ait_app/features/home/data/team_data_controller.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/notification_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/support_chat_page.dart';
@@ -22,9 +21,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TeamController _teamController = Get.find<TeamController>();
-    final tab =
-        Get.parameters['tab']; // Dynamically received parameter from URL
+    //final TeamController _teamController = Get.find<TeamController>();
+    //final tab =Get.parameters['tab']; // Dynamically received parameter from URL
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 

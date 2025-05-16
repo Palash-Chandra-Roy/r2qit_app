@@ -1,0 +1,2 @@
+D:/Flutter Project/r2qit_app-master/r2qit_app/android/app/.cxx/RelWithDebInfo/722h4b11/armeabi-v7a/CMakeFiles/edit_cache.dir
+D:/Flutter Project/r2qit_app-master/r2qit_app/android/app/.cxx/RelWithDebInfo/722h4b11/armeabi-v7a/CMakeFiles/rebuild_cache.dir
