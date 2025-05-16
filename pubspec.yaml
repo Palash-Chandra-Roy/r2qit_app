@@ -55,7 +55,7 @@ dependencies:
   firebase_app_installations: ^0.3.2+5
   flutter_launcher_icons: ^0.13.1
   geolocator: 13.0.4
-
+  image_picker:
 
 dev_dependencies:
   flutter_test:
