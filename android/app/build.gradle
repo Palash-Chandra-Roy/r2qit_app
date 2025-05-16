@@ -7,6 +7,9 @@ plugins {
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
+//dependencies {
+//    implementation 'androidx.core:core-ktx:1.16.0'
+//}
 
 android {
     namespace = "com.example.r2aitapp"
