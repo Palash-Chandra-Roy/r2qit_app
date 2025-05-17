@@ -5,55 +5,54 @@ import 'package:r2ait_app/features/map/logic/get_Current_location.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
+
   @override
-  State<MapPage> createState() => _amState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-const LatLng initialPosition = LatLng(23.763912194094274, 90.42875411066503);
-late GoogleMapController mapController; // San Francisco
-LocationController _locationController = Get.find<LocationController>();
+class _MapPageState extends State<MapPage> {
+  final LocationController _locationController = Get.find<LocationController>();
+  late GoogleMapController mapController;
 
-class _amState extends State<MapPage> {
+  @override
+  void initState() {
+    super.initState();
+    _locationController.myLocation(); // শুরুতেই লোকেশন আনো
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GetBuilder(
-          init: _locationController,
-          builder: (location) {
-            return GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: location.currentLocation ?? initialPosition,
-                zoom: 15,
-              ),
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              compassEnabled: true,
-              markers: {
-                Marker(
-                  markerId: const MarkerId('initialMarker'),
-                  position: location.currentLocation ?? initialPosition,
-                  infoWindow: const InfoWindow(
-                    title: 'My Location',
-                    snippet: 'Dhaka, Bangladesh',
-                  ),
+      body: GetBuilder<LocationController>(
+        builder: (location) {
+          if (location.currentLocation == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: location.currentLocation!,
+              zoom: 15,
+            ),
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            compassEnabled: true,
+            markers: {
+              Marker(
+                markerId: const MarkerId('initialMarker'),
+                position: location.currentLocation!,
+                infoWindow: const InfoWindow(
+                  title: 'My Location',
+                  snippet: 'Dhaka, Bangladesh',
                 ),
-              },
-              onMapCreated: (GoogleMapController controller) {
-                mapController = controller;
-              },
-            );
-          }),
+              ),
+            },
+            onMapCreated: (GoogleMapController controller) {
+              mapController = controller;
+            },
+          );
+        },
+      ),
     );
   }
-
-  // final Set<Marker> _markers = {
-  //   Marker(
-  //     markerId: MarkerId('initialMarker'),
-  //     position: LatLng(23.76377498885718, 90.42878122313259),
-  //     infoWindow: InfoWindow(
-  //       title: 'My Location',
-  //       snippet: 'Dhaka, Bangladesh',
-  //     ),
-  //   ),
-  // };
 }
