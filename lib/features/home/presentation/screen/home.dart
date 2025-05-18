@@ -86,8 +86,8 @@ class Home extends StatelessWidget {
                           Get.to(Service());
                         },
                         child: Text(
-                          "See more",
-                          style: AppWidget.homeTextFeildStyle(),
+                          "see_more".tr,
+                          style: AppWidget.appBarTextFeildStyle(),
                         ))
                   ]),
               CustomHomeServiceCategory(
@@ -119,7 +119,7 @@ class Home extends StatelessWidget {
                 height: screenHeight * 0.02,
               ),
               Center(
-                child: Text("your_team_member".tr,
+                child: Text("our_team_member".tr,
                     style: AppWidget.homeTextFeildStyle()),
               ),
               CustomTeamMember(homeController: _homeController),
