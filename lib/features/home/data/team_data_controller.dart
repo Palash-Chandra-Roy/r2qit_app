@@ -7,10 +7,8 @@ import '../../../model/team_mamber_model.dart';
 
 class TeamController extends GetxController {
   Logger logger = Logger();
-
   List<TeamMemberModel> members = [];
   late bool isLoading = false;
-
   @override
   void onInit() {
     super.onInit();
