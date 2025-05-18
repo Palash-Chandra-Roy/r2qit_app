@@ -29,7 +29,7 @@ const Map<String, String> homeTextEn = {
   'recent_project': 'Recent Projects',
   'all_project': 'All Projects',
   'best_project': 'Best Projects',
-  'your_team_member': 'Your Team Members',
+  'our_team_member': 'Our Team Member',
 };
 const Map<String, String> homeTextBn = {
   'search': 'অনুসন্ধান করুন',
@@ -38,7 +38,7 @@ const Map<String, String> homeTextBn = {
   'recent_project': 'সাম্প্রতিক প্রজেক্ট',
   'all_project': 'সব প্রজেক্ট',
   'best_project': 'সেরা প্রজেক্ট',
-  'your_team_member': 'আপনার টিম মেম্বাররা',
+  'our_team_member': 'আমাদের দলের সদস্য',
 };
 
 const Map<String, String> faqTextEn = {
@@ -102,7 +102,7 @@ const Map<String, String> profileEditEn = {
   'recent_project': 'Recent Projects',
   'all_project': 'All Projects',
   'best_project': 'Best Projects',
-  'your_team_member': 'Your Team Members',
+  'our_team_member': 'Our Team Member',
 };
 const Map<String, String> profileEditBn = {
   'search': 'অনুসন্ধান করুন',
@@ -111,5 +111,5 @@ const Map<String, String> profileEditBn = {
   'recent_project': 'সাম্প্রতিক প্রজেক্ট',
   'all_project': 'সব প্রজেক্ট',
   'best_project': 'সেরা প্রজেক্ট',
-  'your_team_member': 'আপনার টিম মেম্বাররা',
+  'our_team_member': 'আমাদের দলের সদস্য',
 };

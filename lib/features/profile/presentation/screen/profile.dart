@@ -21,6 +21,23 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   UserDataController _userDataController = Get.find<UserDataController>();
   ThemeChanger _themeChanger = Get.put(ThemeChanger());
+
+  // String formatDate(String? rawDate) {
+  //   if (rawDate == null || rawDate.isEmpty) return "No birth date";
+  //   try {
+  //     final parsedDate = DateTime.parse(rawDate);
+  //     return DateFormat('dd MMMM yyyy', 'bn').format(parsedDate);
+  //   } catch (e) {
+  //     try {
+  //       final parsedDate = DateTime.parse(rawDate);
+  //       return DateFormat('dd MMMM yyyy')
+  //           .format(parsedDate); // fallback English
+  //     } catch (e) {
+  //       return rawDate;
+  //     }
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     //final _id = Get.parameters['id'];
@@ -84,8 +101,9 @@ class _ProfileState extends State<Profile> {
                       ContactInfoRow(icon: Icons.email, text: "${user?.email}"),
                       SizedBox(height: 10),
                       ContactInfoRow(
-                          icon: Icons.calendar_month,
-                          text: "${user?.dateOfBirth ?? ' 4-01-2200'}"),
+                        icon: Icons.calendar_month,
+                        text: ("${user?.dateOfBirth}"),
+                      ),
                       SizedBox(height: 10),
                       ContactInfoRow(icon: Icons.man, text: "${user?.gender}"),
                       SizedBox(height: 10),
