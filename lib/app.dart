@@ -9,7 +9,6 @@ import 'utils/translation_text.dart';
 class MyApp extends StatelessWidget {
   final Locale locale;
   MyApp({super.key, required this.locale});
-
   @override
   Widget build(BuildContext context) {
     ThemeChanger theme = Get.put(ThemeChanger());
