@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
 
 class EditProfile extends StatefulWidget {
@@ -11,6 +14,27 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
   final _formKey = GlobalKey<FormState>();
+  File? _coverImage;
+  File? _profileImage;
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> pickCoverImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _coverImage = File(image.path);
+      });
+    }
+  }
+
+  Future<void> pickProfileImage() async {
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        _profileImage = File(image.path);
+      });
+    }
+  }
 
   // Controllers
   final TextEditingController firstNameController = TextEditingController();
@@ -65,23 +89,23 @@ class _EditProfileState extends State<EditProfile> {
                 Container(
                   height: screenWidth * 0.3,
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.blueGrey,
                     image: DecorationImage(
-                      image: NetworkImage(
-                        "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480",
-                      ),
+                      image: _coverImage != null
+                          ? FileImage(_coverImage!)
+                          : NetworkImage(
+                              "https://www.shutterstock.com/shutterstock/videos/3606751217/thumb/1.jpg?ip=x480",
+                            ) as ImageProvider,
                       fit: BoxFit.cover,
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: InkWell(
-                        onTap: () {
-                          print("Edit Cover Photo");
-                        },
+                        onTap: pickCoverImage,
                         child: CircleAvatar(
                           backgroundColor: Colors.grey,
                           radius: 18,
@@ -109,19 +133,19 @@ class _EditProfileState extends State<EditProfile> {
                             border: Border.all(color: Colors.white, width: 3),
                           ),
                           child: ClipOval(
-                            child: Image.network(
-                              "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
-                              fit: BoxFit.cover,
-                            ),
+                            child: _profileImage != null
+                                ? Image.file(_profileImage!, fit: BoxFit.cover)
+                                : Image.network(
+                                    "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                         ),
                         Positioned(
                           bottom: 0,
                           right: 0,
                           child: InkWell(
-                            onTap: () {
-                              print("Profile photo edit");
-                            },
+                            onTap: pickProfileImage,
                             child: CircleAvatar(
                               backgroundColor: Colors.grey.shade800,
                               radius: 16,
@@ -136,6 +160,7 @@ class _EditProfileState extends State<EditProfile> {
                 ),
               ],
             ),
+
             const SizedBox(height: 60),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

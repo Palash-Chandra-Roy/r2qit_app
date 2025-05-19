@@ -119,7 +119,7 @@ class Home extends StatelessWidget {
                 height: screenHeight * 0.02,
               ),
               Center(
-                child: Text("our_team_member".tr,
+                child: Text("our_team_member",
                     style: AppWidget.homeTextFeildStyle()),
               ),
               CustomTeamMember(homeController: _homeController),
