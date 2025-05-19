@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
 import 'package:r2ait_app/features/home/presentation/screen/about.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/edit_profile.dart';
@@ -22,21 +23,21 @@ class _ProfileState extends State<Profile> {
   UserDataController _userDataController = Get.find<UserDataController>();
   ThemeChanger _themeChanger = Get.put(ThemeChanger());
 
-  // String formatDate(String? rawDate) {
-  //   if (rawDate == null || rawDate.isEmpty) return "No birth date";
-  //   try {
-  //     final parsedDate = DateTime.parse(rawDate);
-  //     return DateFormat('dd MMMM yyyy', 'bn').format(parsedDate);
-  //   } catch (e) {
-  //     try {
-  //       final parsedDate = DateTime.parse(rawDate);
-  //       return DateFormat('dd MMMM yyyy')
-  //           .format(parsedDate); // fallback English
-  //     } catch (e) {
-  //       return rawDate;
-  //     }
-  //   }
-  // }
+  String formatDate(String? rawDate) {
+    if (rawDate == null || rawDate.isEmpty) return "No birth date";
+    try {
+      final parsedDate = DateTime.parse(rawDate);
+      return DateFormat('dd MMMM yyyy', 'bn').format(parsedDate);
+    } catch (e) {
+      try {
+        final parsedDate = DateTime.parse(rawDate);
+        return DateFormat('dd MMMM yyyy')
+            .format(parsedDate); // fallback English
+      } catch (e) {
+        return rawDate;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +103,7 @@ class _ProfileState extends State<Profile> {
                       SizedBox(height: 10),
                       ContactInfoRow(
                         icon: Icons.calendar_month,
-                        text: ("${user?.dateOfBirth}"),
+                        text: formatDate("${user?.dateOfBirth}"),
                       ),
                       SizedBox(height: 10),
                       ContactInfoRow(icon: Icons.man, text: "${user?.gender}"),
