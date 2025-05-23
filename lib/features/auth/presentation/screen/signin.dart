@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/logic/login_controller.dart';
+import 'package:r2ait_app/features/auth/presentation/screen/google.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
 
@@ -129,7 +130,10 @@ class _SigninState extends State<Signin> {
                 // Google Sign In (optional)
                 InkWell(
                   onTap: () {
-                    // signInWithGoogle(); // Uncomment and implement if needed
+                    final user = AuthServiceGoogle().signInWithGoogle();
+                    if (user != null) {
+                      print("Logged in as: ${user}");
+                    }
                   },
                   child: Container(
                     height: 60,
