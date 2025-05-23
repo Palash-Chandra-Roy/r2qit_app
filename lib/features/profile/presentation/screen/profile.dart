@@ -120,16 +120,6 @@ class _ProfileState extends State<Profile> {
           SizedBox(
             height: 10,
           ),
-          Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  Get.to(() => EditProfile());
-                },
-                child: Text(
-                  "Edit Profile",
-                  style: AppWidget.appBarTextFeildStyle(),
-                )),
-          ),
           Divider(),
           ProfileManWidget(
             title: "Setting",
@@ -158,7 +148,9 @@ class _ProfileState extends State<Profile> {
           ProfileManWidget(
               title: "User Managment",
               icon: Icon(Icons.personal_injury),
-              onPress: () {}),
+              onPress: () {
+                Get.to(EditProfile());
+              }),
           Divider(),
           ProfileManWidget(
               title: "Location",

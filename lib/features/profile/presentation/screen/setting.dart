@@ -18,17 +18,11 @@ class Setting extends StatelessWidget {
         children: [
           // Profile
           ListTile(
-            leading: const CircleAvatar(
+            leading: CircleAvatar(
               backgroundImage: AssetImage("assets/images/palash.jpg"),
             ),
             title: Text("name".tr),
             subtitle: Text("email".tr),
-            trailing: IconButton(
-              icon: const Icon(Icons.edit),
-              onPressed: () {
-                // Edit profile
-              },
-            ),
           ),
           const Divider(),
 
@@ -85,12 +79,6 @@ class Setting extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.manage_accounts),
             title: Text("manage_account".tr),
-            onTap: () {},
-          ),
-
-          ListTile(
-            leading: const Icon(Icons.logout, color: Colors.red),
-            title: Text("logout".tr, style: const TextStyle(color: Colors.red)),
             onTap: () {},
           ),
         ],
