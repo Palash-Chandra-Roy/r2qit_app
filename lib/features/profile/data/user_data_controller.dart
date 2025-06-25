@@ -26,7 +26,6 @@ class UserDataController extends GetxController {
           "${AuthAPIController.singleUser("$id")}");
       members = UserDataModel.fromJson(data[0]);
     } catch (e) {
-      logger.e("Error fetching team members: $e");
     } finally {
       isLoading = false;
       update();

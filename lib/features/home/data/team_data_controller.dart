@@ -23,7 +23,6 @@ class TeamController extends GetxController {
           await DataController.getDataFrame(TeamsApiController.allTeamMember);
       members = data.map((e) => TeamMemberModel.fromJson(e)).toList();
     } catch (e) {
-      logger.e("Error fetching team members: $e");
     } finally {
       isLoading = false;
       update();
