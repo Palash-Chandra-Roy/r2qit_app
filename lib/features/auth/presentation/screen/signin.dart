@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/logic/login_controller.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/google.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
+import 'package:r2ait_app/features/home/presentation/screen/home.dart';
 import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../widget/custom_logo.dart';
+import '../widget/custom_sign_text.dart';
 import '../widget/custombuttom.dart';
 class Signin extends StatefulWidget {
   const Signin({super.key});
@@ -34,80 +37,9 @@ class _SigninState extends State<Signin> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomLogo(),
-
-                Text("Sign In", style: AppWidget.hederTextFeildStyle()),
-                SizedBox(height: screenheight * 0.01),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        width: 90,
-                        height: 4,
-                        color: const Color.fromARGB(255, 4, 56, 5)),
-                    SizedBox(width: 5),
-                    Container(
-                        width: 90,
-                        height: 4,
-                        color: const Color.fromARGB(255, 121, 13, 6)),
-                  ],
-                ),
-                SizedBox(height: screenheight * 0.03),
-
+               CustomSignText(),
                 // Email
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(
-                    hintText: "Email Or username",
-                    prefixIcon: Icon(Icons.email),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  controller: signinController.userOrEmailController,
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return "Email Or username is required";
-                    } else if (!RegExp(
-                                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-                            .hasMatch(value) &&
-                        !RegExp(r'^[a-zA-Z0-9_]{3,20}$').hasMatch(value)) {
-                      return "Please enter a valid email Or username";
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                SizedBox(height: screenheight * 0.02),
-                //password
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  controller: signinController.passwordController,
-                  obscureText: obscureText,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: InputDecoration(
-                    hintText: "Password",
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          obscureText = !obscureText;
-                        });
-                      },
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Password is required";
-                    }
-                    if (value.length < 6) {
-                      return "Password must be at least 6 characters long";
-                    }
-                    return null;
-                  },
-                ),
-
-                SizedBox(height: screenheight * 0.01),
+                CustomTextField(),
                 InkWell(
                   onTap: () {
                     Get.to(OTP());
@@ -122,10 +54,7 @@ class _SigninState extends State<Signin> {
                 // Google Sign In (optional)
                 InkWell(
                   onTap: () {
-                    final user = AuthServiceGoogle().signInWithGoogle();
-                    if (user != null) {
-                      print("Logged in as: ${user}");
-                    }
+                    googleLogin();
                   },
                   child: Container(
                     height: 60,
@@ -223,5 +152,89 @@ class _SigninState extends State<Signin> {
           user_or_email: signinController.userOrEmailController.text,
           password: signinController.passwordController.text);
     }
+  }
+  void googleLogin()async {
+
+    final user =await AuthServiceGoogle().signInWithGoogle();
+    if (user != null){
+      Logger().e(user.additionalUserInfo);
+      Get.offAll(Home());
+    }
+
+    }
+}
+class CustomTextField extends StatefulWidget {
+  const CustomTextField({super.key});
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
+  Widget build(BuildContext context) {
+    SigninController signinController = Get.put(SigninController());
+    final size = MediaQuery.of(context).size;
+    double height = size.height;
+    double width = size.width;
+    bool obscureText = true;
+    return Column(
+      children: [
+        TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          decoration: InputDecoration(
+            hintText: "Email Or username",
+            prefixIcon: Icon(Icons.email),
+          ),
+          keyboardType: TextInputType.emailAddress,
+          controller: signinController.userOrEmailController,
+          validator: (String? value) {
+            if (value == null || value.isEmpty) {
+              return "Email Or username is required";
+            } else if (!RegExp(
+                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                .hasMatch(value) &&
+                !RegExp(r'^[a-zA-Z0-9_]{3,20}$').hasMatch(value)) {
+              return "Please enter a valid email Or username";
+            } else {
+              return null;
+            }
+          },
+        ),
+        SizedBox(height: height * 0.02),
+        //password
+        TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          controller: signinController.passwordController,
+          obscureText: obscureText,
+          keyboardType: TextInputType.visiblePassword,
+          decoration: InputDecoration(
+            hintText: "Password",
+            prefixIcon: Icon(Icons.lock),
+            suffixIcon: IconButton(
+              icon: Icon(
+                obscureText ? Icons.visibility_off : Icons.visibility,
+              ),
+              onPressed: () {
+                setState(() {
+                  obscureText = !obscureText;
+                });
+              },
+            ),
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "Password is required";
+            }
+            if (value.length < 6) {
+              return "Password must be at least 6 characters long";
+            }
+            return null;
+          },
+        ),
+
+        SizedBox(height: height * 0.01),
+      ],
+    );
   }
 }

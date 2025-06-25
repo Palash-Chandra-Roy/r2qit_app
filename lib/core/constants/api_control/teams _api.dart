@@ -1,4 +1,4 @@
 class TeamsApiController {
-  static String api = 'http://103.145.138.116:3000/teams';
+  static String api = 'https://r2ait.up.railway.app/teams';
   static String allTeamMember = '$api';
 }
