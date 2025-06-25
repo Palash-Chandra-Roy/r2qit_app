@@ -36,7 +36,7 @@ class LoginController {
       Uri url = Uri.parse(AuthAPIController.userLogin);
       final http.Response res = await http.post(
         url,
-        headers: headers,
+        // headers: headers,
         body: jsonEncode(body), // note: using jsonEncode for JSON body
       );
       Logger().e("Login response: ${res.body}");

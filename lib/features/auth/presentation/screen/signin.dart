@@ -4,18 +4,15 @@ import 'package:r2ait_app/features/auth/logic/login_controller.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/google.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
-
 import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
+import '../widget/custom_logo.dart';
 import '../widget/custombuttom.dart';
-
 class Signin extends StatefulWidget {
   const Signin({super.key});
-
   @override
   State<Signin> createState() => _SigninState();
 }
-
 class _SigninState extends State<Signin> {
   SigninController signinController = Get.put(SigninController());
   var isCheck = false.obs;
@@ -36,13 +33,8 @@ class _SigninState extends State<Signin> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  height: 150,
-                  width: 200,
-                  child: Image.asset(
-                    "assets/images/logo.png",
-                  ),
-                ),
+                CustomLogo(),
+
                 Text("Sign In", style: AppWidget.hederTextFeildStyle()),
                 SizedBox(height: screenheight * 0.01),
                 Row(
