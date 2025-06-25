@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
-
 import '../../../../core/constants/controller_control/signup_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../../logic/register_controller.dart';
@@ -202,9 +201,8 @@ class _SignupState extends State<Signup> {
 
   void gotoSignin() {
     if (_formKey.currentState!.validate()) {
-      Logger().e("Done ");
       RegisterController.signUp(
-          name: signUpController.nameController.text,
+          firstName: signUpController.nameController.text,
           email: signUpController.emailController.text,
           password: signUpController.passwordController.text,
           username: signUpController.usernameController.text);
