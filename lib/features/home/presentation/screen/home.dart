@@ -91,7 +91,6 @@ class Home extends StatelessWidget {
                         ))
                   ]),
               CustomHomeServiceCategory(
-                homeController: _homeController,
               ),
               SizedBox(
                 height: screenHeight * 0.01,

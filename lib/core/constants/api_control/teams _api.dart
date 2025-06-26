@@ -1,4 +1,4 @@
+import 'global_api.dart';
 class TeamsApiController {
-  static String api = 'https://r2ait.up.railway.app/teams';
-  static String allTeamMember = '$api';
+  static String allTeamMember = '$api/teams';
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/core/constants/image_controller/image_controller.dart';
 
-class PageViwerScrollController extends GetxController {
+class PageViewrScrollController extends GetxController {
   var bannerPageController = PageController();
 
   var currentBannerPage = 0.obs;
