@@ -21,7 +21,7 @@ class CustomTeamMember extends StatelessWidget {
         Container(
             height: screenHeight * 0.25,
             width: double.infinity,
-            child: GetBuilder<TeamController>(builder: (team_member) {
+            child: GetBuilder<TeamDataController>(builder: (team_member) {
               return Visibility(
                 visible: !team_member.isLoading,
                 replacement: Center(

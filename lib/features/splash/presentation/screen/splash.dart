@@ -17,25 +17,7 @@ class SplashScreen extends StatefulWidget {
 final ServiceControl _serviceControl = Get.find<ServiceControl>();
 
 class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    // Navigate to Home Screen after 3 seconds
-    _serviceControl.checkAdmin();
-    Future<void> checkEmail() async {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      String? id = _prefs.getString("id");
-      if (id != null && id.isNotEmpty) {
-        Get.to(() => BottomNavbar());
-      } else {
-        Get.to(() => Signin());
-      }
-    }
 
-    Future.delayed(Duration(seconds: 3), () async {
-      checkEmail();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,5 +34,23 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+  @override
+  void initState() {
+    super.initState();
+    // Navigate to Home Screen after 3 seconds
+    _serviceControl.checkAdmin();
+    Future<void> checkEmail() async {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      String? id = _prefs.getString("id");
+      if (id != null && id.isNotEmpty) {
+        Get.to(() => BottomNavbar());
+      } else {
+        Get.to(() => Signin());
+      }
+    }
+    Future.delayed(Duration(seconds: 3), () async {
+      checkEmail();
+    });
   }
 }

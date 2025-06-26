@@ -1,5 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthServiceGoogle {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -7,6 +11,7 @@ class AuthServiceGoogle {
 
   Future<UserCredential?> signInWithGoogle() async {
     try {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null;
 
@@ -17,16 +22,14 @@ class AuthServiceGoogle {
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
+      UserCredential user = await _auth.signInWithCredential(credential);
+      _prefs.setString("id", user.user!.uid);
 
-      return await _auth.signInWithCredential(credential);
+      return await user;
     } catch (e) {
-      print("Google Sign-In error: $e");
+      Get.snackbar("Error", "Failed to sign in with Google Please try again");
       return null;
     }
   }
 
-  Future<void> signOut() async {
-    await _auth.signOut();
-    await _googleSignIn.signOut();
-  }
 }

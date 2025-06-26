@@ -1,12 +1,10 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:r2ait_app/core/constants/api_control/teams%20_api.dart';
-import 'package:r2ait_app/core/utils/data_controller.dart';
-
+import 'package:r2ait_app/core/utils/global_get_data_frame.dart';
 import '../../../model/team_mamber_model.dart';
 
-class TeamController extends GetxController {
-  Logger logger = Logger();
+class TeamDataController extends GetxController {
   List<TeamMemberModel> members = [];
   late bool isLoading = false;
   @override
@@ -20,7 +18,7 @@ class TeamController extends GetxController {
     update();
     try {
       List data =
-          await DataController.getDataFrame(TeamsApiController.allTeamMember);
+          await GlobalGetDataFrame.getDataFrame(TeamsApiController.allTeamMember);
       members = data.map((e) => TeamMemberModel.fromJson(e)).toList();
     } catch (e) {
     } finally {

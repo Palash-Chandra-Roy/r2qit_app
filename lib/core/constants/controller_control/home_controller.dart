@@ -7,7 +7,7 @@ class HomeController extends GetxController {
   var resetProjectController = ScrollController();
   var baseProjectController = ScrollController();
   var teamController = ScrollController();
-  var pageViwerScrollController = PageViwerScrollController();
+  var pageViwerScrollController = PageViewrScrollController();
   var teamPageController = PageController(viewportFraction: 0.5);
 
   var currentTeamPage = 0.obs;

@@ -36,12 +36,12 @@ class LoginController {
       Uri url = Uri.parse(AuthAPIController.userLogin);
       final http.Response res = await http.post(
         url,
-        // headers: headers,
+        headers: headers,
         body: jsonEncode(body), // note: using jsonEncode for JSON body
       );
-      Logger().e("Login response: ${res.body}");
 
       final jsondata = jsonDecode(res.body);
+      Logger().e("Login response: ${jsondata}");
       if (res.statusCode == 200) {
         await prefs.setString('token', jsondata['access']);
         await prefs.setString('id', jsondata['id']);
@@ -49,8 +49,8 @@ class LoginController {
         Get.to(() => BottomNavbar());
       } else if (res.statusCode == 404) {
         Get.snackbar("Login Failed", "User not found");
-      } else if (res.statusCode == 403) {
-        Get.snackbar("Access Denied", "Invalid credentials");
+      } else if (res.statusCode == 401) {
+        Get.snackbar("UserName and Password", "Incorrect");
       } else {
         Get.snackbar("Error", "Your email and password are incorrect.");
       }

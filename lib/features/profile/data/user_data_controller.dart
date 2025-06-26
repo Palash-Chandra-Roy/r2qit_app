@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:r2ait_app/core/constants/api_control/auth_api.dart';
-import 'package:r2ait_app/core/utils/data_controller.dart';
+import 'package:r2ait_app/core/utils/global_get_data_frame.dart';
 import 'package:r2ait_app/model/user_data_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +22,7 @@ class UserDataController extends GetxController {
     isLoading = true;
     update();
     try {
-      List data = await DataController.getDataFrame(
+      List data = await GlobalGetDataFrame.getDataFrame(
           "${AuthAPIController.singleUser("$id")}");
       members = UserDataModel.fromJson(data[0]);
     } catch (e) {
