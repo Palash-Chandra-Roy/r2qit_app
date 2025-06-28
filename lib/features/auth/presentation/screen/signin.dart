@@ -12,6 +12,7 @@ import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../../../../widget/custom_logo.dart';
 import '../widget/custom_sign_text.dart';
 import '../widget/custombuttom.dart';
+import '../widget/logo_and_text.dart';
 class Signin extends StatefulWidget {
   const Signin({super.key});
   @override
@@ -35,21 +36,9 @@ class _SigninState extends State<Signin> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomLogo(),
-               CustomSignText(),
-                // Email
-                CustomTextField(),
-                InkWell(
-                  onTap: () {
-                    Get.to(OTP());
-                  },
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Text("Forgot Password?",
-                        style: AppWidget.simpleTextFeildStyle()),
-                  ),
-                ),
-                SizedBox(height: height * 0.01),
+               LogoAndText(),
+                // Email and password, forgot
+                PasswordField(),
                 // Google Sign In (optional)
                 InkWell(
                   onTap: () {
@@ -233,6 +222,45 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
 
         SizedBox(height: height * 0.01),
+      ],
+    );
+  }
+}
+
+
+class PasswordField extends StatelessWidget {
+  const PasswordField({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+
+        TextFormField(
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.email),
+            hintText: "Email or Username"
+          ),
+        ),
+        SizedBox(height: 15.w,),
+        TextFormField(
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.lock),
+              hintText: "Password"
+
+          ),
+        ),
+        SizedBox(height: 10.w,),
+        InkWell(
+          onTap: () {
+          },
+          child: Align(
+            alignment: Alignment.bottomRight,
+            child: Text("Forgot Password?",style: TextStyle(color: Colors.blue),
+            )
+          ),
+        ),
       ],
     );
   }

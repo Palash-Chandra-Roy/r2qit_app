@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 class ThemeChanger extends GetxController {
-  RxBool isDarkMode = false.obs;
+  RxBool isDarkMode = true.obs;
 
   void toggleTheme() {
     isDarkMode.value = !isDarkMode.value;
