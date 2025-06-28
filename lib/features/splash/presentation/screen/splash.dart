@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:r2ait_app/utils/admin_check.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../core/constants/color_control/color_controller.dart';
-import '../../../../widgets/bottom_navbar.dart';
+import '../../../../widget/custom_logo.dart';
+import '../../logic/check_login_status.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -23,13 +23,18 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: splashColor,
-      body: Center(
-        child: Container(
-          height: 120,
-          width: 200,
-          child: Image.asset(
-            "assets/images/logo.png",
-            fit: BoxFit.cover,
+      body: Padding(
+        padding: EdgeInsets.all(3.r),
+        child: Center(
+          child: Column(
+            children: [
+              const  Spacer(),
+              const CustomLogo(),
+              const  Spacer(),
+              const CircularProgressIndicator(),
+                SizedBox(height: 10.h),
+             Text("version 1.0.0",style: TextStyle(color:Colors.grey),)
+            ],
           ),
         ),
       ),
@@ -40,17 +45,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     // Navigate to Home Screen after 3 seconds
     _serviceControl.checkAdmin();
-    Future<void> checkEmail() async {
-      SharedPreferences _prefs = await SharedPreferences.getInstance();
-      String? id = _prefs.getString("id");
-      if (id != null && id.isNotEmpty) {
-        Get.to(() => BottomNavbar());
-      } else {
-        Get.to(() => Signin());
-      }
-    }
     Future.delayed(Duration(seconds: 3), () async {
-      checkEmail();
+      CheckLoginStatus().checkLoginStatus();
     });
   }
 }

@@ -5,6 +5,7 @@ import 'package:r2ait_app/features/profile/data/user_data_controller.dart';
 import 'package:r2ait_app/utils/admin_check.dart';
 
 import 'features/home/data/team_data_controller.dart';
+import 'features/splash/logic/version_control.dart';
 
 class BindingController extends Bindings {
   @override

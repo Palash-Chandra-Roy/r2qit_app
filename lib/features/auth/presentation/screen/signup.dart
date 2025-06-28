@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
-import '../../../../core/constants/controller_control/signup_controller.dart';
+import '../../logic/signup_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../../logic/register_controller.dart';
 import '../widget/custombuttom.dart';
@@ -139,12 +139,12 @@ class _SignupState extends State<Signup> {
 
                 /// Divider
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(width: 100, height: 4, color: Colors.grey),
+                    Container(width: 95, height: 4, color: Colors.grey),
                     Text("Or continue with",
                         style: AppWidget.appBarTextFeildStyle()),
-                    Container(width: 100, height: 4, color: Colors.grey),
+                    Container(width: 95, height: 4, color: Colors.grey),
                   ],
                 ),
                 SizedBox(height: screenheight * 0.04),

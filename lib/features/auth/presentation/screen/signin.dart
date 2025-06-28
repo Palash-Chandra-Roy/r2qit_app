@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/logic/login_controller.dart';
@@ -6,9 +7,9 @@ import 'package:r2ait_app/features/auth/presentation/screen/google.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
 import 'package:r2ait_app/features/home/presentation/screen/home.dart';
-import '../../../../core/constants/controller_control/signin_controller.dart';
+import '../../logic/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
-import '../widget/custom_logo.dart';
+import '../../../../widget/custom_logo.dart';
 import '../widget/custom_sign_text.dart';
 import '../widget/custombuttom.dart';
 class Signin extends StatefulWidget {
@@ -17,20 +18,18 @@ class Signin extends StatefulWidget {
   State<Signin> createState() => _SigninState();
 }
 class _SigninState extends State<Signin> {
-  SigninController signinController = Get.put(SigninController());
-  var isCheck = false.obs;
-  bool obscureText = true;
-  final _formKey = GlobalKey<FormState>();
 
+  SigninController signinController = Get.put(SigninController());
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    double screenheight = MediaQuery.of(context).size.height;
-
+    final size = MediaQuery.of(context).size;
+    double height =size.height;
+    double width = size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+          padding: EdgeInsets.all(10.r),
           child: Form(
             key: _formKey,
             child: Column(
@@ -50,7 +49,7 @@ class _SigninState extends State<Signin> {
                         style: AppWidget.simpleTextFeildStyle()),
                   ),
                 ),
-                SizedBox(height: screenheight * 0.01),
+                SizedBox(height: height * 0.01),
                 // Google Sign In (optional)
                 InkWell(
                   onTap: () {
@@ -76,7 +75,7 @@ class _SigninState extends State<Signin> {
                   ),
                 ),
 
-                SizedBox(height: screenheight * 0.02),
+                SizedBox(height: height * 0.02),
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -97,7 +96,7 @@ class _SigninState extends State<Signin> {
                   ],
                 ),
 
-                SizedBox(height: screenheight * 0.02),
+                SizedBox(height: height * 0.02),
 
                 CustomButton(
                   buttonText: "Sign In",

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:r2ait_app/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,7 +18,12 @@ void main() async {
   final savedLangCode = prefs.getString('language') ?? 'en';
   await FirebaseMessageController().initsFCM();
 
-  runApp(MyApp(
-    locale: Locale(savedLangCode),
+  runApp(ScreenUtilInit(
+    designSize: Size(390, 844),
+      splitScreenMode: true,
+      minTextAdapt: true,
+    child: MyApp(
+      locale: Locale(savedLangCode),
+    ),
   ));
 }

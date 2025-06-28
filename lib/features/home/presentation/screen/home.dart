@@ -27,42 +27,7 @@ class Home extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Container(
-          height: screenHeight * 0.05,
-          width: screenWidth * 0.7,
-          child: TextField(
-            onTap: () {},
-            decoration: InputDecoration(
-              hintText: "search".tr,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade200)),
-              //contentPadding: EdgeInsets.symmetric(horizontal: 12),
-              suffixIcon: Icon(Icons.search),
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-              onPressed: goToSupportPage,
-              icon: Icon(
-                Entypo.chat,
-                size: 20,
-                color: Colors.black,
-              )),
-          IconButton(
-              onPressed: () => goToNotificationPage(context),
-              icon: Icon(
-                Icons.notifications,
-                size: 20,
-                color: Colors.black,
-              )),
-        ],
-      ),
+      appBar: buildAppBar(screenHeight, screenWidth, context),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
@@ -136,6 +101,45 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  AppBar buildAppBar(double screenHeight, double screenWidth, BuildContext context) {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      title: Container(
+        height: screenHeight * 0.05,
+        width: screenWidth * 0.7,
+        child: TextField(
+          onTap: () {},
+          decoration: InputDecoration(
+            hintText: "search".tr,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: Colors.grey.shade200)),
+            //contentPadding: EdgeInsets.symmetric(horizontal: 12),
+            suffixIcon: Icon(Icons.search),
+          ),
+        ),
+      ),
+      actions: [
+        IconButton(
+            onPressed: goToSupportPage,
+            icon: Icon(
+              Entypo.chat,
+              size: 20,
+              color: Colors.black,
+            )),
+        IconButton(
+            onPressed: () => goToNotificationPage(context),
+            icon: Icon(
+              Icons.notifications,
+              size: 20,
+              color: Colors.black,
+            )),
+      ],
     );
   }
 

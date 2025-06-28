@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:r2ait_app/widgets/bottom_navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 class SigninController extends GetxController {
   final userOrEmailController = TextEditingController();
   final passwordController = TextEditingController();

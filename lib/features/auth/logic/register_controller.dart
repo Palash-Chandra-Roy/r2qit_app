@@ -34,6 +34,7 @@ class RegisterController {
       body: jsonEncode(body), // note: using jsonEncode for JSON body
     );
     var decode = jsonDecode(res.body);
+
     if (res.statusCode == 201) {
       Get.to(() => Signin());
       flutterToast(decode['message']);
