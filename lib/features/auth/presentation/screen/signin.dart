@@ -5,17 +5,22 @@ import 'package:r2ait_app/features/auth/logic/login_controller.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/google.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_email.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_password.dart';
 import 'package:r2ait_app/features/home/presentation/screen/home.dart';
+
 import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../widget/custom_logo.dart';
 import '../widget/custom_sign_text.dart';
 import '../widget/custombuttom.dart';
+
 class Signin extends StatefulWidget {
   const Signin({super.key});
   @override
   State<Signin> createState() => _SigninState();
 }
+
 class _SigninState extends State<Signin> {
   SigninController signinController = Get.put(SigninController());
   var isCheck = false.obs;
@@ -37,9 +42,18 @@ class _SigninState extends State<Signin> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomLogo(),
-               CustomSignText(),
+                CustomSignText(),
                 // Email
-                CustomTextField(),
+                //CustomTextField(),
+                CustomTextFromEmail(
+                    controller: signinController.userOrEmailController,
+                    icon: Icons.email),
+                SizedBox(height: screenheight * 0.01),
+                CustomTextFromPassword(
+                  controller: signinController.passwordController,
+                  obscureText: signinController.obscurePassword,
+                  hintText: "Password",
+                ),
                 InkWell(
                   onTap: () {
                     Get.to(OTP());
@@ -112,11 +126,7 @@ class _SigninState extends State<Signin> {
                     } else {
                       print("Not remembering credentials");
                     }
-
                     login();
-
-                    // Go to home screen
-                    // gotoHome(email: email, password: password);
                   },
                 ),
 
@@ -153,88 +163,91 @@ class _SigninState extends State<Signin> {
           password: signinController.passwordController.text);
     }
   }
-  void googleLogin()async {
 
-    final user =await AuthServiceGoogle().signInWithGoogle();
-    if (user != null){
+  void googleLogin() async {
+    final user = await AuthServiceGoogle().signInWithGoogle();
+    if (user != null) {
       Logger().e(user.additionalUserInfo);
       Get.offAll(Home());
     }
-
-    }
-}
-class CustomTextField extends StatefulWidget {
-  const CustomTextField({super.key});
-
-  @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
-  @override
-  Widget build(BuildContext context) {
-    SigninController signinController = Get.put(SigninController());
-    final size = MediaQuery.of(context).size;
-    double height = size.height;
-    double width = size.width;
-    bool obscureText = true;
-    return Column(
-      children: [
-        TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(
-            hintText: "Email Or username",
-            prefixIcon: Icon(Icons.email),
-          ),
-          keyboardType: TextInputType.emailAddress,
-          controller: signinController.userOrEmailController,
-          validator: (String? value) {
-            if (value == null || value.isEmpty) {
-              return "Email Or username is required";
-            } else if (!RegExp(
-                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-                .hasMatch(value) &&
-                !RegExp(r'^[a-zA-Z0-9_]{3,20}$').hasMatch(value)) {
-              return "Please enter a valid email Or username";
-            } else {
-              return null;
-            }
-          },
-        ),
-        SizedBox(height: height * 0.02),
-        //password
-        TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          controller: signinController.passwordController,
-          obscureText: obscureText,
-          keyboardType: TextInputType.visiblePassword,
-          decoration: InputDecoration(
-            hintText: "Password",
-            prefixIcon: Icon(Icons.lock),
-            suffixIcon: IconButton(
-              icon: Icon(
-                obscureText ? Icons.visibility_off : Icons.visibility,
-              ),
-              onPressed: () {
-                setState(() {
-                  obscureText = !obscureText;
-                });
-              },
-            ),
-          ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return "Password is required";
-            }
-            if (value.length < 6) {
-              return "Password must be at least 6 characters long";
-            }
-            return null;
-          },
-        ),
-
-        SizedBox(height: height * 0.01),
-      ],
-    );
   }
 }
+
+// class CustomTextField extends StatefulWidget {
+//   const CustomTextField({super.key});
+
+//   @override
+//   State<CustomTextField> createState() => _CustomTextFieldState();
+// }
+
+// class _CustomTextFieldState extends State<CustomTextField> {
+//   @override
+//   Widget build(BuildContext context) {
+//     SigninController signinController = Get.put(SigninController());
+//     final size = MediaQuery.of(context).size;
+//     double height = size.height;
+//     double width = size.width;
+//     bool obscureText = true;
+//     return Column(
+//       children: [
+//         TextFormField(
+//           autovalidateMode: AutovalidateMode.onUserInteraction,
+//           decoration: InputDecoration(
+//             hintText: "Email Or username",
+//             prefixIcon: Icon(Icons.email),
+//           ),
+//           keyboardType: TextInputType.emailAddress,
+//           controller: signinController.userOrEmailController,
+//           validator: (String? value) {
+//             if (value == null || value.isEmpty) {
+//               return "Email Or username is required";
+//             } else if (!RegExp(
+//                         r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+//                     .hasMatch(value) &&
+//                 !RegExp(r'^[a-zA-Z0-9_]{3,20}$').hasMatch(value)) {
+//               return "Please enter a valid email Or username";
+//             } else {
+//               return null;
+//             }
+//           },
+//         ),
+//         SizedBox(height: height * 0.02),
+//         //password
+//         TextFormField(
+//           autovalidateMode: AutovalidateMode.onUserInteraction,
+//           controller: signinController.passwordController,
+//           obscureText: obscureText,
+//           keyboardType: TextInputType.visiblePassword,
+//           decoration: InputDecoration(
+//             hintText: "Password",
+//             prefixIcon: const Icon(Icons.lock_outline),
+//             suffixIcon: IconButton(
+//               icon: Icon(
+//                 obscureText ? Icons.visibility_off : Icons.visibility,
+//               ),
+//               onPressed: () {
+//                 setState(() {
+//                   obscureText = !obscureText;
+//                 });
+//               },
+//             ),
+//             border: OutlineInputBorder(
+//               borderRadius: BorderRadius.circular(10),
+//             ),
+//           ),
+//           validator: (value) {
+//             if (value == null || value.trim().isEmpty) {
+//               return "Password is required";
+//             }
+//             if (value.trim().length < 6) {
+//               return "Password must be at least 6 characters long";
+//             }
+//             return null;
+//           },
+//         ),
+
+//         SizedBox(height: height * 0.01),
+//       ],
+//     );
+//   }
+// }

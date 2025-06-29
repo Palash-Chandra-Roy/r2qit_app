@@ -6,15 +6,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app.dart';
 import 'features/notification/logic/firebase_messaging_page.dart';
 
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   // Initialize AuthController once globally
+
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+//   final prefs = await SharedPreferences.getInstance();
+//   final savedLangCode = prefs.getString('language') ?? 'en';
+//   await FirebaseMessageController().initsFCM();
+
+//   runApp(MyApp(
+//     locale: Locale(savedLangCode),
+//   ));
+// }
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize AuthController once globally
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   final prefs = await SharedPreferences.getInstance();
   final savedLangCode = prefs.getString('language') ?? 'en';
+
   await FirebaseMessageController().initsFCM();
 
   runApp(MyApp(

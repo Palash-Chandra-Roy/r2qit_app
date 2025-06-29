@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_email.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_password.dart';
+
 import '../../../../core/constants/controller_control/signup_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../../logic/register_controller.dart';
@@ -38,91 +40,32 @@ class _SignupState extends State<Signup> {
                 ),
                 SizedBox(height: screenheight * 0.02),
 
-                /// Full Name
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(
-                    hintText: "Name",
-                    prefixIcon: Icon(Icons.person),
-                  ),
+                CustomTextFromEmail(
                   controller: signUpController.nameController,
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Enter your name";
-                    }
-                    return null;
-                  },
+                  hintText: "Name",
+                  icon: Icons.man,
                 ),
                 SizedBox(height: screenheight * 0.02),
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(
-                    hintText: "username",
-                    prefixIcon: Icon(Icons.drive_file_rename_outline),
-                  ),
+                CustomTextFromEmail(
                   controller: signUpController.usernameController,
-                  keyboardType: TextInputType.name,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Enter your username";
-                    }
-                    return null;
-                  },
+                  hintText: "User Name",
+                  icon: Icons.person,
                 ),
-                SizedBox(height: screenheight * 0.02),
-                //Email
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: InputDecoration(
-                    hintText: "Email",
-                    prefixIcon: Icon(Icons.email),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  controller: signUpController.emailController,
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return "Email is required";
-                    } else if (!RegExp(
-                            r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-                        .hasMatch(value)) {
-                      return "Please enter a valid email";
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                SizedBox(height: screenheight * 0.02),
-                //password
 
-                TextFormField(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                SizedBox(height: screenheight * 0.02),
+
+                CustomTextFromEmail(
+                  controller: signUpController.emailController,
+                  hintText: "Email",
+                  icon: Icons.email,
+                ),
+
+                SizedBox(height: screenheight * 0.02),
+
+                CustomTextFromPassword(
                   controller: signUpController.passwordController,
-                  obscureText: obscureText,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: InputDecoration(
-                    hintText: "Password",
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        obscureText ? Icons.visibility_off : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          obscureText = !obscureText;
-                        });
-                      },
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Password is required";
-                    }
-                    if (value.length < 6) {
-                      return "Password must be at least 6 characters long";
-                    }
-                    return null;
-                  },
+                  obscureText: signUpController.obscurePassword,
+                  hintText: "Password",
                 ),
                 SizedBox(height: screenheight * 0.03),
 
@@ -132,6 +75,7 @@ class _SignupState extends State<Signup> {
                   color: const Color.fromARGB(255, 4, 56, 5),
                   onPressed: () {
                     gotoSignin();
+                    // Get.to(() => gotoSignin());
                   },
                   textColor: Colors.white,
                 ),
@@ -139,12 +83,12 @@ class _SignupState extends State<Signup> {
 
                 /// Divider
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Container(width: 100, height: 4, color: Colors.grey),
+                    Container(width: 95, height: 4, color: Colors.grey),
                     Text("Or continue with",
                         style: AppWidget.appBarTextFeildStyle()),
-                    Container(width: 100, height: 4, color: Colors.grey),
+                    Container(width: 95, height: 4, color: Colors.grey),
                   ],
                 ),
                 SizedBox(height: screenheight * 0.04),
@@ -202,10 +146,10 @@ class _SignupState extends State<Signup> {
   void gotoSignin() {
     if (_formKey.currentState!.validate()) {
       RegisterController.signUp(
-          firstName: signUpController.nameController.text,
-          email: signUpController.emailController.text,
+          firstName: signUpController.nameController.text.trim(),
+          email: signUpController.emailController.text.trim(),
           password: signUpController.passwordController.text,
-          username: signUpController.usernameController.text);
+          username: signUpController.usernameController.text.trim());
     } else {}
   }
 }

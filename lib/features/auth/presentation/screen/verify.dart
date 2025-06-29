@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/forget.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/custom_logo.dart';
 
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../widget/custombuttom.dart';
@@ -44,140 +45,122 @@ class _VerifyState extends State<Verify> {
               fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(
-          right: 20,
-          left: 20,
-        ),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height / 4,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.asset(
-                    "assets/images/verify.png",
-                  ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(
+            right: 20,
+            left: 20,
+          ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 4,
+                  child: CustomLogo(),
                 ),
-              ),
-              Text(
-                "We have sand a verification code your email  \n Please Check you email enter the code ",
-                style: AppWidget.greyTextFeildStyle(),
-              ),
-              SizedBox(
-                height: screenheight * 0.03,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 8.0,
-                  horizontal: 30,
+                Text(
+                  "We have sand a verification code your email  \n Please Check you email enter the code ",
+                  style: AppWidget.greyTextFeildStyle(),
                 ),
-                child: PinCodeTextField(
-                  appContext: context,
-                  pastedTextStyle: TextStyle(
-                    color: Colors.green.shade600,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  length: 6,
-                  obscureText: false,
-                  //  obscuringCharacter: '*',
-                  // obscuringWidget: const FlutterLogo(
-                  //   size: 24,
-                  // ),
-                  blinkWhenObscuring: true,
-                  animationType: AnimationType.fade,
-                  validator: (v) {
-                    if (v!.length < 6) {
-                      return "I'm from validator";
-                    } else {
-                      return null;
-                    }
-                  },
-                  pinTheme: PinTheme(
-                    shape: PinCodeFieldShape.box,
-                    borderRadius: BorderRadius.circular(5),
-                    fieldHeight: 50,
-                    fieldWidth: 40,
-                    activeFillColor: Colors.white,
-                  ),
-                  cursorColor: Colors.black,
-                  animationDuration: const Duration(milliseconds: 300),
-                  enableActiveFill: true,
-                  //errorAnimationController: ,
-                  controller: verifyController,
-                  keyboardType: TextInputType.multiline,
-                  // boxShadows: const [
-                  //   BoxShadow(
-                  //     offset: Offset(0, 1),
-                  //     color: Colors.black12,
-                  //     blurRadius: 10,
-                  //   )
-                  // ],
-                  onCompleted: (v) {
-                    debugPrint("Completed");
-                  },
-                  // onTap: () {
-                  //   print("Pressed");
-                  // },
-                  onChanged: (value) {
-                    debugPrint(value);
-                    setState(() {
-                      currentText = value;
-                    });
-                  },
-                  beforeTextPaste: (text) {
-                    debugPrint("Allowing to paste $text");
-                    return true;
-                  },
+                SizedBox(
+                  height: screenheight * 0.03,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Text(
-                  hasError ? "*Please fill up all the cells properly" : "",
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 30,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: screenWidth * 0.03,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "didn't get the code?",
-                    style: AppWidget.greyTextFeildStyle(),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.back();
+                  child: PinCodeTextField(
+                    appContext: context,
+                    pastedTextStyle: TextStyle(
+                      color: Colors.green.shade600,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    length: 6,
+                    obscureText: false,
+                    blinkWhenObscuring: true,
+                    animationType: AnimationType.fade,
+                    validator: (v) {
+                      if (v!.length < 6) {
+                        return "I'm from validator";
+                      } else {
+                        return null;
+                      }
                     },
-                    child: Text(
-                      'Resent',
-                      style: AppWidget.brand1TextFeildStyle(),
+                    pinTheme: PinTheme(
+                      shape: PinCodeFieldShape.box,
+                      borderRadius: BorderRadius.circular(5),
+                      fieldHeight: 50,
+                      fieldWidth: 40,
+                      activeFillColor: Colors.white,
+                    ),
+                    cursorColor: Colors.black,
+                    animationDuration: const Duration(milliseconds: 300),
+                    enableActiveFill: true,
+                    controller: verifyController,
+                    keyboardType: TextInputType.multiline,
+                    onCompleted: (v) {
+                      debugPrint("Completed");
+                    },
+                    onChanged: (value) {
+                      debugPrint(value);
+                      setState(() {
+                        currentText = value;
+                      });
+                    },
+                    beforeTextPaste: (text) {
+                      debugPrint("Allowing to paste $text");
+                      return true;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Text(
+                    hasError ? "*Please fill up all the cells properly" : "",
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: screenheight * 0.2,
-              ),
-              CustomButton(
-                  buttonText: "Verify",
-                  color: const Color.fromARGB(255, 4, 56, 5),
-                  onPressed: gotoforget,
-                  textColor: Colors.white)
-            ],
+                ),
+                SizedBox(
+                  height: screenWidth * 0.03,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "didn't get the code?",
+                      style: AppWidget.greyTextFeildStyle(),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Text(
+                        'Resent',
+                        style: AppWidget.brand1TextFeildStyle(),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: screenheight * 0.2,
+                ),
+                CustomButton(
+                    buttonText: "Verify",
+                    color: const Color.fromARGB(255, 4, 56, 5),
+                    onPressed: gotoforget,
+                    textColor: Colors.white)
+              ],
+            ),
           ),
         ),
       ),

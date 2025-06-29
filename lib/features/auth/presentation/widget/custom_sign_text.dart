@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/fontsize_control/widget_support.dart';
+
 class CustomSignText extends StatelessWidget {
   const CustomSignText({super.key});
 
@@ -8,7 +9,7 @@ class CustomSignText extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     double height = size.height;
-    double width = size.width;
+    //double width = size.width;
     return Column(
       children: [
         Text("Sign In", style: AppWidget.hederTextFeildStyle()),
