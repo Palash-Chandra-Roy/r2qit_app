@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/Custom_name_or_user.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_email.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_password.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/customgooglebutton.dart';
 
 import '../../../../core/constants/controller_control/signup_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
@@ -40,13 +42,13 @@ class _SignupState extends State<Signup> {
                 ),
                 SizedBox(height: screenheight * 0.02),
 
-                CustomTextFromEmail(
+                CustomTextFromNameOrUser(
                   controller: signUpController.nameController,
-                  hintText: "Name",
+                  hintText: " Full Name",
                   icon: Icons.man,
                 ),
                 SizedBox(height: screenheight * 0.02),
-                CustomTextFromEmail(
+                CustomTextFromNameOrUser(
                   controller: signUpController.usernameController,
                   hintText: "User Name",
                   icon: Icons.person,
@@ -94,28 +96,11 @@ class _SignupState extends State<Signup> {
                 SizedBox(height: screenheight * 0.04),
 
                 /// Google Button
-                InkWell(
+                Customgooglebutton(
                   onTap: () {
-                    // Google sign-in logic
+                    print("Google Sign-In Tapped");
+                    // Or call: googleAuthController.signInWithGoogle();
                   },
-                  child: Container(
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(width: 2, color: Colors.grey),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/images/google.png",
-                            height: 30, width: 30, fit: BoxFit.cover),
-                        SizedBox(width: 8),
-                        Text("Continue with Google",
-                            style: AppWidget.appBarTextFeildStyle()),
-                      ],
-                    ),
-                  ),
                 ),
                 SizedBox(height: screenheight * 0.04),
 

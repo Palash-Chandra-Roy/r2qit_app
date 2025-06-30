@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/forget.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_logo.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/otp_pinfield.dart';
+import 'package:r2ait_app/widgets/customappbar.dart';
 
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../widget/custombuttom.dart';
@@ -27,24 +28,7 @@ class _VerifyState extends State<Verify> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 14,
-              color: Colors.black,
-            )),
-        title: Text(
-          "Verify Gmail",
-          style: TextStyle(
-              fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-      ),
+      appBar: CustomAppBar.build(title: "Verify Gmail"),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -67,54 +51,14 @@ class _VerifyState extends State<Verify> {
                 SizedBox(
                   height: screenheight * 0.03,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8.0,
-                    horizontal: 30,
-                  ),
-                  child: PinCodeTextField(
-                    appContext: context,
-                    pastedTextStyle: TextStyle(
-                      color: Colors.green.shade600,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    length: 6,
-                    obscureText: false,
-                    blinkWhenObscuring: true,
-                    animationType: AnimationType.fade,
-                    validator: (v) {
-                      if (v!.length < 6) {
-                        return "I'm from validator";
-                      } else {
-                        return null;
-                      }
-                    },
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(5),
-                      fieldHeight: 50,
-                      fieldWidth: 40,
-                      activeFillColor: Colors.white,
-                    ),
-                    cursorColor: Colors.black,
-                    animationDuration: const Duration(milliseconds: 300),
-                    enableActiveFill: true,
-                    controller: verifyController,
-                    keyboardType: TextInputType.multiline,
-                    onCompleted: (v) {
-                      debugPrint("Completed");
-                    },
-                    onChanged: (value) {
-                      debugPrint(value);
-                      setState(() {
-                        currentText = value;
-                      });
-                    },
-                    beforeTextPaste: (text) {
-                      debugPrint("Allowing to paste $text");
-                      return true;
-                    },
-                  ),
+                OtpPinField(
+                  controller: verifyController,
+                  onChanged: (value) {
+                    print("Changed: $value");
+                  },
+                  onCompleted: (value) {
+                    print("Completed: $value");
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),

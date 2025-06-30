@@ -119,7 +119,6 @@ class Home extends StatelessWidget {
                     style: AppWidget.homeTextFeildStyle()),
               ),
               CustomTeamMember(homeController: _homeController),
-
               SizedBox(
                 height: screenHeight * 0.01,
               ),

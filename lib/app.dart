@@ -25,8 +25,6 @@ class MyApp extends StatelessWidget {
           getPages: AppRoutes.routes,
           defaultTransition: Transition.fade,
           initialBinding: BindingController(),
-
-          // routes: AppRoutes.routes,
         );
       });
     });

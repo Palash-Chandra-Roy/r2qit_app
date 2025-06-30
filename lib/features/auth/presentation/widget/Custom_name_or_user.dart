@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CustomTextFromEmail extends StatelessWidget {
+class CustomTextFromNameOrUser extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final IconData icon;
 
-  const CustomTextFromEmail({
+  const CustomTextFromNameOrUser({
     super.key,
     required this.controller,
-    this.hintText = "Email",
+    this.hintText = "Name or user",
     required this.icon,
   });
 
@@ -17,7 +17,7 @@ class CustomTextFromEmail extends StatelessWidget {
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: TextInputType.name,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: Icon(icon),
@@ -25,15 +25,11 @@ class CustomTextFromEmail extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
       ),
-      validator: (String? value) {
+      validator: (value) {
         if (value == null || value.isEmpty) {
-          return "Email is required";
-        } else if (!RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-            .hasMatch(value)) {
-          return "Please enter a valid email ";
-        } else {
-          return null;
+          return "Name or User name ";
         }
+        return null;
       },
     );
   }

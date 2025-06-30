@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_logo.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/custombuttom.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/newpassword_text.dart';
+import 'package:r2ait_app/widgets/customappbar.dart';
 
 import '../../../../core/constants/controller_control/forget_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
-import '../widget/custombuttom.dart';
 
 class Forget extends StatefulWidget {
   const Forget({super.key});
@@ -30,19 +31,8 @@ class _ForgetState extends State<Forget> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(Icons.arrow_back_ios, size: 16, color: Colors.black),
-        ),
-        title: const Text(
-          "Create New Password",
-          style: TextStyle(
-              fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
+      appBar: CustomAppBar.build(
+        title: "Create New Password",
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -87,32 +77,20 @@ class _ForgetState extends State<Forget> {
   }
 
   void gotoSigninPage() {
-    if (_formKey.currentState?.validate() ?? false) {
-      final newPassword = forgetController.newPasswordController.text.trim();
-      final confirmPassword =
-          forgetController.confirmPasswordController.text.trim();
+    final newPassword = forgetController.newPasswordController.text.trim();
+    final confirmPassword =
+        forgetController.confirmPasswordController.text.trim();
 
-      if (newPassword != confirmPassword) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Passwords do not match",
-                style: TextStyle(color: Colors.white)),
-            backgroundColor: Colors.red,
-          ),
-        );
-        return;
-      }
-
-      if (!isCheck) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Please agree to the terms & conditions."),
-            backgroundColor: Colors.orange,
-          ),
-        );
-        return;
-      }
-      Get.offAll(() => const Signin());
+    if (newPassword != confirmPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Passwords do not match",
+              style: TextStyle(color: Colors.white)),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
     }
+    Get.offAll(() => const Signin());
   }
 }

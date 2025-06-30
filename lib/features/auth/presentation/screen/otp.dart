@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/verify.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_logo.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_email.dart';
+import 'package:r2ait_app/widgets/customappbar.dart';
 
 import '../../../../core/constants/controller_control/otp_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
@@ -24,20 +25,8 @@ class _OTPState extends State<OTP> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 14,
-              color: Colors.black,
-            )),
-        title:
-            Text("Forgot Password ", style: AppWidget.appBarTextFeildStyle()),
+      appBar: CustomAppBar.build(
+        title: "Forgot Password",
       ),
       body: SingleChildScrollView(
         child: Padding(

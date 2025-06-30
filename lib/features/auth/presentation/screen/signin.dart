@@ -7,6 +7,7 @@ import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_email.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_password.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/customgooglebutton.dart';
 import 'package:r2ait_app/features/home/presentation/screen/home.dart';
 
 import '../../../../core/constants/controller_control/signin_controller.dart';
@@ -66,32 +67,11 @@ class _SigninState extends State<Signin> {
                 ),
                 SizedBox(height: screenheight * 0.01),
                 // Google Sign In (optional)
-                InkWell(
-                  onTap: () {
-                    googleLogin();
-                  },
-                  child: Container(
-                    height: 60,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(width: 2, color: Colors.grey),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset("assets/images/google.png",
-                            height: 30, width: 30),
-                        SizedBox(width: 5),
-                        Text("Continue with Google",
-                            style: AppWidget.appBarTextFeildStyle()),
-                      ],
-                    ),
-                  ),
-                ),
 
+                Customgooglebutton(onTap: () {
+                  googleLogin();
+                }),
                 SizedBox(height: screenheight * 0.02),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -172,82 +152,3 @@ class _SigninState extends State<Signin> {
     }
   }
 }
-
-// class CustomTextField extends StatefulWidget {
-//   const CustomTextField({super.key});
-
-//   @override
-//   State<CustomTextField> createState() => _CustomTextFieldState();
-// }
-
-// class _CustomTextFieldState extends State<CustomTextField> {
-//   @override
-//   Widget build(BuildContext context) {
-//     SigninController signinController = Get.put(SigninController());
-//     final size = MediaQuery.of(context).size;
-//     double height = size.height;
-//     double width = size.width;
-//     bool obscureText = true;
-//     return Column(
-//       children: [
-//         TextFormField(
-//           autovalidateMode: AutovalidateMode.onUserInteraction,
-//           decoration: InputDecoration(
-//             hintText: "Email Or username",
-//             prefixIcon: Icon(Icons.email),
-//           ),
-//           keyboardType: TextInputType.emailAddress,
-//           controller: signinController.userOrEmailController,
-//           validator: (String? value) {
-//             if (value == null || value.isEmpty) {
-//               return "Email Or username is required";
-//             } else if (!RegExp(
-//                         r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-//                     .hasMatch(value) &&
-//                 !RegExp(r'^[a-zA-Z0-9_]{3,20}$').hasMatch(value)) {
-//               return "Please enter a valid email Or username";
-//             } else {
-//               return null;
-//             }
-//           },
-//         ),
-//         SizedBox(height: height * 0.02),
-//         //password
-//         TextFormField(
-//           autovalidateMode: AutovalidateMode.onUserInteraction,
-//           controller: signinController.passwordController,
-//           obscureText: obscureText,
-//           keyboardType: TextInputType.visiblePassword,
-//           decoration: InputDecoration(
-//             hintText: "Password",
-//             prefixIcon: const Icon(Icons.lock_outline),
-//             suffixIcon: IconButton(
-//               icon: Icon(
-//                 obscureText ? Icons.visibility_off : Icons.visibility,
-//               ),
-//               onPressed: () {
-//                 setState(() {
-//                   obscureText = !obscureText;
-//                 });
-//               },
-//             ),
-//             border: OutlineInputBorder(
-//               borderRadius: BorderRadius.circular(10),
-//             ),
-//           ),
-//           validator: (value) {
-//             if (value == null || value.trim().isEmpty) {
-//               return "Password is required";
-//             }
-//             if (value.trim().length < 6) {
-//               return "Password must be at least 6 characters long";
-//             }
-//             return null;
-//           },
-//         ),
-
-//         SizedBox(height: height * 0.01),
-//       ],
-//     );
-//   }
-// }
