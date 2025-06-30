@@ -5,7 +5,7 @@ import 'package:r2ait_app/core/constants/fontsize_control/widget_support.dart';
 import 'package:r2ait_app/features/home/presentation/screen/about.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/edit_profile.dart';
 import 'package:r2ait_app/features/profile/presentation/screen/setting.dart';
-import 'package:r2ait_app/utils/theme_changer.dart';
+import 'package:r2ait_app/theme/logic/theme_changer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../model/user_data_model.dart';

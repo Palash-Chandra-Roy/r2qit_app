@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/logic/login_controller.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/google.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
+import 'package:r2ait_app/features/auth/presentation/widget/custom_sign_text.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_email.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_password.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/customgooglebutton.dart';
 import 'package:r2ait_app/features/home/presentation/screen/home.dart';
+import 'package:r2ait_app/widget/custom_logo.dart';
 
-import '../../../../core/constants/controller_control/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
-import '../widget/custom_logo.dart';
-import '../widget/custom_sign_text.dart';
+import '../../logic/signin_controller.dart';
 import '../widget/custombuttom.dart';
 
 class Signin extends StatefulWidget {
@@ -24,24 +25,23 @@ class Signin extends StatefulWidget {
 
 class _SigninState extends State<Signin> {
   SigninController signinController = Get.put(SigninController());
-  var isCheck = false.obs;
-  bool obscureText = true;
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     double screenheight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+          padding: EdgeInsets.all(10.r),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: screenheight * 0.1,
+                ),
                 CustomLogo(),
                 CustomSignText(),
                 // Email
@@ -66,8 +66,6 @@ class _SigninState extends State<Signin> {
                   ),
                 ),
                 SizedBox(height: screenheight * 0.01),
-                // Google Sign In (optional)
-
                 Customgooglebutton(onTap: () {
                   googleLogin();
                 }),
@@ -109,9 +107,7 @@ class _SigninState extends State<Signin> {
                     login();
                   },
                 ),
-
-                SizedBox(height: 30),
-
+                SizedBox(height: screenheight * 0.02),
                 // Go to Sign Up
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -139,8 +135,9 @@ class _SigninState extends State<Signin> {
   void login() {
     if (_formKey.currentState?.validate() ?? false) {
       LoginController.login(
-          user_or_email: signinController.userOrEmailController.text,
-          password: signinController.passwordController.text);
+        user_or_email: signinController.userOrEmailController.text.trim(),
+        password: signinController.passwordController.text.trim(),
+      );
     }
   }
 

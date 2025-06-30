@@ -6,9 +6,9 @@ import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_ema
 import 'package:r2ait_app/features/auth/presentation/widget/custom_text_from_password.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/customgooglebutton.dart';
 
-import '../../../../core/constants/controller_control/signup_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
 import '../../logic/register_controller.dart';
+import '../../logic/signup_controller.dart';
 import '../widget/custombuttom.dart';
 
 class Signup extends StatefulWidget {

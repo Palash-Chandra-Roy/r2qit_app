@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signin.dart';
-import 'package:r2ait_app/features/auth/presentation/widget/custom_logo.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/custombuttom.dart';
 import 'package:r2ait_app/features/auth/presentation/widget/newpassword_text.dart';
+import 'package:r2ait_app/widget/custom_logo.dart';
 import 'package:r2ait_app/widgets/customappbar.dart';
 
 import '../../../../core/constants/controller_control/forget_controller.dart';

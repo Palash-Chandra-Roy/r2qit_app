@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:r2ait_app/utils/theme_changer.dart';
+import 'package:r2ait_app/theme/light_dark_theme.dart';
+import 'package:r2ait_app/theme/logic/theme_changer.dart';
 
 import '../../routing/routes.dart';
 import 'binding.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           fallbackLocale: Locale('bn'),
           title: 'R2AIT',
           debugShowCheckedModeBanner: false,
-          theme: theme.themeMode,
+          theme: themeMood(),
           initialRoute: AppRoutes.initial,
           getPages: AppRoutes.routes,
           defaultTransition: Transition.fade,
