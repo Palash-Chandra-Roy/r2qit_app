@@ -1,5 +1,6 @@
 class PasswordValidation {
-  String? validation (String value){ if (value.isEmpty) {
+ static String? validation (String value){
+    if (value.isEmpty) {
   return "Password is required";
   }
   if (value.length < 6) {

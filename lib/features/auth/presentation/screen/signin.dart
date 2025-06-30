@@ -4,13 +4,12 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import 'package:r2ait_app/features/auth/logic/login_controller.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/google.dart';
-import 'package:r2ait_app/features/auth/presentation/screen/otp.dart';
 import 'package:r2ait_app/features/auth/presentation/screen/signup.dart';
 import 'package:r2ait_app/features/home/presentation/screen/home.dart';
+import '../../logic/email_validation.dart';
+import '../../logic/passdword_validation.dart';
 import '../../logic/signin_controller.dart';
 import '../../../../core/constants/fontsize_control/widget_support.dart';
-import '../../../../widget/custom_logo.dart';
-import '../widget/custom_sign_text.dart';
 import '../widget/custombuttom.dart';
 import '../widget/logo_and_text.dart';
 class Signin extends StatefulWidget {
@@ -22,8 +21,19 @@ class _SigninState extends State<Signin> {
 
   SigninController signinController = Get.put(SigninController());
   final _formKey = GlobalKey<FormState>();
+  late TextEditingController _emailController;
+   late TextEditingController _passwordController;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+
+  }
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery.of(context).size;
     double height =size.height;
     double width = size.width;
@@ -38,7 +48,7 @@ class _SigninState extends State<Signin> {
               children: [
                LogoAndText(),
                 // Email and password, forgot
-                PasswordField(),
+                PasswordField(emailController: _emailController, passwordController: _passwordController),
                 // Google Sign In (optional)
                 InkWell(
                   onTap: () {
@@ -137,19 +147,29 @@ class _SigninState extends State<Signin> {
   void login() {
     if (_formKey.currentState?.validate() ?? false) {
       LoginController.login(
-          user_or_email: signinController.userOrEmailController.text,
-          password: signinController.passwordController.text);
+          user_or_email: _emailController.text,
+          password: _passwordController.text);
     }
   }
   void googleLogin()async {
-
     final user =await AuthServiceGoogle().signInWithGoogle();
     if (user != null){
       Logger().e(user.additionalUserInfo);
       Get.offAll(Home());
-    }
+    }}
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _passwordController.dispose();
+    _passwordController.dispose();
+  }
+  void clean() {
+    _emailController.clear();
+    _passwordController.clear();
+      }
 
-    }
+
 }
 class CustomTextField extends StatefulWidget {
   const CustomTextField({super.key});
@@ -170,6 +190,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       children: [
         TextFormField(
           autovalidateMode: AutovalidateMode.onUserInteraction,
+          textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             hintText: "Email Or username",
             prefixIcon: Icon(Icons.email),
@@ -177,16 +198,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           keyboardType: TextInputType.emailAddress,
           controller: signinController.userOrEmailController,
           validator: (String? value) {
-            if (value == null || value.isEmpty) {
-              return "Email Or username is required";
-            } else if (!RegExp(
-                r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
-                .hasMatch(value) &&
-                !RegExp(r'^[a-zA-Z0-9_]{3,20}$').hasMatch(value)) {
-              return "Please enter a valid email Or username";
-            } else {
-              return null;
-            }
+
           },
         ),
         SizedBox(height: height * 0.02),
@@ -229,7 +241,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
 
 class PasswordField extends StatelessWidget {
-  const PasswordField({super.key});
+  TextEditingController emailController;
+  TextEditingController passwordController;
+ PasswordField({super.key, required this.emailController, required this.passwordController});
 
   @override
   Widget build(BuildContext context) {
@@ -238,6 +252,12 @@ class PasswordField extends StatelessWidget {
       children: [
 
         TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          textInputAction: TextInputAction.next,
+          validator: (_){
+            emailValidation();
+          },
+          controller: emailController,
           decoration: InputDecoration(
             prefixIcon: Icon(Icons.email),
             hintText: "Email or Username"
@@ -245,6 +265,12 @@ class PasswordField extends StatelessWidget {
         ),
         SizedBox(height: 15.w,),
         TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          textInputAction: TextInputAction.done,
+          validator: (_){
+           passwordValidation();
+          },
+          controller: passwordController,
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.lock),
               hintText: "Password"
@@ -264,4 +290,11 @@ class PasswordField extends StatelessWidget {
       ],
     );
   }
+  void passwordValidation(){
+    PasswordValidation.validation(passwordController.text);
+  }
+  void emailValidation () {
+    EmailValidation.emailValidation(emailController.text);
+  }
+
 }
