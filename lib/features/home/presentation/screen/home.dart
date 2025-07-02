@@ -21,8 +21,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final TeamController _teamController = Get.find<TeamController>();
-    //final tab =Get.parameters['tab']; // Dynamically received parameter from URL
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -55,8 +53,7 @@ class Home extends StatelessWidget {
                           style: AppWidget.appBarTextFeildStyle(),
                         ))
                   ]),
-              CustomHomeServiceCategory(
-              ),
+              CustomHomeServiceCategory(),
               SizedBox(
                 height: screenHeight * 0.01,
               ),
@@ -87,7 +84,6 @@ class Home extends StatelessWidget {
                     style: AppWidget.homeTextFeildStyle()),
               ),
               CustomTeamMember(homeController: _homeController),
-
               SizedBox(
                 height: screenHeight * 0.01,
               ),

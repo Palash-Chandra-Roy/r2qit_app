@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_font_icons/flutter_font_icons.dart';
 import 'package:get/get.dart';
+import 'package:r2ait_app/features/carts/presentation/screen/carts_screen.dart';
 import 'package:r2ait_app/features/home/presentation/screen/faq_page.dart';
 import 'package:r2ait_app/features/home/presentation/screen/home.dart';
 import 'package:r2ait_app/features/job/presentation/job.dart';
@@ -25,6 +26,7 @@ class _Bottomnavbar extends State<BottomNavbar> {
     Service(),
     Job(),
     Profile(),
+    Carts(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -100,6 +102,12 @@ class _Bottomnavbar extends State<BottomNavbar> {
                     Icons.person,
                   ),
                   label: "Preson",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.shopping_cart,
+                  ),
+                  label: "Carts",
                 ),
               ],
             ),

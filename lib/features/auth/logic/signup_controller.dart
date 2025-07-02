@@ -8,6 +8,7 @@ class SignUpController extends GetxController {
   TextEditingController usernameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  final obscurePassword = true.obs;
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
