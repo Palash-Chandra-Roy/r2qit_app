@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
 class CustomSignText extends StatelessWidget {
   const CustomSignText({super.key});
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     double height = size.height;
-    //double width = size.width;
+    double width = size.width;
     return Column(
       children: [
-        Text("Sign In", style: Theme.of(context).textTheme.titleLarge),
+        Text("Sign In", style:Theme.of(context).textTheme.titleLarge),
         SizedBox(height: height * 0.01),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

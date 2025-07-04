@@ -8,7 +8,6 @@ class SigninController extends GetxController {
   final userOrEmailController = TextEditingController();
   final passwordController = TextEditingController();
   var isCheck = false.obs;
-  final obscurePassword = true.obs;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
