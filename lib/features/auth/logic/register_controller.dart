@@ -22,61 +22,28 @@ class RegisterController {
       'firstName': firstName,
       'email': email,
       'password': password,
-      'username': username,
-      'role': 'user',
+      "username": username,
+      'role': 'user'
     };
 
     Uri url = Uri.parse(AuthAPIController.userSignUp);
 
-    try {
-      final http.Response res = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode(body),
-      );
+    final http.Response res = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(body), // note: using jsonEncode for JSON body
+    );
+    var decode = jsonDecode(res.body);
 
-      print('Status Code: ${res.statusCode}');
-      print('Response Body: ${res.body}');
-
-      if (res.statusCode == 201) {
-        final decode = jsonDecode(res.body);
-        Get.to(() => Signin());
-        flutterToast(decode['message']);
-      } else if (res.statusCode == 409) {
-        Get.snackbar("Sign Up Failed", "Already Have an account");
-      } else if (res.statusCode == 403) {
-        Get.snackbar("Access Denied", "Invalid credentials");
-      } else {
-        // Optional: Try decoding only if response looks like JSON
-        try {
-          final decode = jsonDecode(res.body);
-          Get.snackbar(
-              "Error", decode['message'] ?? "Unexpected error occurred");
-        } catch (_) {
-          Get.snackbar("Error", "Unexpected server response");
-        }
-      }
-    } catch (e) {
-      Logger().e("Signup error: $e");
-      Get.snackbar("Error", "Something went wrong");
-
-      final http.Response res = await http.post(
-        url,
-        headers: headers,
-        body: jsonEncode(body), // note: using jsonEncode for JSON body
-      );
-      var decode = jsonDecode(res.body);
-
-      if (res.statusCode == 201) {
-        Get.to(() => Signin());
-        flutterToast(decode['message']);
-      } else if (res.statusCode == 409) {
-        Get.snackbar("Sign Up Failed", "Already Have an account");
-      } else if (res.statusCode == 403) {
-        Get.snackbar("Access Denied", "Invalid credentials");
-      } else {
-        Get.snackbar("Error", "Unexpected error occurred");
-      }
+    if (res.statusCode == 201) {
+      Get.to(() => Signin());
+      flutterToast(decode['message']);
+    } else if (res.statusCode == 409) {
+      Get.snackbar("Sign Up Failed", "Already Have an account");
+    } else if (res.statusCode == 403) {
+      Get.snackbar("Access Denied", "Invalid credentials");
+    } else {
+      Get.snackbar("Error", "Unexpected error occurred");
     }
   }
 }

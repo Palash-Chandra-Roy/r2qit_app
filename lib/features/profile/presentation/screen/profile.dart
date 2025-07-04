@@ -41,6 +41,11 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    //final _id = Get.parameters['id'];
+
+    // bool isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    // double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       // backgroundColor: Colors.white,
       appBar: AppBar(
